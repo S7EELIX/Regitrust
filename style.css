@@ -203,6 +203,41 @@ h1 {
   box-shadow: 0 20px 50px rgba(11, 41, 104, 0.12);
 }
 
+.hero-graphic {
+  margin-bottom: 1.25rem;
+  border: 1px solid #d7e5fb;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #eef6ff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.hero-graphic svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hero-graphic-chip rect,
+.hero-graphic-panel rect:first-child {
+  fill: rgba(255, 255, 255, 0.9);
+  stroke: #c9dcf8;
+}
+
+.hero-graphic-chip text {
+  fill: var(--primary-dark);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.hero-graphic-panel circle {
+  fill: #a8c5f3;
+}
+
+.hero-graphic-panel rect:not(:first-child) {
+  fill: #d9e7fb;
+}
+
 .hero-card h2 {
   font-size: 1.16rem;
   margin-bottom: 0.8rem;
