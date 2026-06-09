@@ -56,6 +56,7 @@ if (contactForm) {
     event.preventDefault();
 
     const submitButton = contactForm.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton ? submitButton.textContent : "";
     const formData = new FormData(contactForm);
 
     if (submitButton) {
@@ -97,7 +98,7 @@ if (contactForm) {
     } finally {
       if (submitButton) {
         submitButton.disabled = false;
-        submitButton.textContent = "Request Callback";
+        submitButton.textContent = originalButtonText;
       }
     }
   });

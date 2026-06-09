@@ -41,10 +41,11 @@ body {
 }
 
 .nav-wrap {
-  min-height: 152px;
+  min-height: 104px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1.2rem;
 }
 
 .brand {
@@ -55,7 +56,7 @@ body {
 }
 
 .brand img {
-  height: 132px;
+  height: 88px;
   width: auto;
   display: block;
 }
@@ -156,6 +157,18 @@ body {
   border-radius: 10px;
   padding: 0.3rem 0.65rem;
   font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 3px solid rgba(42, 140, 255, 0.42);
+  outline-offset: 3px;
 }
 
 .hero {
@@ -628,8 +641,12 @@ details p {
 
 @media (max-width: 760px) {
 
+  .nav-wrap {
+    min-height: 82px;
+  }
+
   .brand img {
-    height: 102px;
+    height: 64px;
   }
 
   .menu-btn {
@@ -638,7 +655,7 @@ details p {
 
   .nav {
     position: absolute;
-    top: 152px;
+    top: 100%;
     left: 0;
     right: 0;
     display: none;
@@ -721,7 +738,7 @@ details p {
   }
 
   .whatsapp-float {
-    bottom: 4.8rem;
+    bottom: 5.2rem;
   }
 
   .cta-band-wrap {
