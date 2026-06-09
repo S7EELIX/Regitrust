@@ -104,6 +104,26 @@ if (contactForm) {
   });
 }
 
+document.querySelectorAll(".nav-dropdown").forEach((dropdown) => {
+  const toggle = dropdown.querySelector(".dropdown-toggle");
+  if (!toggle) {
+    return;
+  }
+
+  toggle.addEventListener("click", (event) => {
+    event.preventDefault();
+    const isOpen = dropdown.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  dropdown.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      dropdown.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+    });
+  });
+});
+
 document.querySelectorAll("[data-track]").forEach((element) => {
   element.addEventListener("click", () => {
     const name = element.getAttribute("data-track");
