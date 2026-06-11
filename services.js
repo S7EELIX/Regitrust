@@ -43,30 +43,37 @@ function renderServiceDetail() {
   }
 
   const params = new URLSearchParams(window.location.search);
-  const slug = params.get("service") || "standalone-private-company";
+  const slug = params.get("service") || "private-limited-company-registration";
   const service = window.REGITRUST_SERVICES.find((item) => item.slug === slug) || window.REGITRUST_SERVICES[0];
+  const content = window.REGITRUST_SERVICE_CONTENT ? window.REGITRUST_SERVICE_CONTENT[service.slug] : null;
+  const title = content ? content.serviceName : service.title;
+  const category = content ? content.category : service.category;
 
-  document.title = `${service.title} | Regitrust Services LLP`;
+  document.title = `${title} | Regitrust Services LLP`;
   const description = document.querySelector('meta[name="description"]');
   if (description) {
-    description.setAttribute("content", `${service.title} support from Regitrust Services LLP with premium guidance, structured process updates, and affordable value for the service quality delivered.`);
+    description.setAttribute("content", metaDescriptionFor(title, content));
+  }
+  const canonical = document.querySelector('link[rel="canonical"]');
+  if (canonical) {
+    canonical.setAttribute("href", `https://regitrust.in/service.html?service=${service.slug}`);
   }
 
   detail.innerHTML = `
     <section class="section section-muted service-hero">
       <div class="container service-hero-grid">
         <div>
-          <span class="pill">${service.category}</span>
-          <h1>${service.title}</h1>
-          <p>${introFor(service)}</p>
+          <span class="pill">${escapeHtml(category)}</span>
+          <h1>${escapeHtml(title)}</h1>
+          <p>${escapeHtml(introFor(service, content))}</p>
           <div class="hero-cta">
             <a class="btn btn-primary" href="contact.html" data-track="service_detail_consultation_click">Book Consultation</a>
             <a class="btn btn-secondary" href="https://wa.me/918984297666" target="_blank" rel="noopener noreferrer" data-track="service_detail_whatsapp_click">Chat on WhatsApp</a>
           </div>
         </div>
         <aside class="service-note">
-          <h2>Premium Support, Sensible Value</h2>
-          <p>Regitrust provides premium professional service at affordable pricing when compared with the quality of guidance, documentation, tracking, and post-filing support delivered.</p>
+          <h2>Page Contents</h2>
+          <p>Meaning, suitability, benefits, documents, process, government fees, timeline, compliance steps, common mistakes, and FAQs.</p>
         </aside>
       </div>
     </section>
@@ -74,19 +81,7 @@ function renderServiceDetail() {
     <section class="section">
       <div class="container service-article">
         <article>
-          <h2>What is ${service.title}?</h2>
-          <p>${whatIsFor(service)}</p>
-
-          <h2>How it works</h2>
-          <p>${howItWorksFor(service)}</p>
-
-          <h2>Process followed by Regitrust</h2>
-          <ol class="process-list">
-            ${processFor(service).map((step) => `<li>${step}</li>`).join("")}
-          </ol>
-
-          <h2>Why work with Regitrust?</h2>
-          <p>Our team keeps the engagement clear from day one: practical document checklists, transparent updates, careful filing review, and support until the service milestone is complete. You get premium handling without unnecessary complexity or inflated positioning.</p>
+          ${content ? renderRichService(content) : renderFallbackService(service)}
         </article>
 
         <aside class="related-services">
@@ -94,7 +89,7 @@ function renderServiceDetail() {
           ${window.REGITRUST_SERVICES
             .filter((item) => item.category === service.category && item.slug !== service.slug)
             .slice(0, 8)
-            .map((item) => `<a href="${serviceLink(item.title)}">${item.title}</a>`)
+            .map((item) => `<a href="${serviceLink(item.title)}">${escapeHtml(item.title)}</a>`)
             .join("")}
           <a class="text-link" href="services.html">View all services -></a>
         </aside>
@@ -103,25 +98,64 @@ function renderServiceDetail() {
   `;
 }
 
-function introFor(service) {
-  return `${service.title} is part of our ${service.category.toLowerCase()} support for founders, companies, firms, NGOs, and growing businesses that need accurate documentation, timely filings, and clear professional guidance.`;
+function renderRichService(content) {
+  return `
+    <h2>Meaning</h2>
+    <p>${escapeHtml(content.meaning)}</p>
+    ${renderListSection("Who Should Choose It", content.whoShouldChooseIt)}
+    ${renderListSection("Benefits", content.benefits)}
+    ${renderListSection("Documents Required", content.documentsRequired)}
+    <h2>Process</h2>
+    <ol class="process-list">${content.process.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ol>
+    <h2>Government Fees</h2>
+    <p>${escapeHtml(content.governmentFees)}</p>
+    <h2>Time Required</h2>
+    <p>${escapeHtml(content.timeRequired)}</p>
+    ${renderListSection("Compliance / Next Steps", content.complianceNextSteps)}
+    ${renderListSection("Common Mistakes", content.commonMistakes)}
+    <h2>FAQs</h2>
+    <div class="faq-list service-faqs">
+      ${content.faqs.map((faq) => `
+        <details>
+          <summary>${escapeHtml(faq.question)}</summary>
+          <p>${escapeHtml(faq.answer)}</p>
+        </details>
+      `).join("")}
+    </div>
+  `;
 }
 
-function whatIsFor(service) {
-  if (service.category.includes("IPR")) {
-    return `${service.title} helps protect or enforce business assets such as brand identity, inventions, product appearance, origin-linked reputation, or intellectual property rights. It reduces risk and creates a clearer legal position for commercial use.`;
-  }
-  if (service.category.includes("Taxation") || service.category.includes("Accounting")) {
-    return `${service.title} is a finance and tax support service that keeps reporting, records, and filings organized. It helps businesses and individuals maintain compliance while improving decision quality.`;
-  }
-  if (service.category.includes("RBI")) {
-    return `${service.title} relates to regulatory reporting and compliance for foreign investment, overseas borrowings, cross-border transactions, or RBI/FEMA-facing obligations.`;
-  }
-  return `${service.title} is a structured registration, compliance, or advisory service that helps your business meet legal requirements and operate with greater confidence.`;
+function renderFallbackService(service) {
+  return `
+    <h2>Meaning</h2>
+    <p>${escapeHtml(service.title)} is a structured registration, compliance, taxation, legal documentation, or advisory service for Indian businesses.</p>
+    <h2>Process</h2>
+    <ol class="process-list">
+      ${processFor(service).map((step) => `<li>${escapeHtml(step)}</li>`).join("")}
+    </ol>
+  `;
 }
 
-function howItWorksFor(service) {
-  return `Regitrust first understands your business model, jurisdiction, ownership structure, and required outcome. Then we confirm the document checklist, prepare or review filings, coordinate submissions where applicable, and keep you updated until completion.`;
+function renderListSection(title, items) {
+  return `
+    <h2>${escapeHtml(title)}</h2>
+    <ul class="contact-list">${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+  `;
+}
+
+function introFor(service, content) {
+  if (content && content.meaning) {
+    return content.meaning.split(". ").slice(0, 2).join(". ").replace(/\.$/, "") + ".";
+  }
+  return `${service.title} is part of our ${service.category.toLowerCase()} support for Indian businesses that need accurate documentation, timely filings, and clear compliance guidance.`;
+}
+
+function metaDescriptionFor(title, content) {
+  if (content && content.meaning) {
+    const base = content.meaning.replace(/\s+/g, " ").slice(0, 155);
+    return base.length >= 155 ? `${base.replace(/\s+\S*$/, "")}.` : base;
+  }
+  return `${title} support from Regitrust Services LLP with documents, process, fees, timeline, compliance steps, and FAQs.`;
 }
 
 function processFor(service) {
@@ -132,6 +166,15 @@ function processFor(service) {
     "Submission, tracking, and coordination with the relevant portal or authority where applicable.",
     "Completion update, records handover, and next-step compliance guidance."
   ];
+}
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 renderServiceCatalogue();

@@ -1,227 +1,183 @@
 const serviceCategories = [
-  {
-    title: "Company Registration",
-    summary: "Choose the right legal structure for your Indian business, startup, subsidiary, or founder-led venture.",
-    groups: [
-      {
-        title: "Private Company",
-        items: [
-          "Standalone Private Company",
-          "Indian Subsidiary",
-          "Foreign Subsidiary"
-        ]
-      },
-      {
-        title: "Other Entity Types",
-        items: [
-          "Public Company",
-          "Limited Liability Partnership",
-          "Partnership Firm",
-          "Non-Government Organization/Not-for-Profit Organization (NGO)",
-          "Sole Proprietorship",
-          "One Person Company",
-          "Startup India"
-        ]
-      }
-    ]
-  },
-  {
-    title: "Government Registration",
-    summary: "Licences, registrations, and certificates that help businesses operate smoothly and stay authority-ready.",
-    groups: [
-      {
-        title: "Export-Import Business",
-        items: [
-          "Import-Export Code",
-          "ICEGATE Registration",
-          "Port Registration",
-          "AD Code Registration"
-        ]
-      },
-      {
-        title: "Business Licences and Registrations",
-        items: [
-          "Professional Tax",
-          "PTEC",
-          "PTRC",
-          "ISO Certification",
-          "FSSAI",
-          "Shop License",
-          "Trade License",
-          "12A and 80G Registrations",
-          "FCRA Registration",
-          "MSME Registration",
-          "GST Registration",
-          "EPF Registration",
-          "ESIC Registration"
-        ]
-      }
-    ]
-  },
-  {
-    title: "International Business Registration",
-    summary: "Cross-border setup support for founders planning to operate from major global jurisdictions.",
-    groups: [
-      {
-        title: "Global Company Incorporation",
-        items: [
-          "Incorporate Company in UK",
-          "Incorporate Company in USA",
-          "Incorporate Company in UAE"
-        ]
-      }
-    ]
-  },
-  {
-    title: "Compliance",
-    summary: "Recurring compliance support to help companies, LLPs, NGOs, proprietorships, and firms avoid filing stress.",
-    groups: [
-      {
-        title: "Annual and Recurring Compliance",
-        items: [
-          "Business Compliance",
-          "MSME Returns",
-          "GST Returns",
-          "Private Annual Compliance",
-          "Private Company Annual Compliance",
-          "Small Company Annual Compliance",
-          "Startup Company Compliances",
-          "LLP Compliances",
-          "Sole Proprietorship Compliances",
-          "NGO/NPO Compliances",
-          "Partnership Firm Compliances"
-        ]
-      }
-    ]
-  },
-  {
-    title: "MCA Services",
-    summary: "Company law filings and changes handled through MCA workflows. More MCA service items can be added as you finalize the list.",
-    groups: [
-      {
-        title: "Corporate Changes and Filings",
-        items: [
-          "MCA Services"
-        ]
-      }
-    ]
-  },
-  {
-    title: "Event-Based Compliances",
-    summary: "Support for important corporate events such as changes in directors, capital, registered office, shares, or auditors.",
-    groups: [
-      {
-        title: "Event-Based Compliances",
-        items: [
-          "Event-Based Compliances"
-        ]
-      }
-    ]
-  },
-  {
-    title: "Conversion of Entities",
-    summary: "Entity conversion support when your business structure needs to evolve with growth, investors, or compliance needs.",
-    groups: [
-      {
-        title: "Conversion of Entities",
-        items: [
-          "Conversion of Entities"
-        ]
-      }
-    ]
-  },
-  {
-    title: "Intellectual Property Rights (IPR)",
-    summary: "Protect brand, inventions, designs, and origin-linked business assets with practical IPR guidance.",
-    groups: [
-      {
-        title: "IPR Services",
-        items: [
-          "Trademark",
-          "Patent",
-          "Design",
-          "Geographical Indications",
-          "IPR Dispute Handling"
-        ]
-      }
-    ]
-  },
-  {
-    title: "Taxation",
-    summary: "Tax filing and return support for individuals, companies, employers, and recurring statutory requirements.",
-    groups: [
-      {
-        title: "Tax Filing and Returns",
-        items: [
-          "ITR Filing for Individual and Company",
-          "TDS Return",
-          "PF Return",
-          "ESIC Return"
-        ]
-      }
-    ]
-  },
-  {
-    title: "Accounting",
-    summary: "Organized books, accounting support, and tax planning so founders can make cleaner financial decisions.",
-    groups: [
-      {
-        title: "Accounting and Planning",
-        items: [
-          "Bookkeeping Services",
-          "Accounting Services",
-          "Tax Planning Services"
-        ]
-      }
-    ]
-  },
-  {
-    title: "Consulting",
-    summary: "Founder-focused advisory for business planning, strategy, growth, and expansion decisions.",
-    groups: [
-      {
-        title: "Business Consulting",
-        items: [
-          "Business Planning",
-          "Marketing Strategy",
-          "Tax Strategy",
-          "Business Expansion",
-          "Business Diversification"
-        ]
-      }
-    ]
-  },
-  {
-    title: "Office Address",
-    summary: "Virtual office address support for businesses that need professional presence in India and overseas markets.",
-    groups: [
-      {
-        title: "Virtual Office Address",
-        items: [
-          "Virtual Office Address in India",
-          "Virtual Office Address in UK",
-          "Virtual Office Address in USA",
-          "Virtual Office Address in UAE"
-        ]
-      }
-    ]
-  },
-  {
-    title: "RBI Compliances",
-    summary: "Foreign investment and RBI-facing filings for companies handling cross-border capital, reporting, or transactions.",
-    groups: [
-      {
-        title: "RBI and FEMA Support",
-        items: [
-          "ECB Compliances",
-          "FEMA Compliances",
-          "FDI Compliances",
-          "FII Compliances",
-          "FLA Filing"
-        ]
-      }
-    ]
-  }
+    {
+        "title":  "Company Registration",
+        "summary":  "Company, LLP, proprietorship, and startup registrations for Indian businesses.",
+        "groups":  [
+                       {
+                           "title":  "Company Registration",
+                           "items":  [
+                                         "Private Limited Company Registration",
+                                         "One Person Company (OPC) Registration",
+                                         "LLP Registration",
+                                         "Partnership Firm Registration",
+                                         "Sole Proprietorship Registration",
+                                         "Startup India Registration"
+                                     ]
+                       }
+                   ]
+    },
+    {
+        "title":  "Government Registration",
+        "summary":  "Licences and registrations required for tax, trade, food, labour, and business operations.",
+        "groups":  [
+                       {
+                           "title":  "Government Registration",
+                           "items":  [
+                                         "GST Registration",
+                                         "Import Export Code (IEC) Registration",
+                                         "FSSAI Registration",
+                                         "Shop \u0026 Establishment Registration",
+                                         "MSME (Udyam) Registration",
+                                         "Professional Tax Registration",
+                                         "IEC Modification",
+                                         "FSSAI License Renewal",
+                                         "FSSAI Central License",
+                                         "FSSAI State License",
+                                         "Trade License Registration",
+                                         "Labour License Registration",
+                                         "EPF Registration",
+                                         "ESIC Registration"
+                                     ]
+                       }
+                   ]
+    },
+    {
+        "title":  "International Business Registration",
+        "summary":  "Import, export, and cross-border compliance support for Indian businesses.",
+        "groups":  [
+                       {
+                           "title":  "International Business Registration",
+                           "items":  [
+                                         "Import Compliance Services",
+                                         "Export Compliance Services"
+                                     ]
+                       }
+                   ]
+    },
+    {
+        "title":  "Compliance",
+        "summary":  "Recurring and closure compliance for companies, LLPs, and growing businesses.",
+        "groups":  [
+                       {
+                           "title":  "Compliance",
+                           "items":  [
+                                         "Annual ROC Filing",
+                                         "LLP Annual Filing",
+                                         "Business Compliance Management",
+                                         "Corporate Secretarial Services",
+                                         "Company Strike Off / Business Closure"
+                                     ]
+                       }
+                   ]
+    },
+    {
+        "title":  "MCA Services",
+        "summary":  "Company law changes, director updates, share capital actions, and MCA filings.",
+        "groups":  [
+                       {
+                           "title":  "MCA Services",
+                           "items":  [
+                                         "DIN Registration",
+                                         "DSC Registration",
+                                         "Company Name Change",
+                                         "Registered Office Change",
+                                         "Director Addition",
+                                         "Director Resignation",
+                                         "Share Transfer",
+                                         "Authorized Capital Increase",
+                                         "MOA Amendment",
+                                         "AOA Amendment"
+                                     ]
+                       }
+                   ]
+    },
+    {
+        "title":  "Intellectual Property Rights",
+        "summary":  "Trademark, copyright, and brand protection services for business assets.",
+        "groups":  [
+                       {
+                           "title":  "Intellectual Property Rights",
+                           "items":  [
+                                         "Trademark Registration",
+                                         "Trademark Objection Reply",
+                                         "Trademark Renewal",
+                                         "Copyright Registration",
+                                         "Trademark Hearing Representation"
+                                     ]
+                       }
+                   ]
+    },
+    {
+        "title":  "Taxation",
+        "summary":  "GST, income tax, TDS, and related tax compliance services.",
+        "groups":  [
+                       {
+                           "title":  "Taxation",
+                           "items":  [
+                                         "GST Return Filing",
+                                         "PAN Application",
+                                         "TAN Application",
+                                         "Income Tax Return Filing",
+                                         "TDS Return Filing",
+                                         "GST Notice Reply",
+                                         "Income Tax Notice Reply",
+                                         "GST Cancellation",
+                                         "GST Revocation",
+                                         "GST LUT Filing",
+                                         "GST Annual Return Filing",
+                                         "E-Invoicing Registration"
+                                     ]
+                       }
+                   ]
+    },
+    {
+        "title":  "Legal Documentation",
+        "summary":  "Business agreements, employment documents, founder documents, and legal certificates.",
+        "groups":  [
+                       {
+                           "title":  "Legal Documentation",
+                           "items":  [
+                                         "Business Agreement Drafting",
+                                         "Employment Agreement Drafting",
+                                         "Vendor Agreement Drafting",
+                                         "Founders Agreement Drafting",
+                                         "NDA Drafting",
+                                         "LLP Agreement Drafting",
+                                         "LLP Agreement Amendment",
+                                         "Partnership Deed Drafting",
+                                         "Partnership Deed Amendment",
+                                         "Legal Heir Certificate Assistance"
+                                     ]
+                       }
+                   ]
+    },
+    {
+        "title":  "Consulting",
+        "summary":  "Startup, due diligence, and business advisory services.",
+        "groups":  [
+                       {
+                           "title":  "Consulting",
+                           "items":  [
+                                         "Startup Legal Advisory",
+                                         "Due Diligence Services"
+                                     ]
+                       }
+                   ]
+    },
+    {
+        "title":  "Accounting",
+        "summary":  "Finance, bookkeeping, payroll, and virtual CFO support.",
+        "groups":  [
+                       {
+                           "title":  "Accounting",
+                           "items":  [
+                                         "Virtual CFO Services",
+                                         "Accounting \u0026 Bookkeeping Services",
+                                         "Payroll Management Services"
+                                     ]
+                       }
+                   ]
+    }
 ];
 
 function serviceSlug(title) {
