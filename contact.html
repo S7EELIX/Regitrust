@@ -40,11 +40,11 @@
               <strong>Compliance</strong>
               <a href="compliance.html" role="menuitem">ROC & Business Compliance</a>
               <a href="services.html#mca-services" role="menuitem">MCA Services</a>
-              <a href="services.html#rbi-compliances" role="menuitem">RBI Compliances</a>
+              <a href="services.html#taxation" role="menuitem">Taxation</a>
             </div>
             <div>
               <strong>Advisory</strong>
-              <a href="services.html#intellectual-property-rights-ipr" role="menuitem">IPR</a>
+              <a href="services.html#intellectual-property-rights" role="menuitem">IPR</a>
               <a href="services.html#taxation" role="menuitem">Taxation</a>
               <a href="services.html#accounting" role="menuitem">Accounting</a>
               <a href="services.html#consulting" role="menuitem">Consulting</a>
@@ -90,10 +90,12 @@
           </div>
         </div>
 
-        <form class="contact-form" id="contact-form" action="https://formsubmit.co/ajax/contact@regitrust.in" method="post">
+        <form class="contact-form" id="contact-form" action="https://formsubmit.co/contact@regitrust.in" data-ajax-action="https://formsubmit.co/ajax/contact@regitrust.in" method="post">
           <input type="hidden" name="_subject" value="New contact page lead from Regitrust website">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://regitrust.in/thank-you.html">
+          <input type="hidden" name="source_page" value="contact.html">
 
           <label for="name">Full Name</label>
           <input id="name" name="name" type="text" required>
@@ -106,10 +108,7 @@
 
           <label for="service">Service Needed</label>
           <select id="service" name="service">
-            <option>Company Registration</option>
-            <option>GST & PAN Services</option>
-            <option>Compliance & Filings</option>
-            <option>Legal Documentation</option>
+            <option value="">Select a service</option>
           </select>
 
           <label for="message">Message</label>
@@ -135,6 +134,7 @@
     </div>
   </footer>
 
+  <script src="services-data.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

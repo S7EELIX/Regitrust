@@ -3,6 +3,7 @@ const nav = document.getElementById("site-nav");
 const year = document.getElementById("year");
 const contactForm = document.getElementById("contact-form");
 const formStatus = document.getElementById("form-status");
+const serviceSelect = document.getElementById("service");
 
 const GA4_MEASUREMENT_ID = "G-XXXXXXXXXX";
 
@@ -32,6 +33,50 @@ function trackEvent(eventName, params = {}) {
 }
 
 setupAnalytics();
+
+function setupServiceSelect() {
+  if (!serviceSelect || !window.REGITRUST_SERVICE_CATEGORIES || !window.REGITRUST_SERVICE_SLUG) {
+    return;
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const requestedService = params.get("service");
+  const fragment = document.createDocumentFragment();
+  const placeholder = document.createElement("option");
+  placeholder.value = "";
+  placeholder.textContent = "Select a service";
+  fragment.appendChild(placeholder);
+
+  window.REGITRUST_SERVICE_CATEGORIES.forEach((category) => {
+    const group = document.createElement("optgroup");
+    group.label = category.title;
+
+    category.groups.forEach((serviceGroup) => {
+      serviceGroup.items.forEach((item) => {
+        const option = document.createElement("option");
+        option.value = item;
+        option.textContent = item;
+        option.dataset.slug = window.REGITRUST_SERVICE_SLUG(item);
+        group.appendChild(option);
+      });
+    });
+
+    fragment.appendChild(group);
+  });
+
+  serviceSelect.replaceChildren(fragment);
+
+  if (requestedService) {
+    const match = Array.from(serviceSelect.options).find((option) =>
+      option.value === requestedService || option.dataset.slug === requestedService
+    );
+    if (match) {
+      serviceSelect.value = match.value;
+    }
+  }
+}
+
+setupServiceSelect();
 
 if (menuBtn && nav) {
   menuBtn.addEventListener("click", () => {
@@ -70,7 +115,8 @@ if (contactForm) {
     }
 
     try {
-      const response = await fetch(contactForm.action, {
+      const endpoint = contactForm.dataset.ajaxAction || contactForm.action;
+      const response = await fetch(endpoint, {
         method: "POST",
         body: formData,
         headers: {
