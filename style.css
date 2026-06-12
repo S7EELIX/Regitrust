@@ -810,6 +810,21 @@ details p {
   justify-content: center;
 }
 
+.thank-you-wrap {
+  max-width: 760px;
+}
+
+.thank-you-wrap h1 {
+  margin-top: 0.8rem;
+  max-width: 720px;
+}
+
+.thank-you-wrap p {
+  color: var(--muted);
+  margin-top: 0.75rem;
+  max-width: 640px;
+}
+
 .whatsapp-float {
   position: fixed;
   right: 1rem;

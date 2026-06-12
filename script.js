@@ -88,8 +88,14 @@ if (contactForm) {
         page_location: window.location.pathname
       });
       if (formStatus) {
-        formStatus.textContent = "Thanks! Our team will contact you shortly.";
+        formStatus.textContent = "Thanks! Redirecting you to confirmation...";
       }
+      const submittedService = formData.get("service");
+      const thankYouUrl = new URL("thank-you.html", window.location.href);
+      if (submittedService) {
+        thankYouUrl.searchParams.set("service", submittedService);
+      }
+      window.location.href = thankYouUrl.toString();
     } catch (error) {
       if (formStatus) {
         formStatus.classList.add("error");
