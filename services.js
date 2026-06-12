@@ -2,6 +2,19 @@ function serviceLink(title) {
   return `service.html?service=${window.REGITRUST_SERVICE_SLUG(title)}`;
 }
 
+const SERVICE_SECTIONS = [
+  ["meaning", "Meaning"],
+  ["who-should-choose-it", "Who Should Choose It"],
+  ["benefits", "Benefits"],
+  ["documents-required", "Documents Required"],
+  ["process", "Process"],
+  ["government-fees", "Government Fees"],
+  ["time-required", "Time Required"],
+  ["compliance-next-steps", "Compliance / Next Steps"],
+  ["common-mistakes", "Common Mistakes"],
+  ["faqs", "FAQs"]
+];
+
 function renderServiceCatalogue() {
   const catalogue = document.getElementById("service-catalogue");
   if (!catalogue || !window.REGITRUST_SERVICE_CATEGORIES) {
@@ -58,6 +71,8 @@ function renderServiceDetail() {
   if (canonical) {
     canonical.setAttribute("href", `https://regitrust.in/service.html?service=${service.slug}`);
   }
+  updateOpenGraph(title, service, content);
+  injectServiceSchema(service, content);
 
   detail.innerHTML = `
     <section class="section section-muted service-hero">
@@ -73,7 +88,9 @@ function renderServiceDetail() {
         </div>
         <aside class="service-note">
           <h2>Page Contents</h2>
-          <p>Meaning, suitability, benefits, documents, process, government fees, timeline, compliance steps, common mistakes, and FAQs.</p>
+          <nav class="service-jump-links" aria-label="Service page sections">
+            ${SERVICE_SECTIONS.map(([id, label]) => `<a href="#${id}">${escapeHtml(label)}</a>`).join("")}
+          </nav>
         </aside>
       </div>
     </section>
@@ -85,6 +102,12 @@ function renderServiceDetail() {
         </article>
 
         <aside class="related-services">
+          <div class="service-contact-card">
+            <h2>Need This Service?</h2>
+            <p>Share your details and service requirement. The team can review documents, timelines, and next steps.</p>
+            <a class="btn btn-primary" href="contact.html" data-track="service_sidebar_contact_click">Request Callback</a>
+            <a class="btn btn-secondary" href="https://wa.me/918984297666?text=${encodeURIComponent(`Hello Regitrust, I need help with ${title}.`)}" target="_blank" rel="noopener noreferrer" data-track="service_sidebar_whatsapp_click">WhatsApp</a>
+          </div>
           <h2>Related Services</h2>
           ${window.REGITRUST_SERVICES
             .filter((item) => item.category === service.category && item.slug !== service.slug)
@@ -100,20 +123,20 @@ function renderServiceDetail() {
 
 function renderRichService(content) {
   return `
-    <h2>Meaning</h2>
+    <h2 id="meaning">Meaning</h2>
     <p>${escapeHtml(content.meaning)}</p>
-    ${renderListSection("Who Should Choose It", content.whoShouldChooseIt)}
-    ${renderListSection("Benefits", content.benefits)}
-    ${renderListSection("Documents Required", content.documentsRequired)}
-    <h2>Process</h2>
+    ${renderListSection("Who Should Choose It", "who-should-choose-it", content.whoShouldChooseIt)}
+    ${renderListSection("Benefits", "benefits", content.benefits)}
+    ${renderListSection("Documents Required", "documents-required", content.documentsRequired)}
+    <h2 id="process">Process</h2>
     <ol class="process-list">${content.process.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ol>
-    <h2>Government Fees</h2>
+    <h2 id="government-fees">Government Fees</h2>
     <p>${escapeHtml(content.governmentFees)}</p>
-    <h2>Time Required</h2>
+    <h2 id="time-required">Time Required</h2>
     <p>${escapeHtml(content.timeRequired)}</p>
-    ${renderListSection("Compliance / Next Steps", content.complianceNextSteps)}
-    ${renderListSection("Common Mistakes", content.commonMistakes)}
-    <h2>FAQs</h2>
+    ${renderListSection("Compliance / Next Steps", "compliance-next-steps", content.complianceNextSteps)}
+    ${renderListSection("Common Mistakes", "common-mistakes", content.commonMistakes)}
+    <h2 id="faqs">FAQs</h2>
     <div class="faq-list service-faqs">
       ${content.faqs.map((faq) => `
         <details>
@@ -127,18 +150,18 @@ function renderRichService(content) {
 
 function renderFallbackService(service) {
   return `
-    <h2>Meaning</h2>
+    <h2 id="meaning">Meaning</h2>
     <p>${escapeHtml(service.title)} is a structured registration, compliance, taxation, legal documentation, or advisory service for Indian businesses.</p>
-    <h2>Process</h2>
+    <h2 id="process">Process</h2>
     <ol class="process-list">
       ${processFor(service).map((step) => `<li>${escapeHtml(step)}</li>`).join("")}
     </ol>
   `;
 }
 
-function renderListSection(title, items) {
+function renderListSection(title, id, items) {
   return `
-    <h2>${escapeHtml(title)}</h2>
+    <h2 id="${escapeHtml(id)}">${escapeHtml(title)}</h2>
     <ul class="contact-list">${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
   `;
 }
@@ -175,6 +198,57 @@ function escapeHtml(value) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+function updateOpenGraph(title, service, content) {
+  const fields = [
+    ['meta[property="og:title"]', `${title} | Regitrust Services LLP`],
+    ['meta[property="og:description"]', metaDescriptionFor(title, content)],
+    ['meta[property="og:url"]', `https://regitrust.in/service.html?service=${service.slug}`]
+  ];
+  fields.forEach(([selector, value]) => {
+    const tag = document.querySelector(selector);
+    if (tag) {
+      tag.setAttribute("content", value);
+    }
+  });
+}
+
+function injectServiceSchema(service, content) {
+  if (!content) {
+    return;
+  }
+  const existing = document.getElementById("service-json-ld");
+  if (existing) {
+    existing.remove();
+  }
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": content.serviceName,
+    "serviceType": content.category,
+    "provider": {
+      "@type": "LegalService",
+      "name": "Regitrust Services LLP",
+      "url": "https://regitrust.in/"
+    },
+    "areaServed": "India",
+    "description": metaDescriptionFor(content.serviceName, content),
+    "url": `https://regitrust.in/service.html?service=${service.slug}`,
+    "mainEntity": content.faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+  const script = document.createElement("script");
+  script.type = "application/ld+json";
+  script.id = "service-json-ld";
+  script.textContent = JSON.stringify(schema);
+  document.head.appendChild(script);
 }
 
 renderServiceCatalogue();

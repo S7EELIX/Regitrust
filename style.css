@@ -742,9 +742,32 @@ details p {
   margin-top: 0.5rem;
 }
 
+.service-jump-links {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 0.75rem;
+}
+
+.service-jump-links a {
+  color: #233858;
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.55rem 0.65rem;
+  background: #f8fbff;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.service-jump-links a:hover {
+  color: var(--primary);
+  background: #eef4ff;
+}
+
 .service-article article h2 {
   margin-top: 1.5rem;
   font-size: 1.3rem;
+  scroll-margin-top: 6rem;
 }
 
 .service-article article h2:first-child {
@@ -768,6 +791,23 @@ details p {
 
 .related-services h2 {
   font-size: 1.05rem;
+}
+
+.service-contact-card {
+  display: grid;
+  gap: 0.65rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1rem;
+  margin-bottom: 0.45rem;
+}
+
+.service-contact-card p {
+  color: var(--muted);
+}
+
+.service-contact-card .btn {
+  width: 100%;
+  justify-content: center;
 }
 
 .whatsapp-float {
