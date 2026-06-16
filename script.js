@@ -43,6 +43,20 @@ setupAnalytics();
 
 function setupLeadCaptureHelpers() {
   const pageLabel = document.title.replace(/\s*\|\s*Regitrust Services LLP\s*$/i, "").trim() || "Regitrust website";
+  const header = document.querySelector(".site-header");
+
+  if (header && !document.querySelector(".site-contact-bar")) {
+    const contactBar = document.createElement("div");
+    contactBar.className = "site-contact-bar";
+    contactBar.innerHTML = `
+      <div class="container site-contact-bar-wrap">
+        <span>Need registration, GST, ROC, tax, or trademark help?</span>
+        <a href="tel:${PRIMARY_PHONE}" data-track="top_bar_call_click">Call ${DISPLAY_PHONE}</a>
+        <a href="${whatsappUrl(`Hello Regitrust, I am viewing ${pageLabel} and need help.`)}" target="_blank" rel="noopener noreferrer" data-track="top_bar_whatsapp_click">WhatsApp</a>
+      </div>
+    `;
+    header.insertAdjacentElement("afterend", contactBar);
+  }
 
   if (!document.querySelector(".whatsapp-float")) {
     const floatingWhatsapp = document.createElement("a");
@@ -68,17 +82,42 @@ function setupLeadCaptureHelpers() {
   }
 
   document.querySelectorAll(".contact-form").forEach((form) => {
-    const existingSource = form.querySelector('input[name="source_url"]');
-    if (!existingSource) {
-      const source = document.createElement("input");
-      source.type = "hidden";
-      source.name = "source_url";
-      source.value = window.location.href;
-      form.appendChild(source);
-    }
+    setHiddenInput(form, "source_url", window.location.href);
+    setHiddenInput(form, "source_path", window.location.pathname);
+    setHiddenInput(form, "source_title", document.title);
+    setHiddenInput(form, "lead_channel", "website");
+
+    form.querySelectorAll('input[type="tel"]').forEach((input) => {
+      input.setAttribute("inputmode", "tel");
+      input.setAttribute("autocomplete", "tel");
+      input.setAttribute("pattern", "[0-9+()\\-\\s]{7,}");
+    });
   });
 
+  const footer = document.querySelector(".footer-wrap");
+  if (footer && !footer.querySelector(".footer-contact")) {
+    const footerContact = document.createElement("p");
+    footerContact.className = "footer-contact";
+    footerContact.innerHTML = `
+      <a href="tel:${PRIMARY_PHONE}">${DISPLAY_PHONE}</a>
+      <span>Lucknow, Uttar Pradesh</span>
+      <a href="mailto:contact@regitrust.in">contact@regitrust.in</a>
+    `;
+    footer.appendChild(footerContact);
+  }
+
   injectLeadSchema();
+}
+
+function setHiddenInput(form, name, value) {
+  let input = form.querySelector(`input[name="${name}"]`);
+  if (!input) {
+    input = document.createElement("input");
+    input.type = "hidden";
+    input.name = name;
+    form.appendChild(input);
+  }
+  input.value = value;
 }
 
 function injectLeadSchema() {
@@ -195,6 +234,7 @@ if (contactForm) {
 
     const submitButton = contactForm.querySelector('button[type="submit"]');
     const originalButtonText = submitButton ? submitButton.textContent : "";
+    setHiddenInput(contactForm, "submitted_at", new Date().toISOString());
     const formData = new FormData(contactForm);
 
     if (submitButton) {
