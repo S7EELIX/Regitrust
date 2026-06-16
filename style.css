@@ -2427,6 +2427,89 @@ body {
   margin-top: 0.6rem;
 }
 
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.38rem;
+  margin-bottom: 0.9rem;
+  color: var(--color-muted);
+  font-size: 0.88rem;
+}
+
+.breadcrumbs a {
+  color: var(--color-brand);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.service-snapshot {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0 0 1.1rem;
+}
+
+.service-snapshot div {
+  padding: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+}
+
+.service-snapshot dt {
+  margin-bottom: 0.18rem;
+  color: var(--color-muted);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.service-snapshot dd {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: 0.92rem;
+  font-weight: 650;
+  line-height: 1.45;
+}
+
+.service-search {
+  display: grid;
+  gap: 0.45rem;
+  max-width: 760px;
+  margin: 0 0 1rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.service-search label {
+  color: var(--color-ink);
+  font-weight: 800;
+}
+
+.service-search input {
+  width: 100%;
+  min-height: 46px;
+  padding: 0.72rem 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-ink);
+  font-size: 1rem;
+}
+
+.service-search p {
+  min-height: 1.3em;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
 @media (max-width: 860px) {
   .nav-dropdown-wide .mega-menu {
     right: auto !important;

@@ -47,6 +47,56 @@ function renderServiceCatalogue() {
   if (activePanel) {
     activePanel.open = true;
   }
+
+  setupServiceSearch(catalogue);
+}
+
+function setupServiceSearch(catalogue) {
+  const input = document.getElementById("service-search-input");
+  const status = document.getElementById("service-search-status");
+  if (!input || !catalogue) {
+    return;
+  }
+
+  function applyFilter() {
+    const query = input.value.trim().toLowerCase();
+    let visibleCount = 0;
+
+    catalogue.querySelectorAll(".service-category").forEach((category) => {
+      let categoryHasMatch = false;
+
+      category.querySelectorAll(".service-group").forEach((group) => {
+        let groupHasMatch = false;
+
+        group.querySelectorAll(".service-links a").forEach((link) => {
+          const matches = !query || link.textContent.toLowerCase().includes(query);
+          link.hidden = !matches;
+          if (matches) {
+            groupHasMatch = true;
+            categoryHasMatch = true;
+            visibleCount += 1;
+          }
+        });
+
+        group.hidden = !groupHasMatch;
+        if (query && groupHasMatch) {
+          group.open = true;
+        }
+      });
+
+      category.hidden = !categoryHasMatch;
+      if (query && categoryHasMatch) {
+        category.open = true;
+      }
+    });
+
+    if (status) {
+      status.textContent = query ? `${visibleCount} matching service${visibleCount === 1 ? "" : "s"} found.` : "Showing all services.";
+    }
+  }
+
+  input.addEventListener("input", applyFilter);
+  applyFilter();
 }
 
 function renderServiceDetail() {
@@ -73,11 +123,19 @@ function renderServiceDetail() {
   }
   updateOpenGraph(title, service, content);
   injectServiceSchema(service, content);
+  injectBreadcrumbSchema(service, title);
 
   detail.innerHTML = `
     <section class="section section-muted service-hero">
       <div class="container service-hero-grid">
         <div>
+          <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span>/</span>
+            <a href="services.html">Services</a>
+            <span>/</span>
+            <a href="services.html#${window.REGITRUST_SERVICE_SLUG(category)}">${escapeHtml(category)}</a>
+          </nav>
           <span class="pill">${escapeHtml(category)}</span>
           <h1>${escapeHtml(title)}</h1>
           <p>${escapeHtml(introFor(service, content))}</p>
@@ -87,6 +145,21 @@ function renderServiceDetail() {
           </div>
         </div>
         <aside class="service-note">
+          <h2>Quick Service Snapshot</h2>
+          <dl class="service-snapshot">
+            <div>
+              <dt>Category</dt>
+              <dd>${escapeHtml(category)}</dd>
+            </div>
+            <div>
+              <dt>Timeline</dt>
+              <dd>${escapeHtml(content ? content.timeRequired : "Timeline depends on document readiness and authority processing.")}</dd>
+            </div>
+            <div>
+              <dt>Government Fees</dt>
+              <dd>${escapeHtml(content ? content.governmentFees : "Government fees vary by service, state, and business structure.")}</dd>
+            </div>
+          </dl>
           <h2>Page Contents</h2>
           <nav class="service-jump-links" aria-label="Service page sections">
             ${SERVICE_SECTIONS.map(([id, label]) => `<a href="#${id}">${escapeHtml(label)}</a>`).join("")}
@@ -248,6 +321,42 @@ function injectServiceSchema(service, content) {
   const script = document.createElement("script");
   script.type = "application/ld+json";
   script.id = "service-json-ld";
+  script.textContent = JSON.stringify(schema);
+  document.head.appendChild(script);
+}
+
+function injectBreadcrumbSchema(service, title) {
+  const existing = document.getElementById("breadcrumb-json-ld");
+  if (existing) {
+    existing.remove();
+  }
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://regitrust.in/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Services",
+        "item": "https://regitrust.in/services.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": title,
+        "item": `https://regitrust.in/service.html?service=${service.slug}`
+      }
+    ]
+  };
+  const script = document.createElement("script");
+  script.type = "application/ld+json";
+  script.id = "breadcrumb-json-ld";
   script.textContent = JSON.stringify(schema);
   document.head.appendChild(script);
 }

@@ -69,7 +69,14 @@
     </section>
 
     <section class="section">
-      <div class="container service-catalogue" id="service-catalogue"></div>
+      <div class="container">
+        <div class="service-search" role="search">
+          <label for="service-search-input">Find a service</label>
+          <input id="service-search-input" type="search" placeholder="Search GST, trademark, ROC, company registration..." autocomplete="off">
+          <p id="service-search-status" role="status" aria-live="polite"></p>
+        </div>
+        <div class="service-catalogue" id="service-catalogue"></div>
+      </div>
     </section>
   </main>
 

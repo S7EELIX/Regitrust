@@ -6,6 +6,13 @@ const formStatus = document.getElementById("form-status");
 const serviceSelect = document.getElementById("service");
 
 const GA4_MEASUREMENT_ID = "G-XXXXXXXXXX";
+const PRIMARY_PHONE = "+918984297666";
+const DISPLAY_PHONE = "+91 89842 97666";
+const WHATSAPP_MESSAGE = "Hello Regitrust, I need help with business registration or compliance.";
+
+function whatsappUrl(message = WHATSAPP_MESSAGE) {
+  return `https://wa.me/${PRIMARY_PHONE.replace("+", "")}?text=${encodeURIComponent(message)}`;
+}
 
 function setupAnalytics() {
   if (!GA4_MEASUREMENT_ID || GA4_MEASUREMENT_ID === "G-XXXXXXXXXX") {
@@ -33,6 +40,92 @@ function trackEvent(eventName, params = {}) {
 }
 
 setupAnalytics();
+
+function setupLeadCaptureHelpers() {
+  const pageLabel = document.title.replace(/\s*\|\s*Regitrust Services LLP\s*$/i, "").trim() || "Regitrust website";
+
+  if (!document.querySelector(".whatsapp-float")) {
+    const floatingWhatsapp = document.createElement("a");
+    floatingWhatsapp.href = whatsappUrl(`Hello Regitrust, I am viewing ${pageLabel} and need help.`);
+    floatingWhatsapp.target = "_blank";
+    floatingWhatsapp.rel = "noopener noreferrer";
+    floatingWhatsapp.className = "whatsapp-float";
+    floatingWhatsapp.setAttribute("aria-label", "Chat on WhatsApp");
+    floatingWhatsapp.dataset.track = "floating_whatsapp_click";
+    floatingWhatsapp.textContent = "WhatsApp";
+    document.body.appendChild(floatingWhatsapp);
+  }
+
+  if (!document.querySelector(".mobile-cta")) {
+    const mobileCta = document.createElement("div");
+    mobileCta.className = "mobile-cta";
+    mobileCta.setAttribute("aria-label", "Quick contact actions");
+    mobileCta.innerHTML = `
+      <a href="tel:${PRIMARY_PHONE}" data-track="mobile_call_click">Call Now</a>
+      <a href="${whatsappUrl(`Hello Regitrust, I am viewing ${pageLabel} and need help.`)}" target="_blank" rel="noopener noreferrer" data-track="mobile_whatsapp_click">WhatsApp</a>
+    `;
+    document.body.appendChild(mobileCta);
+  }
+
+  document.querySelectorAll(".contact-form").forEach((form) => {
+    const existingSource = form.querySelector('input[name="source_url"]');
+    if (!existingSource) {
+      const source = document.createElement("input");
+      source.type = "hidden";
+      source.name = "source_url";
+      source.value = window.location.href;
+      form.appendChild(source);
+    }
+  });
+
+  injectLeadSchema();
+}
+
+function injectLeadSchema() {
+  if (document.getElementById("regitrust-local-business-schema")) {
+    return;
+  }
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "@id": "https://regitrust.in/#legalservice",
+    "name": "Regitrust Services LLP",
+    "url": "https://regitrust.in/",
+    "logo": "https://regitrust.in/assets/logo.png",
+    "image": "https://regitrust.in/assets/logo.png",
+    "telephone": [PRIMARY_PHONE, "+916306898090"],
+    "email": "contact@regitrust.in",
+    "areaServed": "India",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Lucknow",
+      "addressRegion": "Uttar Pradesh",
+      "addressCountry": "IN"
+    },
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "09:00",
+      "closes": "19:00"
+    }],
+    "contactPoint": [{
+      "@type": "ContactPoint",
+      "telephone": PRIMARY_PHONE,
+      "contactType": "customer support",
+      "areaServed": "IN",
+      "availableLanguage": ["en", "hi"]
+    }]
+  };
+
+  const script = document.createElement("script");
+  script.type = "application/ld+json";
+  script.id = "regitrust-local-business-schema";
+  script.textContent = JSON.stringify(schema);
+  document.head.appendChild(script);
+}
+
+setupLeadCaptureHelpers();
 
 function setupServiceSelect() {
   if (!serviceSelect || !window.REGITRUST_SERVICE_CATEGORIES || !window.REGITRUST_SERVICE_SLUG) {
