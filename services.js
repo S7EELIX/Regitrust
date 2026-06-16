@@ -1,4 +1,7 @@
 function serviceLink(title) {
+  if (window.REGITRUST_SERVICE_SLUG(title) === "trademark-registration") {
+    return "trademark-registration.html";
+  }
   return `service.html?service=${window.REGITRUST_SERVICE_SLUG(title)}`;
 }
 
