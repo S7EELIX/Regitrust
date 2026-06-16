@@ -82,8 +82,8 @@ function renderServiceDetail() {
           <h1>${escapeHtml(title)}</h1>
           <p>${escapeHtml(introFor(service, content))}</p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="contact.html?service=${encodeURIComponent(service.slug)}" data-track="service_detail_consultation_click">Book Consultation</a>
-            <a class="btn btn-secondary" href="https://wa.me/918984297666" target="_blank" rel="noopener noreferrer" data-track="service_detail_whatsapp_click">Chat on WhatsApp</a>
+            <a class="btn btn-primary" href="tel:+918984297666" data-track="service_detail_call_click">Call +91 89842 97666</a>
+            <a class="btn btn-secondary" href="https://wa.me/918984297666?text=${encodeURIComponent(`Hello Regitrust, I need help with ${title}.`)}" target="_blank" rel="noopener noreferrer" data-track="service_detail_whatsapp_click">WhatsApp Expert</a>
           </div>
         </div>
         <aside class="service-note">
@@ -105,8 +105,9 @@ function renderServiceDetail() {
           <div class="service-contact-card">
             <h2>Need This Service?</h2>
             <p>Share your details and service requirement. The team can review documents, timelines, and next steps.</p>
-            <a class="btn btn-primary" href="contact.html?service=${encodeURIComponent(service.slug)}" data-track="service_sidebar_contact_click">Request Callback</a>
+            <a class="btn btn-primary" href="tel:+918984297666" data-track="service_sidebar_call_click">Call Now</a>
             <a class="btn btn-secondary" href="https://wa.me/918984297666?text=${encodeURIComponent(`Hello Regitrust, I need help with ${title}.`)}" target="_blank" rel="noopener noreferrer" data-track="service_sidebar_whatsapp_click">WhatsApp</a>
+            <a class="text-link" href="contact.html?service=${encodeURIComponent(service.slug)}" data-track="service_sidebar_contact_click">Request callback -></a>
           </div>
           <h2>Related Services</h2>
           ${window.REGITRUST_SERVICES
