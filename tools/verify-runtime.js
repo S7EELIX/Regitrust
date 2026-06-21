@@ -81,6 +81,22 @@ function main() {
     }
   });
 
+  check("contact form captures lead stage and urgency", () => {
+    if (!contactHtml.includes('name="business_stage"')) {
+      throw new Error("Expected contact form to capture business stage");
+    }
+    if (!contactHtml.includes('name="urgency"')) {
+      throw new Error("Expected contact form to capture urgency");
+    }
+  });
+
+  check("shared script supports wrapped FAQ sections", () => {
+    const script = read("script.js");
+    if (!script.includes('faqHeading.closest(".section-head")')) {
+      throw new Error("Expected FAQ schema helper to support section-head wrapped FAQ headings");
+    }
+  });
+
   check("shared script tracks lead actions and form outcomes", () => {
     const script = read("script.js");
     ["phone_lead_click", "email_lead_click", "whatsapp_lead_click", "lead_form_submit_attempt", "lead_form_submitted", "lead_form_submit_failed"].forEach((eventName) => {
@@ -95,7 +111,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log(JSON.stringify({ checks: 8, failures: 0 }, null, 2));
+  console.log(JSON.stringify({ checks: 10, failures: 0 }, null, 2));
 }
 
 main();

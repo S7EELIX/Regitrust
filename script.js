@@ -232,21 +232,27 @@ function injectPageFaqSchema() {
   }
 
   const faqs = [];
-  let node = faqHeading.nextElementSibling;
+  const headingWrapper = faqHeading.closest(".section-head");
+  let node = faqHeading.nextElementSibling || headingWrapper?.nextElementSibling;
   while (node && node.tagName !== "H2") {
-    if (node.tagName === "H3") {
-      const answerNode = node.nextElementSibling;
+    const questionNodes = node.tagName === "H3"
+      ? [node]
+      : Array.from(node.querySelectorAll?.("h3") || []);
+
+    questionNodes.forEach((questionNode) => {
+      const answerNode = questionNode.nextElementSibling;
       if (answerNode && answerNode.tagName === "P") {
         faqs.push({
           "@type": "Question",
-          "name": node.textContent.trim(),
+          "name": questionNode.textContent.trim(),
           "acceptedAnswer": {
             "@type": "Answer",
             "text": answerNode.textContent.trim()
           }
         });
       }
-    }
+    });
+
     node = node.nextElementSibling;
   }
 
