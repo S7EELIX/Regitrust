@@ -35,8 +35,40 @@ function setupAnalytics() {
 
 function trackEvent(eventName, params = {}) {
   if (typeof window.gtag === "function") {
-    window.gtag("event", eventName, params);
+    window.gtag("event", eventName, {
+      page_path: window.location.pathname,
+      page_title: document.title,
+      ...params
+    });
   }
+}
+
+function getServiceContext(form) {
+  const params = new URLSearchParams(window.location.search);
+  const selectedService = form?.querySelector('[name="service"]')?.value || params.get("service") || "";
+  return selectedService ? { service_name: selectedService } : {};
+}
+
+function getLeadEventName(element) {
+  const explicitName = element.getAttribute("data-track");
+  if (explicitName) {
+    return explicitName;
+  }
+
+  const href = element.getAttribute("href") || "";
+  if (href.startsWith("tel:")) {
+    return "phone_lead_click";
+  }
+  if (href.startsWith("mailto:")) {
+    return "email_lead_click";
+  }
+  if (href.includes("wa.me") || href.includes("api.whatsapp.com")) {
+    return "whatsapp_lead_click";
+  }
+  if (href.includes("contact.html")) {
+    return "quote_request_click";
+  }
+  return "";
 }
 
 setupAnalytics();
@@ -236,6 +268,11 @@ if (contactForm) {
     const originalButtonText = submitButton ? submitButton.textContent : "";
     setHiddenInput(contactForm, "submitted_at", new Date().toISOString());
     const formData = new FormData(contactForm);
+    const serviceContext = getServiceContext(contactForm);
+    trackEvent("lead_form_submit_attempt", {
+      form_id: contactForm.id || "contact-form",
+      ...serviceContext
+    });
 
     if (submitButton) {
       submitButton.disabled = true;
@@ -264,7 +301,7 @@ if (contactForm) {
       contactForm.reset();
       trackEvent("lead_form_submitted", {
         form_id: contactForm.id || "contact-form",
-        page_location: window.location.pathname
+        ...serviceContext
       });
       if (formStatus) {
         formStatus.textContent = "Thanks! Redirecting you to confirmation...";
@@ -280,6 +317,10 @@ if (contactForm) {
         formStatus.classList.add("error");
         formStatus.textContent = "Unable to submit right now. Please call or WhatsApp us.";
       }
+      trackEvent("lead_form_submit_failed", {
+        form_id: contactForm.id || "contact-form",
+        ...serviceContext
+      });
     } finally {
       if (submitButton) {
         submitButton.disabled = false;
@@ -309,11 +350,15 @@ document.querySelectorAll(".nav-dropdown").forEach((dropdown) => {
   });
 });
 
-document.querySelectorAll("[data-track]").forEach((element) => {
+document.querySelectorAll("[data-track], a[href^='tel:'], a[href^='mailto:'], a[href*='wa.me'], a[href*='contact.html']").forEach((element) => {
   element.addEventListener("click", () => {
-    const name = element.getAttribute("data-track");
+    const name = getLeadEventName(element);
     if (name) {
-      trackEvent(name, { page_location: window.location.pathname });
+      trackEvent(name, {
+        link_url: element.href || "",
+        link_text: element.textContent.trim().slice(0, 80),
+        ...getServiceContext()
+      });
     }
   });
 });

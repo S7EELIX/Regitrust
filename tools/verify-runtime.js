@@ -72,12 +72,30 @@ function main() {
     }
   });
 
+  check("contact form captures location and preferred contact method", () => {
+    if (!contactHtml.includes('name="city_state"')) {
+      throw new Error("Expected contact form to capture city/state");
+    }
+    if (!contactHtml.includes('name="preferred_contact"')) {
+      throw new Error("Expected contact form to capture preferred contact method");
+    }
+  });
+
+  check("shared script tracks lead actions and form outcomes", () => {
+    const script = read("script.js");
+    ["phone_lead_click", "email_lead_click", "whatsapp_lead_click", "lead_form_submit_attempt", "lead_form_submitted", "lead_form_submit_failed"].forEach((eventName) => {
+      if (!script.includes(eventName)) {
+        throw new Error(`Expected shared script to include ${eventName}`);
+      }
+    });
+  });
+
   if (failures.length) {
     console.error(JSON.stringify({ failures }, null, 2));
     process.exit(1);
   }
 
-  console.log(JSON.stringify({ checks: 6, failures: 0 }, null, 2));
+  console.log(JSON.stringify({ checks: 8, failures: 0 }, null, 2));
 }
 
 main();
