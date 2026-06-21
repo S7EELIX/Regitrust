@@ -38,6 +38,10 @@ const cleanServiceUrls = {
   "income-tax-return-filing": "income-tax-return-filing.html",
   "gst-notice-reply": "gst-notice-reply.html",
   "income-tax-notice-reply": "income-tax-notice-reply.html",
+  "llp-annual-filing": "llp-annual-filing.html",
+  "tds-return-filing": "tds-return-filing.html",
+  "dsc-registration": "dsc-registration.html",
+  "copyright-registration": "copyright-registration.html",
   "pan-application": "pan-tan-application.html",
   "tan-application": "pan-tan-application.html"
 };
