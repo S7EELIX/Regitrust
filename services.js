@@ -1,22 +1,23 @@
+const CLEAN_SERVICE_URLS = {
+  "trademark-registration": "trademark-registration.html",
+  "llp-registration": "llp-registration.html",
+  "fssai-registration": "fssai-registration.html",
+  "msme-udyam-registration": "msme-udyam-registration.html",
+  "import-export-code-iec-registration": "iec-registration.html",
+  "startup-india-registration": "startup-india-registration.html",
+  "gst-return-filing": "gst-return-filing.html",
+  "trademark-objection-reply": "trademark-objection-reply.html",
+  "trademark-renewal": "trademark-renewal.html",
+  "income-tax-return-filing": "income-tax-return-filing.html",
+  "gst-notice-reply": "gst-notice-reply.html",
+  "income-tax-notice-reply": "income-tax-notice-reply.html",
+  "pan-application": "pan-tan-application.html",
+  "tan-application": "pan-tan-application.html"
+};
+
 function serviceLink(title) {
   const slug = window.REGITRUST_SERVICE_SLUG(title);
-  const landingPages = {
-    "trademark-registration": "trademark-registration.html",
-    "llp-registration": "llp-registration.html",
-    "fssai-registration": "fssai-registration.html",
-    "msme-udyam-registration": "msme-udyam-registration.html",
-    "import-export-code-iec-registration": "iec-registration.html",
-    "startup-india-registration": "startup-india-registration.html",
-    "gst-return-filing": "gst-return-filing.html",
-    "trademark-objection-reply": "trademark-objection-reply.html",
-    "trademark-renewal": "trademark-renewal.html",
-    "income-tax-return-filing": "income-tax-return-filing.html",
-    "gst-notice-reply": "gst-notice-reply.html",
-    "income-tax-notice-reply": "income-tax-notice-reply.html",
-    "pan-application": "pan-tan-application.html",
-    "tan-application": "pan-tan-application.html"
-  };
-  return landingPages[slug] || `service.html?service=${slug}`;
+  return CLEAN_SERVICE_URLS[slug] || `service.html?service=${slug}`;
 }
 
 const SERVICE_SECTIONS = [
@@ -136,7 +137,7 @@ function renderServiceDetail() {
   }
   const canonical = document.querySelector('link[rel="canonical"]');
   if (canonical) {
-    canonical.setAttribute("href", `https://regitrust.in/service.html?service=${service.slug}`);
+    canonical.setAttribute("href", serviceCanonicalUrl(service.slug));
   }
   updateOpenGraph(title, service, content);
   injectServiceSchema(service, content);
@@ -295,7 +296,7 @@ function updateOpenGraph(title, service, content) {
   const fields = [
     ['meta[property="og:title"]', `${title} | Regitrust Services LLP`],
     ['meta[property="og:description"]', metaDescriptionFor(title, content)],
-    ['meta[property="og:url"]', `https://regitrust.in/service.html?service=${service.slug}`]
+    ['meta[property="og:url"]', serviceCanonicalUrl(service.slug)]
   ];
   fields.forEach(([selector, value]) => {
     const tag = document.querySelector(selector);
@@ -325,7 +326,7 @@ function injectServiceSchema(service, content) {
     },
     "areaServed": "India",
     "description": metaDescriptionFor(content.serviceName, content),
-    "url": `https://regitrust.in/service.html?service=${service.slug}`,
+    "url": serviceCanonicalUrl(service.slug),
     "mainEntity": content.faqs.map((faq) => ({
       "@type": "Question",
       "name": faq.question,
@@ -367,7 +368,7 @@ function injectBreadcrumbSchema(service, title) {
         "@type": "ListItem",
         "position": 3,
         "name": title,
-        "item": `https://regitrust.in/service.html?service=${service.slug}`
+        "item": serviceCanonicalUrl(service.slug)
       }
     ]
   };
@@ -376,6 +377,10 @@ function injectBreadcrumbSchema(service, title) {
   script.id = "breadcrumb-json-ld";
   script.textContent = JSON.stringify(schema);
   document.head.appendChild(script);
+}
+
+function serviceCanonicalUrl(slug) {
+  return `https://regitrust.in/${CLEAN_SERVICE_URLS[slug] || `service.html?service=${slug}`}`;
 }
 
 renderServiceCatalogue();
