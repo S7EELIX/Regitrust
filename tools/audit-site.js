@@ -23,6 +23,24 @@ const serviceContent = context.window.REGITRUST_SERVICE_CONTENT || {};
 const categoryIds = categories.map((category) => slugFor(category.title));
 const serviceSlugs = services.map((service) => service.slug);
 const serviceContentSlugs = Object.keys(serviceContent);
+const cleanServiceUrls = {
+  "private-limited-company-registration": "company-registration.html",
+  "gst-registration": "gst-pan.html",
+  "trademark-registration": "trademark-registration.html",
+  "llp-registration": "llp-registration.html",
+  "fssai-registration": "fssai-registration.html",
+  "msme-udyam-registration": "msme-udyam-registration.html",
+  "import-export-code-iec-registration": "iec-registration.html",
+  "startup-india-registration": "startup-india-registration.html",
+  "gst-return-filing": "gst-return-filing.html",
+  "trademark-objection-reply": "trademark-objection-reply.html",
+  "trademark-renewal": "trademark-renewal.html",
+  "income-tax-return-filing": "income-tax-return-filing.html",
+  "gst-notice-reply": "gst-notice-reply.html",
+  "income-tax-notice-reply": "income-tax-notice-reply.html",
+  "pan-application": "pan-tan-application.html",
+  "tan-application": "pan-tan-application.html"
+};
 const problems = [];
 
 function addProblem(file, message, detail = "") {
@@ -116,7 +134,10 @@ serviceSlugs
 
 const sitemap = read("sitemap.xml");
 serviceSlugs
-  .filter((slug) => !sitemap.includes(`service.html?service=${slug}`))
+  .filter((slug) => {
+    const cleanUrl = cleanServiceUrls[slug];
+    return !sitemap.includes(`service.html?service=${slug}`) && (!cleanUrl || !sitemap.includes(cleanUrl));
+  })
   .forEach((slug) => addProblem("sitemap.xml", "Service missing from sitemap", slug));
 
 assetFiles
