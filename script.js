@@ -68,6 +68,13 @@ function getLeadEventName(element) {
   if (href.includes("contact.html")) {
     return "quote_request_click";
   }
+  if (
+    element.classList.contains("card") ||
+    element.closest(".service-links") ||
+    element.closest(".footer-service-links")
+  ) {
+    return "service_internal_click";
+  }
   return "";
 }
 
@@ -448,7 +455,7 @@ document.querySelectorAll(".nav-dropdown").forEach((dropdown) => {
   });
 });
 
-document.querySelectorAll("[data-track], a[href^='tel:'], a[href^='mailto:'], a[href*='wa.me'], a[href*='contact.html']").forEach((element) => {
+document.querySelectorAll("[data-track], a[href^='tel:'], a[href^='mailto:'], a[href*='wa.me'], a[href*='contact.html'], .card[href], .service-links a, .footer-service-links a").forEach((element) => {
   element.addEventListener("click", () => {
     const name = getLeadEventName(element);
     if (name) {
