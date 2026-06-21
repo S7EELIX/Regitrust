@@ -25,8 +25,9 @@ function main() {
   const content = context.window.REGITRUST_SERVICE_CONTENT || {};
   const indexHtml = read("index.html");
   const contactHtml = read("contact.html");
+  const companyRegistrationHtm = read("company-registration.htm");
   const servicesJs = read("services.js");
-  const textFiles = fs.readdirSync(root).filter((file) => /\.(html|css|js|xml|txt)$/i.test(file));
+  const textFiles = fs.readdirSync(root).filter((file) => /\.(html?|css|js|xml|txt)$/i.test(file));
 
   check("service database exposes 69 services", () => {
     if (services.length !== 69) {
@@ -70,6 +71,15 @@ function main() {
     }
     if (!indexHtml.includes('name="_next" value="https://regitrust.in/thank-you.html"')) {
       throw new Error("Expected homepage form _next redirect for no-JavaScript fallback");
+    }
+  });
+
+  check("legacy company-registration htm path redirects to canonical page", () => {
+    if (!companyRegistrationHtm.includes('url=company-registration.html')) {
+      throw new Error("Expected company-registration.htm to meta-refresh to company-registration.html");
+    }
+    if (!companyRegistrationHtm.includes('href="https://regitrust.in/company-registration.html"')) {
+      throw new Error("Expected company-registration.htm to canonicalize to company-registration.html");
     }
   });
 
@@ -133,7 +143,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log(JSON.stringify({ checks: 12, failures: 0 }, null, 2));
+  console.log(JSON.stringify({ checks: 13, failures: 0 }, null, 2));
 }
 
 main();
