@@ -18,6 +18,10 @@ const CLEAN_SERVICE_URLS = {
   "shop-and-establishment-registration": "shop-establishment-registration.html",
   "trade-license-registration": "trade-license-registration.html",
   "professional-tax-registration": "professional-tax-registration.html",
+  "gst-cancellation": "gst-cancellation.html",
+  "gst-revocation": "gst-revocation.html",
+  "gst-lut-filing": "gst-lut-filing.html",
+  "gst-annual-return-filing": "gst-annual-return-filing.html",
   "pan-application": "pan-tan-application.html",
   "tan-application": "pan-tan-application.html"
 };
