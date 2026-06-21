@@ -23,6 +23,7 @@ function main() {
 
   const services = context.window.REGITRUST_SERVICES || [];
   const content = context.window.REGITRUST_SERVICE_CONTENT || {};
+  const indexHtml = read("index.html");
   const contactHtml = read("contact.html");
   const servicesJs = read("services.js");
   const textFiles = fs.readdirSync(root).filter((file) => /\.(html|css|js|xml|txt)$/i.test(file));
@@ -57,6 +58,18 @@ function main() {
     }
     if (!contactHtml.includes('name="_next" value="https://regitrust.in/thank-you.html"')) {
       throw new Error("Expected _next redirect for no-JavaScript fallback");
+    }
+  });
+
+  check("homepage form supports no-JavaScript fallback", () => {
+    if (!indexHtml.includes('action="https://formsubmit.co/contact@regitrust.in"')) {
+      throw new Error("Expected homepage form to use regular FormSubmit action for no-JavaScript fallback");
+    }
+    if (!indexHtml.includes('data-ajax-action="https://formsubmit.co/ajax/contact@regitrust.in"')) {
+      throw new Error("Expected homepage form to keep AJAX FormSubmit endpoint for enhanced submission");
+    }
+    if (!indexHtml.includes('name="_next" value="https://regitrust.in/thank-you.html"')) {
+      throw new Error("Expected homepage form _next redirect for no-JavaScript fallback");
     }
   });
 
@@ -120,7 +133,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log(JSON.stringify({ checks: 11, failures: 0 }, null, 2));
+  console.log(JSON.stringify({ checks: 12, failures: 0 }, null, 2));
 }
 
 main();
