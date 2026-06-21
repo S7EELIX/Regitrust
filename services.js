@@ -15,6 +15,9 @@ const CLEAN_SERVICE_URLS = {
   "tds-return-filing": "tds-return-filing.html",
   "dsc-registration": "dsc-registration.html",
   "copyright-registration": "copyright-registration.html",
+  "shop-and-establishment-registration": "shop-establishment-registration.html",
+  "trade-license-registration": "trade-license-registration.html",
+  "professional-tax-registration": "professional-tax-registration.html",
   "pan-application": "pan-tan-application.html",
   "tan-application": "pan-tan-application.html"
 };
