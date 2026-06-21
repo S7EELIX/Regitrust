@@ -25,6 +25,7 @@ function main() {
   const content = context.window.REGITRUST_SERVICE_CONTENT || {};
   const contactHtml = read("contact.html");
   const servicesJs = read("services.js");
+  const textFiles = fs.readdirSync(root).filter((file) => /\.(html|css|js|xml|txt)$/i.test(file));
 
   check("service database exposes 69 services", () => {
     if (services.length !== 69) {
@@ -106,12 +107,20 @@ function main() {
     });
   });
 
+  check("public text files are free of common mojibake", () => {
+    const mojibakePattern = /(?:\u00e2\u20ac|\u00e2\u20ac\u0153|\u00e2\u20ac\ufffd|\u00e2\u20ac\u2122|\u00c3\u00a9|\u00c3\u00a2|\ufffd)/;
+    const affected = textFiles.filter((file) => mojibakePattern.test(read(file)));
+    if (affected.length) {
+      throw new Error(`Found possible mojibake in: ${affected.join(", ")}`);
+    }
+  });
+
   if (failures.length) {
     console.error(JSON.stringify({ failures }, null, 2));
     process.exit(1);
   }
 
-  console.log(JSON.stringify({ checks: 10, failures: 0 }, null, 2));
+  console.log(JSON.stringify({ checks: 11, failures: 0 }, null, 2));
 }
 
 main();
