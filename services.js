@@ -9,7 +9,10 @@ function serviceLink(title) {
     "startup-india-registration": "startup-india-registration.html",
     "gst-return-filing": "gst-return-filing.html",
     "trademark-objection-reply": "trademark-objection-reply.html",
+    "trademark-renewal": "trademark-renewal.html",
     "income-tax-return-filing": "income-tax-return-filing.html",
+    "gst-notice-reply": "gst-notice-reply.html",
+    "income-tax-notice-reply": "income-tax-notice-reply.html",
     "pan-application": "pan-tan-application.html",
     "tan-application": "pan-tan-application.html"
   };
