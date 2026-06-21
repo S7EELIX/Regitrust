@@ -5,7 +5,7 @@ const contactForm = document.getElementById("contact-form");
 const formStatus = document.getElementById("form-status");
 const serviceSelect = document.getElementById("service");
 
-const GA4_MEASUREMENT_ID = "G-XXXXXXXXXX";
+const GA4_MEASUREMENT_ID = "G-3TFYHJLKL3";
 const PRIMARY_PHONE = "+918984297666";
 const DISPLAY_PHONE = "+91 89842 97666";
 const WHATSAPP_MESSAGE = "Hello Regitrust, I need help with business registration or compliance.";
