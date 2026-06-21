@@ -1,8 +1,13 @@
 function serviceLink(title) {
-  if (window.REGITRUST_SERVICE_SLUG(title) === "trademark-registration") {
-    return "trademark-registration.html";
-  }
-  return `service.html?service=${window.REGITRUST_SERVICE_SLUG(title)}`;
+  const slug = window.REGITRUST_SERVICE_SLUG(title);
+  const landingPages = {
+    "trademark-registration": "trademark-registration.html",
+    "llp-registration": "llp-registration.html",
+    "fssai-registration": "fssai-registration.html",
+    "msme-udyam-registration": "msme-udyam-registration.html",
+    "import-export-code-iec-registration": "iec-registration.html"
+  };
+  return landingPages[slug] || `service.html?service=${slug}`;
 }
 
 const SERVICE_SECTIONS = [
