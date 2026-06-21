@@ -139,6 +139,8 @@ function setupLeadCaptureHelpers() {
   }
 
   injectLeadSchema();
+  injectPageFaqSchema();
+  injectBreadcrumbSchema();
 }
 
 function setHiddenInput(form, name, value) {
@@ -193,6 +195,88 @@ function injectLeadSchema() {
   script.type = "application/ld+json";
   script.id = "regitrust-local-business-schema";
   script.textContent = JSON.stringify(schema);
+  document.head.appendChild(script);
+}
+
+function injectPageFaqSchema() {
+  if (document.getElementById("regitrust-page-faq-schema")) {
+    return;
+  }
+
+  const faqHeading = Array.from(document.querySelectorAll("h2")).find((heading) =>
+    /frequently asked questions|faqs/i.test(heading.textContent)
+  );
+  if (!faqHeading) {
+    return;
+  }
+
+  const faqs = [];
+  let node = faqHeading.nextElementSibling;
+  while (node && node.tagName !== "H2") {
+    if (node.tagName === "H3") {
+      const answerNode = node.nextElementSibling;
+      if (answerNode && answerNode.tagName === "P") {
+        faqs.push({
+          "@type": "Question",
+          "name": node.textContent.trim(),
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": answerNode.textContent.trim()
+          }
+        });
+      }
+    }
+    node = node.nextElementSibling;
+  }
+
+  if (!faqs.length) {
+    return;
+  }
+
+  const script = document.createElement("script");
+  script.type = "application/ld+json";
+  script.id = "regitrust-page-faq-schema";
+  script.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs
+  });
+  document.head.appendChild(script);
+}
+
+function injectBreadcrumbSchema() {
+  if (document.getElementById("regitrust-breadcrumb-schema")) {
+    return;
+  }
+
+  const links = Array.from(document.querySelectorAll(".breadcrumbs a"));
+  const currentPageName = document.querySelector("h1")?.textContent.trim();
+  if (!links.length || !currentPageName) {
+    return;
+  }
+
+  const items = links.map((link, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": link.textContent.trim(),
+    "item": new URL(link.getAttribute("href"), window.location.href).href
+  }));
+
+  items.push({
+    "@type": "ListItem",
+    "position": items.length + 1,
+    "name": currentPageName,
+    "item": window.location.href.split("#")[0]
+  });
+
+  const script = document.createElement("script");
+  script.type = "application/ld+json";
+  script.id = "regitrust-breadcrumb-schema";
+  script.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": items
+  });
   document.head.appendChild(script);
 }
 
