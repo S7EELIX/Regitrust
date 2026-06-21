@@ -138,6 +138,20 @@ function setupLeadCaptureHelpers() {
     footer.appendChild(footerContact);
   }
 
+  if (footer && !footer.querySelector(".footer-service-links")) {
+    const footerServiceLinks = document.createElement("p");
+    footerServiceLinks.className = "legal-links footer-service-links";
+    footerServiceLinks.innerHTML = `
+      <a href="company-registration.html">Company Registration</a>
+      <a href="gst-pan.html">GST Registration</a>
+      <a href="llp-registration.html">LLP Registration</a>
+      <a href="fssai-registration.html">FSSAI</a>
+      <a href="gst-notice-reply.html">GST Notice</a>
+      <a href="income-tax-return-filing.html">ITR Filing</a>
+    `;
+    footer.appendChild(footerServiceLinks);
+  }
+
   injectLeadSchema();
   injectPageFaqSchema();
   injectBreadcrumbSchema();
