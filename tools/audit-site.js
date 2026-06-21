@@ -41,6 +41,7 @@ const cleanServiceUrls = {
   "llp-annual-filing": "llp-annual-filing.html",
   "tds-return-filing": "tds-return-filing.html",
   "dsc-registration": "dsc-registration.html",
+  "din-registration": "din-registration.html",
   "copyright-registration": "copyright-registration.html",
   "shop-and-establishment-registration": "shop-establishment-registration.html",
   "trade-license-registration": "trade-license-registration.html",
@@ -49,6 +50,9 @@ const cleanServiceUrls = {
   "gst-revocation": "gst-revocation.html",
   "gst-lut-filing": "gst-lut-filing.html",
   "gst-annual-return-filing": "gst-annual-return-filing.html",
+  "fssai-license-renewal": "fssai-license-renewal.html",
+  "fssai-state-license": "fssai-state-license.html",
+  "fssai-central-license": "fssai-central-license.html",
   "pan-application": "pan-tan-application.html",
   "tan-application": "pan-tan-application.html"
 };
