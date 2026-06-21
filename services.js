@@ -5,7 +5,13 @@ function serviceLink(title) {
     "llp-registration": "llp-registration.html",
     "fssai-registration": "fssai-registration.html",
     "msme-udyam-registration": "msme-udyam-registration.html",
-    "import-export-code-iec-registration": "iec-registration.html"
+    "import-export-code-iec-registration": "iec-registration.html",
+    "startup-india-registration": "startup-india-registration.html",
+    "gst-return-filing": "gst-return-filing.html",
+    "trademark-objection-reply": "trademark-objection-reply.html",
+    "income-tax-return-filing": "income-tax-return-filing.html",
+    "pan-application": "pan-tan-application.html",
+    "tan-application": "pan-tan-application.html"
   };
   return landingPages[slug] || `service.html?service=${slug}`;
 }
