@@ -2513,6 +2513,33 @@ body {
   border-color: var(--color-brand);
 }
 
+.decision-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.decision-grid article {
+  min-height: 100%;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.decision-grid h3 {
+  font-size: 1.04rem;
+  line-height: 1.28;
+}
+
+.decision-grid p {
+  margin-top: 0.45rem;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  line-height: 1.62;
+}
+
 .contact-trust {
   margin-top: 1rem;
   padding: 1rem;
@@ -2733,6 +2760,10 @@ body {
   }
 
   .path-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .decision-grid {
     grid-template-columns: 1fr;
   }
 

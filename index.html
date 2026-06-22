@@ -78,9 +78,9 @@
           </div>
           <p class="lead-note">Free first consultation. Starts-from pricing after scope check. Response during business hours: Mon - Sat, 9 AM to 7 PM.</p>
           <div class="stats">
-            <div><strong>5,000+</strong><span>Businesses Supported</span></div>
-            <div><strong>99%</strong><span>On-time Filing Support</span></div>
-            <div><strong>1:1</strong><span>Expert Case Review</span></div>
+            <div><strong>Scope-first</strong><span>Quote after case review</span></div>
+            <div><strong>Checklist-led</strong><span>Documents checked before filing</span></div>
+            <div><strong>Follow-up</strong><span>Status and next steps tracked</span></div>
           </div>
         </div>
 
@@ -227,6 +227,29 @@
       </div>
     </section>
 
+    <section class="section section-muted decision-guide" aria-labelledby="decision-guide-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="decision-guide-title">Not Sure Which Service You Need?</h2>
+          <p>Many business owners ask for one filing but actually need a different registration, correction, or compliance step first. These quick checks help us guide you faster.</p>
+        </div>
+        <div class="decision-grid">
+          <article>
+            <h3>If you are starting fresh</h3>
+            <p>Share business activity, founders, state, capital plan, and whether you need GST, bank account, Startup India, or FSSAI after registration.</p>
+          </article>
+          <article>
+            <h3>If you already have a business</h3>
+            <p>Share entity type, GST status, last ROC or tax filing position, pending returns, and any deadline or portal issue.</p>
+          </article>
+          <article>
+            <h3>If you received a notice</h3>
+            <p>Share the notice copy, deadline, assessment or financial year, portal screenshot if available, and previous reply history.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="services">
       <div class="container">
         <div class="section-head">
@@ -357,6 +380,16 @@
           <input id="email" name="email" type="email" required>
           <label for="phone">Phone Number</label>
           <input id="phone" name="phone" type="tel" required>
+          <label for="city">City / State</label>
+          <input id="city" name="city_state" type="text" autocomplete="address-level2" placeholder="Example: Lucknow, Uttar Pradesh">
+          <label for="business-stage">Business Stage</label>
+          <select id="business-stage" name="business_stage">
+            <option value="">Select your stage</option>
+            <option value="Planning to start">Planning to start</option>
+            <option value="Already registered">Already registered</option>
+            <option value="Need filing cleanup">Need filing cleanup</option>
+            <option value="Received notice or objection">Received notice or objection</option>
+          </select>
           <label for="service">Service Needed</label>
           <select id="service" name="service">
             <option>Company Registration</option>
@@ -364,9 +397,24 @@
             <option>Compliance & Filings</option>
             <option>Legal Documentation</option>
           </select>
+          <label for="urgency">Timeline / Urgency</label>
+          <select id="urgency" name="urgency">
+            <option value="">Select timeline</option>
+            <option value="Urgent - today or tomorrow">Urgent - today or tomorrow</option>
+            <option value="This week">This week</option>
+            <option value="This month">This month</option>
+            <option value="Planning ahead">Planning ahead</option>
+          </select>
+          <label for="preferred-contact">Preferred Contact Method</label>
+          <select id="preferred-contact" name="preferred_contact">
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="Phone Call">Phone Call</option>
+            <option value="Email">Email</option>
+          </select>
           <label for="message">Message</label>
           <textarea id="message" name="message" rows="4" placeholder="Tell us about your requirement"></textarea>
           <button class="btn btn-primary" type="submit" data-track="homepage_form_submit_click">Get My Callback</button>
+          <p class="form-note">Your request is also saved to the lead sheet after the form is connected and tested.</p>
           <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
