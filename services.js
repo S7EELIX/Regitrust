@@ -1,5 +1,7 @@
 const CLEAN_SERVICE_URLS = {
   "trademark-registration": "trademark-registration.html",
+  "one-person-company-opc-registration": "opc-registration.html",
+  "annual-roc-filing": "annual-roc-filing.html",
   "llp-registration": "llp-registration.html",
   "fssai-registration": "fssai-registration.html",
   "msme-udyam-registration": "msme-udyam-registration.html",
