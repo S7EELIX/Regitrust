@@ -209,6 +209,8 @@ function setupLeadCaptureHelpers() {
       <a href="fssai-registration.html">FSSAI</a>
       <a href="gst-notice-reply.html">GST Notice</a>
       <a href="income-tax-return-filing.html">ITR Filing</a>
+      <a href="company-registration-lucknow.html">Company Registration Lucknow</a>
+      <a href="gst-registration-lucknow.html">GST Registration Lucknow</a>
     `;
     footer.appendChild(footerServiceLinks);
   }
