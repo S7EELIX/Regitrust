@@ -172,8 +172,8 @@ function main() {
     if (!leadConfigJs.includes("REGITRUST_LEAD_WEBHOOK_URL")) {
       throw new Error("Expected lead-config.js to expose REGITRUST_LEAD_WEBHOOK_URL");
     }
-    if (!leadConfigJs.includes('window.REGITRUST_LEAD_WEBHOOK_URL = ""')) {
-      throw new Error("Expected blank default lead webhook URL");
+    if (!/window\.REGITRUST_LEAD_WEBHOOK_URL\s*=\s*"https:\/\/script\.google\.com\/macros\/s\/[^"]+\/exec"/.test(leadConfigJs)) {
+      throw new Error("Expected deployed Google Apps Script webhook URL");
     }
   });
 
