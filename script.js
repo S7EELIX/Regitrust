@@ -69,25 +69,17 @@ function formDataToLeadPayload(formData, form, serviceContext = {}) {
   };
 }
 
-function submitLeadBackup(formData, form, serviceContext = {}) {
+async function submitLeadBackup(formData, form, serviceContext = {}) {
   const endpoint = window.REGITRUST_LEAD_WEBHOOK_URL;
   if (!endpoint || !/^https:\/\//i.test(endpoint)) {
-    return;
+    return false;
   }
 
   const payload = formDataToLeadPayload(formData, form, serviceContext);
   const body = JSON.stringify(payload);
 
   try {
-    if (navigator.sendBeacon) {
-      const blob = new Blob([body], { type: "text/plain;charset=UTF-8" });
-      if (navigator.sendBeacon(endpoint, blob)) {
-        trackEvent("lead_backup_beacon_sent", serviceContext);
-        return;
-      }
-    }
-
-    fetch(endpoint, {
+    await fetch(endpoint, {
       method: "POST",
       mode: "no-cors",
       keepalive: true,
@@ -95,13 +87,19 @@ function submitLeadBackup(formData, form, serviceContext = {}) {
         "Content-Type": "text/plain;charset=UTF-8"
       },
       body
-    }).then(() => {
-      trackEvent("lead_backup_request_sent", serviceContext);
-    }).catch(() => {
-      trackEvent("lead_backup_request_failed", serviceContext);
     });
+    trackEvent("lead_backup_request_sent", serviceContext);
+    return true;
   } catch (error) {
+    if (navigator.sendBeacon) {
+      const blob = new Blob([body], { type: "text/plain;charset=UTF-8" });
+      if (navigator.sendBeacon(endpoint, blob)) {
+        trackEvent("lead_backup_beacon_sent", serviceContext);
+        return true;
+      }
+    }
     trackEvent("lead_backup_request_failed", serviceContext);
+    return false;
   }
 }
 
@@ -452,20 +450,33 @@ if (contactForm) {
     }
 
     try {
+      const leadBackupSaved = await submitLeadBackup(formData, contactForm, serviceContext);
       const endpoint = contactForm.dataset.ajaxAction || contactForm.action;
-      const response = await fetch(endpoint, {
-        method: "POST",
-        body: formData,
-        headers: {
-          Accept: "application/json"
-        }
-      });
+      let emailSubmitted = false;
 
-      if (!response.ok) {
-        throw new Error("Submission failed");
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          body: formData,
+          headers: {
+            Accept: "application/json"
+          }
+        });
+        emailSubmitted = response.ok;
+      } catch (error) {
+        emailSubmitted = false;
       }
 
-      submitLeadBackup(formData, contactForm, serviceContext);
+      if (!emailSubmitted && !leadBackupSaved) {
+        throw new Error("Submission failed");
+      }
+      if (!emailSubmitted) {
+        trackEvent("lead_form_email_failed", {
+          form_id: contactForm.id || "contact-form",
+          ...serviceContext
+        });
+      }
+
       contactForm.reset();
       trackEvent("lead_form_submitted", {
         form_id: contactForm.id || "contact-form",

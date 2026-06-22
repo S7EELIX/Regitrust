@@ -161,7 +161,7 @@ function main() {
   });
 
   check("shared script tracks lead actions and form outcomes", () => {
-    ["phone_lead_click", "email_lead_click", "whatsapp_lead_click", "lead_form_submit_attempt", "lead_form_submitted", "lead_form_submit_failed"].forEach((eventName) => {
+    ["phone_lead_click", "email_lead_click", "whatsapp_lead_click", "lead_form_submit_attempt", "lead_form_submitted", "lead_form_submit_failed", "lead_form_email_failed"].forEach((eventName) => {
       if (!scriptJs.includes(eventName)) {
         throw new Error(`Expected shared script to include ${eventName}`);
       }
