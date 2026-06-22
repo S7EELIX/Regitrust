@@ -152,6 +152,34 @@ serviceSlugs
   .forEach((slug) => addProblem("services-data.js", "Duplicate service slug", slug));
 
 const sitemap = read("sitemap.xml");
+const robots = read("robots.txt");
+const manifest = JSON.parse(read("site.webmanifest"));
+
+if (!robots.includes("Sitemap: https://regitrust.in/sitemap.xml")) {
+  addProblem("robots.txt", "Missing sitemap directive");
+}
+
+if (!robots.includes("Allow: /")) {
+  addProblem("robots.txt", "Missing crawl allow directive");
+}
+
+if (!Array.isArray(manifest.icons) || !manifest.icons.length) {
+  addProblem("site.webmanifest", "Missing manifest icons");
+} else {
+  manifest.icons.forEach((icon) => {
+    const iconPath = String(icon.src || "").replace(/^\//, "");
+    if (!iconPath || !exists(iconPath)) {
+      addProblem("site.webmanifest", "Broken manifest icon", icon.src || "");
+    }
+  });
+}
+
+[...sitemap.matchAll(/<loc>https:\/\/regitrust\.in\/([^<]*)<\/loc>/g)]
+  .map((match) => match[1] || "index.html")
+  .map((pathname) => pathname === "" ? "index.html" : pathname)
+  .filter((pathname) => !pathname.includes("?") && !exists(pathname))
+  .forEach((pathname) => addProblem("sitemap.xml", "Broken sitemap local target", pathname));
+
 serviceSlugs
   .filter((slug) => {
     const cleanUrl = cleanServiceUrls[slug];
