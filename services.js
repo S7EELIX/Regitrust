@@ -15,6 +15,8 @@ const CLEAN_SERVICE_URLS = {
   "tds-return-filing": "tds-return-filing.html",
   "dsc-registration": "dsc-registration.html",
   "din-registration": "din-registration.html",
+  "company-name-change": "company-name-change.html",
+  "registered-office-change": "registered-office-change.html",
   "director-addition": "director-addition.html",
   "director-resignation": "director-resignation.html",
   "copyright-registration": "copyright-registration.html",
