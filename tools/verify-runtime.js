@@ -26,7 +26,10 @@ function main() {
   const indexHtml = read("index.html");
   const contactHtml = read("contact.html");
   const companyRegistrationHtm = read("company-registration.htm");
+  const leadConfigJs = read("lead-config.js");
+  const leadCaptureGs = read("tools/google-apps-script/lead-capture.gs");
   const servicesJs = read("services.js");
+  const scriptJs = read("script.js");
   const textFiles = fs.readdirSync(root).filter((file) => /\.(html?|css|js|xml|txt)$/i.test(file));
   const htmlFiles = fs.readdirSync(root).filter((file) => /\.html?$/i.test(file));
   const cleanServiceSlugs = new Set(
@@ -52,6 +55,17 @@ function main() {
     if (dataIndex === -1 || scriptIndex === -1 || dataIndex > scriptIndex) {
       throw new Error("contact.html must load services-data.js before script.js");
     }
+  });
+
+  check("lead storage config loads before shared script", () => {
+    [indexHtml, contactHtml].forEach((html, index) => {
+      const file = index === 0 ? "index.html" : "contact.html";
+      const configIndex = html.indexOf('src="lead-config.js"');
+      const scriptIndex = html.indexOf('src="script.js"');
+      if (configIndex === -1 || scriptIndex === -1 || configIndex > scriptIndex) {
+        throw new Error(`${file} must load lead-config.js before script.js`);
+      }
+    });
   });
 
   check("contact form supports no-JavaScript fallback", () => {
@@ -147,10 +161,48 @@ function main() {
   });
 
   check("shared script tracks lead actions and form outcomes", () => {
-    const script = read("script.js");
     ["phone_lead_click", "email_lead_click", "whatsapp_lead_click", "lead_form_submit_attempt", "lead_form_submitted", "lead_form_submit_failed"].forEach((eventName) => {
-      if (!script.includes(eventName)) {
+      if (!scriptJs.includes(eventName)) {
         throw new Error(`Expected shared script to include ${eventName}`);
+      }
+    });
+  });
+
+  check("lead backup endpoint is configurable without code changes", () => {
+    if (!leadConfigJs.includes("REGITRUST_LEAD_WEBHOOK_URL")) {
+      throw new Error("Expected lead-config.js to expose REGITRUST_LEAD_WEBHOOK_URL");
+    }
+    if (!leadConfigJs.includes('window.REGITRUST_LEAD_WEBHOOK_URL = ""')) {
+      throw new Error("Expected blank default lead webhook URL");
+    }
+  });
+
+  check("successful form submissions are copied to optional lead storage", () => {
+    [
+      "submitLeadBackup(formData, contactForm, serviceContext)",
+      "navigator.sendBeacon",
+      'mode: "no-cors"',
+      "lead_backup_request_sent",
+      "lead_backup_request_failed"
+    ].forEach((snippet) => {
+      if (!scriptJs.includes(snippet)) {
+        throw new Error(`Expected shared script lead backup support to include ${snippet}`);
+      }
+    });
+  });
+
+  check("Google Apps Script lead receiver stores key form fields", () => {
+    [
+      "function doPost(e)",
+      "SpreadsheetApp.getActiveSpreadsheet",
+      "sheet.appendRow(row)",
+      '"phone"',
+      '"service"',
+      '"urgency"',
+      '"preferred_contact"'
+    ].forEach((snippet) => {
+      if (!leadCaptureGs.includes(snippet)) {
+        throw new Error(`Expected lead capture Apps Script to include ${snippet}`);
       }
     });
   });
@@ -168,7 +220,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log(JSON.stringify({ checks: 15, failures: 0 }, null, 2));
+  console.log(JSON.stringify({ checks: 19, failures: 0 }, null, 2));
 }
 
 main();

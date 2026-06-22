@@ -49,6 +49,62 @@ function getServiceContext(form) {
   return selectedService ? { service_name: selectedService } : {};
 }
 
+function formDataToLeadPayload(formData, form, serviceContext = {}) {
+  const payload = {};
+  formData.forEach((value, key) => {
+    if (typeof value === "string") {
+      payload[key] = value.trim();
+    }
+  });
+
+  return {
+    ...payload,
+    form_id: form?.id || "contact-form",
+    page_url: window.location.href,
+    page_path: window.location.pathname,
+    page_title: document.title,
+    user_agent: navigator.userAgent,
+    lead_storage_version: "2026-06-22",
+    ...serviceContext
+  };
+}
+
+function submitLeadBackup(formData, form, serviceContext = {}) {
+  const endpoint = window.REGITRUST_LEAD_WEBHOOK_URL;
+  if (!endpoint || !/^https:\/\//i.test(endpoint)) {
+    return;
+  }
+
+  const payload = formDataToLeadPayload(formData, form, serviceContext);
+  const body = JSON.stringify(payload);
+
+  try {
+    if (navigator.sendBeacon) {
+      const blob = new Blob([body], { type: "text/plain;charset=UTF-8" });
+      if (navigator.sendBeacon(endpoint, blob)) {
+        trackEvent("lead_backup_beacon_sent", serviceContext);
+        return;
+      }
+    }
+
+    fetch(endpoint, {
+      method: "POST",
+      mode: "no-cors",
+      keepalive: true,
+      headers: {
+        "Content-Type": "text/plain;charset=UTF-8"
+      },
+      body
+    }).then(() => {
+      trackEvent("lead_backup_request_sent", serviceContext);
+    }).catch(() => {
+      trackEvent("lead_backup_request_failed", serviceContext);
+    });
+  } catch (error) {
+    trackEvent("lead_backup_request_failed", serviceContext);
+  }
+}
+
 function getLeadEventName(element) {
   const explicitName = element.getAttribute("data-track");
   if (explicitName) {
@@ -409,6 +465,7 @@ if (contactForm) {
         throw new Error("Submission failed");
       }
 
+      submitLeadBackup(formData, contactForm, serviceContext);
       contactForm.reset();
       trackEvent("lead_form_submitted", {
         form_id: contactForm.id || "contact-form",
