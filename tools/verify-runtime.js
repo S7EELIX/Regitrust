@@ -80,6 +80,9 @@ function main() {
     if (!contactHtml.includes('data-ajax-action="https://formsubmit.co/ajax/contact@regitrust.in"')) {
       throw new Error("Expected AJAX FormSubmit endpoint for enhanced submission");
     }
+    if (!contactHtml.includes('name="_honey"')) {
+      throw new Error("Expected FormSubmit honeypot field on contact form");
+    }
     if (!contactHtml.includes('name="_next" value="https://regitrust.in/thank-you.html"')) {
       throw new Error("Expected _next redirect for no-JavaScript fallback");
     }
@@ -91,6 +94,9 @@ function main() {
     }
     if (!indexHtml.includes('data-ajax-action="https://formsubmit.co/ajax/contact@regitrust.in"')) {
       throw new Error("Expected homepage form to keep AJAX FormSubmit endpoint for enhanced submission");
+    }
+    if (!indexHtml.includes('name="_honey"')) {
+      throw new Error("Expected FormSubmit honeypot field on homepage form");
     }
     if (!indexHtml.includes('name="_next" value="https://regitrust.in/thank-you.html"')) {
       throw new Error("Expected homepage form _next redirect for no-JavaScript fallback");
