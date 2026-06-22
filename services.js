@@ -142,6 +142,12 @@ function renderServiceDetail() {
 
   const params = new URLSearchParams(window.location.search);
   const slug = params.get("service") || "private-limited-company-registration";
+  const cleanUrl = CLEAN_SERVICE_URLS[slug];
+  if (cleanUrl && /\/service\.html$/i.test(window.location.pathname)) {
+    window.location.replace(cleanUrl);
+    return;
+  }
+
   const service = window.REGITRUST_SERVICES.find((item) => item.slug === slug) || window.REGITRUST_SERVICES[0];
   const content = window.REGITRUST_SERVICE_CONTENT ? window.REGITRUST_SERVICE_CONTENT[service.slug] : null;
   const title = content ? content.serviceName : service.title;

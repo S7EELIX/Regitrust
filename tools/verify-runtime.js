@@ -93,6 +93,12 @@ function main() {
     }
   });
 
+  check("dynamic service page redirects to clean landing pages", () => {
+    if (!servicesJs.includes("window.location.replace(cleanUrl)")) {
+      throw new Error("Expected service.html clean URL requests to redirect to dedicated landing pages");
+    }
+  });
+
   check("public pages link to clean landing pages when available", () => {
     const staleLinks = [];
     htmlFiles.forEach((file) => {
@@ -162,7 +168,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log(JSON.stringify({ checks: 14, failures: 0 }, null, 2));
+  console.log(JSON.stringify({ checks: 15, failures: 0 }, null, 2));
 }
 
 main();
