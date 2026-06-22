@@ -30,6 +30,11 @@ function main() {
   const leadCaptureGs = read("tools/google-apps-script/lead-capture.gs");
   const servicesJs = read("services.js");
   const scriptJs = read("script.js");
+  const localLeadPages = [
+    "company-registration-lucknow.html",
+    "gst-registration-lucknow.html",
+    "trademark-registration-lucknow.html"
+  ];
   const textFiles = fs.readdirSync(root).filter((file) => /\.(html?|css|js|xml|txt)$/i.test(file));
   const htmlFiles = fs.readdirSync(root).filter((file) => /\.html?$/i.test(file));
   const cleanServiceSlugs = new Set(
@@ -128,6 +133,25 @@ function main() {
     }
   });
 
+  check("local Lucknow lead pages exist and are linked from homepage", () => {
+    const missing = localLeadPages.filter((file) => !fs.existsSync(path.join(root, file)));
+    if (missing.length) {
+      throw new Error(`Missing local lead pages: ${missing.join(", ")}`);
+    }
+    const unlinked = localLeadPages.filter((file) => !indexHtml.includes(`href="${file}"`));
+    if (unlinked.length) {
+      throw new Error(`Homepage must link local lead pages: ${unlinked.join(", ")}`);
+    }
+  });
+
+  check("local Lucknow lead pages are included in sitemap", () => {
+    const sitemap = read("sitemap.xml");
+    const missing = localLeadPages.filter((file) => !sitemap.includes(`https://regitrust.in/${file}`));
+    if (missing.length) {
+      throw new Error(`Sitemap missing local lead pages: ${missing.join(", ")}`);
+    }
+  });
+
   check("contact service select can represent every service plus placeholder", () => {
     const expectedOptions = services.length + 1;
     if (expectedOptions !== 70) {
@@ -220,7 +244,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log(JSON.stringify({ checks: 19, failures: 0 }, null, 2));
+  console.log(JSON.stringify({ checks: 21, failures: 0 }, null, 2));
 }
 
 main();
