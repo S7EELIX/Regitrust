@@ -42,6 +42,8 @@ const cleanServiceUrls = {
   "tds-return-filing": "tds-return-filing.html",
   "dsc-registration": "dsc-registration.html",
   "din-registration": "din-registration.html",
+  "director-addition": "director-addition.html",
+  "director-resignation": "director-resignation.html",
   "copyright-registration": "copyright-registration.html",
   "shop-and-establishment-registration": "shop-establishment-registration.html",
   "trade-license-registration": "trade-license-registration.html",
