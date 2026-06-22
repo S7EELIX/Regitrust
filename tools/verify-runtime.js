@@ -28,6 +28,10 @@ function main() {
   const companyRegistrationHtm = read("company-registration.htm");
   const servicesJs = read("services.js");
   const textFiles = fs.readdirSync(root).filter((file) => /\.(html?|css|js|xml|txt)$/i.test(file));
+  const htmlFiles = fs.readdirSync(root).filter((file) => /\.html?$/i.test(file));
+  const cleanServiceSlugs = new Set(
+    Array.from(servicesJs.matchAll(/"([^"]+)":\s*"[^"]+\.html"/g)).map((match) => match[1])
+  );
 
   check("service database exposes 69 services", () => {
     if (services.length !== 69) {
@@ -89,6 +93,21 @@ function main() {
     }
   });
 
+  check("public pages link to clean landing pages when available", () => {
+    const staleLinks = [];
+    htmlFiles.forEach((file) => {
+      Array.from(read(file).matchAll(/service\.html\?service=([a-z0-9-]+)/g)).forEach((match) => {
+        if (cleanServiceSlugs.has(match[1])) {
+          staleLinks.push(`${file}:${match[0]}`);
+        }
+      });
+    });
+
+    if (staleLinks.length) {
+      throw new Error(`Replace dynamic links with clean URLs: ${staleLinks.join(", ")}`);
+    }
+  });
+
   check("contact service select can represent every service plus placeholder", () => {
     const expectedOptions = services.length + 1;
     if (expectedOptions !== 70) {
@@ -143,7 +162,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log(JSON.stringify({ checks: 13, failures: 0 }, null, 2));
+  console.log(JSON.stringify({ checks: 14, failures: 0 }, null, 2));
 }
 
 main();
