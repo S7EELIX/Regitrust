@@ -40,6 +40,9 @@ function main() {
     "gst-registration-bengaluru.html",
     "gst-registration-chennai.html",
     "gst-registration-hyderabad.html",
+    "trademark-registration-bengaluru.html",
+    "trademark-registration-chennai.html",
+    "trademark-registration-hyderabad.html",
     "nri-company-registration-india.html",
     "india-market-entry-services.html"
   ];
