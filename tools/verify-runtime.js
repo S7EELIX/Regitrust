@@ -37,6 +37,9 @@ function main() {
     "company-registration-bengaluru.html",
     "company-registration-chennai.html",
     "company-registration-hyderabad.html",
+    "gst-registration-bengaluru.html",
+    "gst-registration-chennai.html",
+    "gst-registration-hyderabad.html",
     "nri-company-registration-india.html",
     "india-market-entry-services.html"
   ];
