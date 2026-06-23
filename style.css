@@ -2380,6 +2380,11 @@ body {
   gap: 0.55rem;
 }
 
+.local-link-row {
+  justify-content: center;
+  margin-top: 1rem;
+}
+
 .lead-strip-actions a {
   min-height: 40px;
   display: inline-flex;

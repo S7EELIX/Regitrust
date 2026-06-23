@@ -211,6 +211,10 @@ function setupLeadCaptureHelpers() {
       <a href="income-tax-return-filing.html">ITR Filing</a>
       <a href="company-registration-lucknow.html">Company Registration Lucknow</a>
       <a href="gst-registration-lucknow.html">GST Registration Lucknow</a>
+      <a href="nri-company-registration-india.html">NRI Company Registration</a>
+      <a href="company-registration-bengaluru.html">Company Registration Bengaluru</a>
+      <a href="company-registration-chennai.html">Company Registration Chennai</a>
+      <a href="company-registration-hyderabad.html">Company Registration Hyderabad</a>
     `;
     footer.appendChild(footerServiceLinks);
   }

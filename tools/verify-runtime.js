@@ -33,7 +33,20 @@ function main() {
   const localLeadPages = [
     "company-registration-lucknow.html",
     "gst-registration-lucknow.html",
-    "trademark-registration-lucknow.html"
+    "trademark-registration-lucknow.html",
+    "company-registration-bengaluru.html",
+    "company-registration-chennai.html",
+    "company-registration-hyderabad.html",
+    "nri-company-registration-india.html",
+    "india-market-entry-services.html"
+  ];
+  const homepageLeadPages = [
+    "company-registration-lucknow.html",
+    "company-registration-bengaluru.html",
+    "company-registration-chennai.html",
+    "company-registration-hyderabad.html",
+    "nri-company-registration-india.html",
+    "india-market-entry-services.html"
   ];
   const textFiles = fs.readdirSync(root).filter((file) => /\.(html?|css|js|xml|txt)$/i.test(file));
   const htmlFiles = fs.readdirSync(root).filter((file) => /\.html?$/i.test(file));
@@ -144,7 +157,7 @@ function main() {
     if (missing.length) {
       throw new Error(`Missing local lead pages: ${missing.join(", ")}`);
     }
-    const unlinked = localLeadPages.filter((file) => !indexHtml.includes(`href="${file}"`));
+    const unlinked = homepageLeadPages.filter((file) => !indexHtml.includes(`href="${file}"`));
     if (unlinked.length) {
       throw new Error(`Homepage must link local lead pages: ${unlinked.join(", ")}`);
     }
