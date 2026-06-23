@@ -9,6 +9,7 @@ const GA4_MEASUREMENT_ID = "G-3TFYHJLKL3";
 const PRIMARY_PHONE = "+918984297666";
 const DISPLAY_PHONE = "+91 89842 97666";
 const WHATSAPP_MESSAGE = "Hello Regitrust, I need help with business registration or compliance.";
+const ATTRIBUTION_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid"];
 
 function whatsappUrl(message = WHATSAPP_MESSAGE) {
   return `https://wa.me/${PRIMARY_PHONE.replace("+", "")}?text=${encodeURIComponent(message)}`;
@@ -49,6 +50,42 @@ function getServiceContext(form) {
   return selectedService ? { service_name: selectedService } : {};
 }
 
+function getSessionValue(key) {
+  try {
+    return sessionStorage.getItem(key) || "";
+  } catch (error) {
+    return "";
+  }
+}
+
+function setSessionValue(key, value) {
+  try {
+    sessionStorage.setItem(key, value);
+  } catch (error) {
+    // Attribution is helpful, but lead submission should never depend on storage access.
+  }
+}
+
+function getAttributionContext() {
+  const params = new URLSearchParams(window.location.search);
+  const firstLanding = getSessionValue("regitrust_first_landing") || window.location.href;
+  const firstReferrer = getSessionValue("regitrust_first_referrer") || document.referrer || "";
+  const attribution = {
+    referrer_url: document.referrer || "",
+    first_landing_url: firstLanding,
+    first_referrer_url: firstReferrer
+  };
+
+  ATTRIBUTION_KEYS.forEach((key) => {
+    const value = params.get(key) || getSessionValue(`regitrust_${key}`) || "";
+    if (value) {
+      attribution[key] = value;
+    }
+  });
+
+  return attribution;
+}
+
 function formDataToLeadPayload(formData, form, serviceContext = {}) {
   const payload = {};
   formData.forEach((value, key) => {
@@ -64,7 +101,8 @@ function formDataToLeadPayload(formData, form, serviceContext = {}) {
     page_path: window.location.pathname,
     page_title: document.title,
     user_agent: navigator.userAgent,
-    lead_storage_version: "2026-06-22",
+    lead_storage_version: "2026-06-24",
+    ...getAttributionContext(),
     ...serviceContext
   };
 }
@@ -133,6 +171,7 @@ function getLeadEventName(element) {
 }
 
 setupAnalytics();
+setupAttribution();
 
 function setupLeadCaptureHelpers() {
   const pageLabel = document.title.replace(/\s*\|\s*Regitrust Services LLP\s*$/i, "").trim() || "Regitrust website";
@@ -179,6 +218,9 @@ function setupLeadCaptureHelpers() {
     setHiddenInput(form, "source_path", window.location.pathname);
     setHiddenInput(form, "source_title", document.title);
     setHiddenInput(form, "lead_channel", "website");
+    Object.entries(getAttributionContext()).forEach(([name, value]) => {
+      setHiddenInput(form, name, value);
+    });
 
     form.querySelectorAll('input[type="tel"]').forEach((input) => {
       input.setAttribute("inputmode", "tel");
@@ -222,6 +264,23 @@ function setupLeadCaptureHelpers() {
   injectLeadSchema();
   injectPageFaqSchema();
   injectBreadcrumbSchema();
+}
+
+function setupAttribution() {
+  if (!getSessionValue("regitrust_first_landing")) {
+    setSessionValue("regitrust_first_landing", window.location.href);
+  }
+  if (!getSessionValue("regitrust_first_referrer")) {
+    setSessionValue("regitrust_first_referrer", document.referrer || "");
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  ATTRIBUTION_KEYS.forEach((key) => {
+    const value = params.get(key);
+    if (value) {
+      setSessionValue(`regitrust_${key}`, value);
+    }
+  });
 }
 
 function setHiddenInput(form, name, value) {

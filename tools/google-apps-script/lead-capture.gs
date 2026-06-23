@@ -19,6 +19,15 @@ const HEADERS = [
   "page_path",
   "page_title",
   "service_name",
+  "referrer_url",
+  "first_landing_url",
+  "first_referrer_url",
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_term",
+  "utm_content",
+  "gclid",
   "submitted_at",
   "lead_channel",
   "form_id",
@@ -66,11 +75,19 @@ function getLeadSheet_() {
     sheet = spreadsheet.insertSheet(SHEET_NAME);
   }
 
-  const firstRow = sheet.getRange(1, 1, 1, HEADERS.length).getValues()[0];
+  const lastColumn = Math.max(sheet.getLastColumn(), HEADERS.length);
+  const firstRow = sheet.getRange(1, 1, 1, lastColumn).getValues()[0];
   const hasHeaders = firstRow.some((value) => value);
   if (!hasHeaders) {
     sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
     sheet.setFrozenRows(1);
+    return sheet;
+  }
+
+  const existingHeaders = firstRow.map((value) => String(value || "").trim()).filter(Boolean);
+  const missingHeaders = HEADERS.filter((header) => existingHeaders.indexOf(header) === -1);
+  if (missingHeaders.length) {
+    sheet.getRange(1, sheet.getLastColumn() + 1, 1, missingHeaders.length).setValues([missingHeaders]);
   }
 
   return sheet;
