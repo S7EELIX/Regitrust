@@ -37,6 +37,7 @@ function main() {
     "company-registration-bengaluru.html",
     "company-registration-chennai.html",
     "company-registration-hyderabad.html",
+    "south-india-business-registration.html",
     "gst-registration-bengaluru.html",
     "gst-registration-chennai.html",
     "gst-registration-hyderabad.html",
@@ -47,7 +48,7 @@ function main() {
     "india-market-entry-services.html"
   ];
   const homepageLeadPages = [
-    "company-registration-bengaluru.html",
+    "south-india-business-registration.html",
     "nri-company-registration-india.html",
     "india-market-entry-services.html"
   ];
