@@ -464,7 +464,10 @@ if (contactForm) {
             Accept: "application/json"
           }
         });
-        emailSubmitted = response.ok;
+        if (response.ok) {
+          const result = await response.json().catch(() => ({}));
+          emailSubmitted = result.success !== false && result.success !== "false";
+        }
       } catch (error) {
         emailSubmitted = false;
       }
