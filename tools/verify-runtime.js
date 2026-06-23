@@ -41,10 +41,7 @@ function main() {
     "india-market-entry-services.html"
   ];
   const homepageLeadPages = [
-    "company-registration-lucknow.html",
     "company-registration-bengaluru.html",
-    "company-registration-chennai.html",
-    "company-registration-hyderabad.html",
     "nri-company-registration-india.html",
     "india-market-entry-services.html"
   ];

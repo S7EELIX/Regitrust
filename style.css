@@ -2740,6 +2740,55 @@ body {
   text-decoration: underline;
 }
 
+.home-clean .hero {
+  padding: clamp(3.4rem, 6vw, 4.6rem) 0 clamp(2.4rem, 4vw, 3.4rem);
+  background: #f8fbff;
+}
+
+.home-clean .hero-grid {
+  grid-template-columns: minmax(0, 1.12fr) minmax(300px, 0.62fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.home-clean .hero h1 {
+  max-width: 660px;
+  font-size: clamp(2.2rem, 3.6vw, 3.45rem);
+}
+
+.home-clean .hero p {
+  max-width: 620px;
+}
+
+.clean-hero-panel {
+  align-self: center;
+  padding: 1.15rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.clean-hero-panel .btn {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.home-clean .conversion-paths {
+  background: #ffffff;
+  border-top: 1px solid var(--color-border);
+}
+
+.home-clean #why-us {
+  background: var(--color-soft);
+}
+
+.home-clean .section {
+  padding-top: clamp(2.8rem, 4.6vw, 3.8rem);
+  padding-bottom: clamp(2.8rem, 4.6vw, 3.8rem);
+}
+
+.home-clean .cta-band {
+  padding-top: 2.6rem;
+  padding-bottom: 2.6rem;
+}
+
 .footer-contact {
   display: flex;
   flex-wrap: wrap;
@@ -2792,6 +2841,10 @@ body {
     justify-content: flex-start;
     overflow-x: auto;
     white-space: nowrap;
+  }
+
+  .home-clean .hero-grid {
+    grid-template-columns: 1fr;
   }
 }
 
