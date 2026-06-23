@@ -143,9 +143,9 @@ function setupLeadCaptureHelpers() {
     contactBar.className = "site-contact-bar";
     contactBar.innerHTML = `
       <div class="container site-contact-bar-wrap">
-        <span>Need registration, GST, ROC, tax, or trademark help?</span>
-        <a href="tel:${PRIMARY_PHONE}" data-track="top_bar_call_click">Call ${DISPLAY_PHONE}</a>
-        <a href="${whatsappUrl(`Hello Regitrust, I am viewing ${pageLabel} and need help.`)}" target="_blank" rel="noopener noreferrer" data-track="top_bar_whatsapp_click">WhatsApp</a>
+        <span class="site-contact-message">Need registration, GST, ROC, tax, or trademark help?</span>
+        <a class="site-contact-call" href="tel:${PRIMARY_PHONE}" data-track="top_bar_call_click">Call ${DISPLAY_PHONE}</a>
+        <a class="site-contact-whatsapp" href="${whatsappUrl(`Hello Regitrust, I am viewing ${pageLabel} and need help.`)}" target="_blank" rel="noopener noreferrer" data-track="top_bar_whatsapp_click">WhatsApp</a>
       </div>
     `;
     header.insertAdjacentElement("afterend", contactBar);

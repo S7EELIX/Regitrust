@@ -2838,13 +2838,47 @@ body {
   }
 
   .site-contact-bar-wrap {
-    justify-content: flex-start;
-    overflow-x: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    overflow-x: visible;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .site-contact-message {
+    display: none;
+  }
+
+  .site-contact-bar a {
     white-space: nowrap;
   }
 
   .home-clean .hero-grid {
     grid-template-columns: 1fr;
+  }
+
+  .home-clean .hero {
+    padding: 2.35rem 0 2rem;
+  }
+
+  .home-clean .hero-copy,
+  .home-clean .hero p,
+  .home-clean .hero h1 {
+    text-align: left;
+  }
+
+  .home-clean .hero h1 {
+    font-size: 2.25rem;
+    line-height: 1.06;
+  }
+
+  .home-clean .hero p {
+    font-size: 1rem;
+  }
+
+  .home-clean .clean-hero-panel {
+    display: none;
   }
 }
 
@@ -2860,7 +2894,28 @@ body {
   }
 
   .whatsapp-float {
-    right: 0.8rem;
-    bottom: 5.35rem;
+    display: none;
+  }
+
+  .home-clean .hero {
+    padding: 1.8rem 0 1.65rem;
+  }
+
+  .home-clean .hero h1 {
+    font-size: 2.02rem;
+  }
+
+  .home-clean .hero-cta {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.72rem;
+  }
+
+  .home-clean .hero-cta .btn {
+    width: 100%;
+  }
+
+  .home-clean .lead-note {
+    margin-top: 0.85rem;
   }
 }
