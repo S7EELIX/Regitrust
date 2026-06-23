@@ -254,6 +254,23 @@ function main() {
     });
   });
 
+  check("lead attribution fields are captured and stored", () => {
+    [
+      "ATTRIBUTION_KEYS",
+      "getAttributionContext",
+      "first_landing_url",
+      "first_referrer_url",
+      "utm_source",
+      "utm_medium",
+      "utm_campaign",
+      "gclid"
+    ].forEach((snippet) => {
+      if (!scriptJs.includes(snippet) && !leadCaptureGs.includes(snippet)) {
+        throw new Error(`Expected lead attribution support to include ${snippet}`);
+      }
+    });
+  });
+
   check("public text files are free of common mojibake", () => {
     const mojibakePattern = /(?:\u00e2\u20ac|\u00e2\u20ac\u0153|\u00e2\u20ac\ufffd|\u00e2\u20ac\u2122|\u00c3\u00a9|\u00c3\u00a2|\ufffd)/;
     const affected = textFiles.filter((file) => mojibakePattern.test(read(file)));
@@ -267,7 +284,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log(JSON.stringify({ checks: 21, failures: 0 }, null, 2));
+  console.log(JSON.stringify({ checks: 22, failures: 0 }, null, 2));
 }
 
 main();
