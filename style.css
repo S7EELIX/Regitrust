@@ -3908,3 +3908,116 @@ body:not(.home-clean) .legal-copy h3 {
     min-height: 62px;
   }
 }
+
+/* Premium services catalogue page */
+.services-page main > .section:first-child .section-head {
+  max-width: 980px;
+}
+
+.services-page main > .section:first-child h1 {
+  max-width: 880px;
+}
+
+.service-decision-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.72rem;
+  margin-top: 1.45rem;
+}
+
+.service-decision-strip a {
+  display: grid;
+  gap: 0.14rem;
+  min-height: 86px;
+  align-content: center;
+  border: 1px solid rgba(216, 225, 239, 0.96);
+  border-radius: 13px;
+  padding: 0.82rem;
+  color: #14233d;
+  background: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(8, 21, 45, 0.055);
+}
+
+.service-decision-strip a:hover {
+  border-color: #b9cae5;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(8, 21, 45, 0.09);
+}
+
+.service-decision-strip strong {
+  color: #08152d;
+  font-size: 0.98rem;
+}
+
+.service-decision-strip span {
+  color: #65728a;
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+
+.services-page .cards.cards-3 {
+  gap: 0.9rem;
+}
+
+.services-page .cards.cards-3 + .cards.cards-3 {
+  margin-top: 0.9rem !important;
+}
+
+.services-page .card {
+  min-height: 100%;
+  padding: 1rem;
+}
+
+.services-page .card h3 {
+  font-size: 1.04rem;
+  line-height: 1.28;
+}
+
+.services-page .card p {
+  font-size: 0.92rem;
+}
+
+.services-page .card .btn {
+  width: 100%;
+  margin-top: auto;
+}
+
+.services-page .service-search {
+  max-width: none;
+  grid-template-columns: minmax(170px, 0.28fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 16px;
+  padding: 0.85rem;
+  box-shadow: 0 16px 38px rgba(8, 21, 45, 0.08);
+}
+
+.services-page .service-search p {
+  grid-column: 2;
+}
+
+.services-page .service-catalogue {
+  margin-top: 1.1rem;
+}
+
+.services-page .service-category {
+  border-radius: 14px;
+}
+
+@media (max-width: 920px) {
+  .service-decision-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .service-decision-strip,
+  .services-page .service-search {
+    grid-template-columns: 1fr;
+  }
+
+  .services-page .service-search p {
+    grid-column: auto;
+  }
+}
