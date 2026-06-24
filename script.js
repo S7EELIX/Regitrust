@@ -297,7 +297,8 @@ function setupPremiumPageEnhancements() {
   }
 
   const heading = heroHead.querySelector("h1");
-  if (!heading) {
+  const isServiceLanding = !!firstSection.querySelector('.breadcrumbs a[href*="services.html"]');
+  if (!heading || !isServiceLanding) {
     return;
   }
 
