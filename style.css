@@ -4307,3 +4307,27 @@ body:not(.home-clean):not(.services-page) .legal-copy .hero-cta {
   border-top: 1px solid #e3ebf6;
   padding-top: 1.2rem;
 }
+
+.thank-you-page .path-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.thank-you-page .path-card {
+  min-height: 250px;
+}
+
+@media (max-width: 1080px) {
+  .thank-you-page .path-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .thank-you-page .path-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .thank-you-page .path-card {
+    min-height: auto;
+  }
+}
