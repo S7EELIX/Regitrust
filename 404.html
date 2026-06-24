@@ -20,17 +20,84 @@
   <link rel="manifest" href="site.webmanifest">
   <meta name="theme-color" content="#133f97">
 </head>
-<body>
-  <main class="section">
-    <div class="container legal-copy" style="text-align:center;">
-      <h1>404</h1>
-      <h2>Oops! Page not found.</h2>
-      <p>The page you requested does not exist or has been moved.</p>
-      <div class="hero-cta" style="justify-content:center;">
-        <a class="btn btn-primary" href="index.html">Go to Homepage</a>
-        <a class="btn btn-secondary" href="contact.html">Contact Support</a>
-      </div>
+<body class="not-found-page">
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="Regitrust home">
+        <img src="./assets/logo-header.png" alt="Regitrust Services LLP logo">
+      </a>
+      <button class="menu-btn" id="menu-btn" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+      <nav class="nav" id="site-nav">
+        <div class="nav-dropdown nav-dropdown-wide">
+          <button class="dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">Services <span aria-hidden="true">&#9662;</span></button>
+          <div class="dropdown-menu mega-menu" role="menu">
+            <div>
+              <strong>Registrations</strong>
+              <a href="company-registration.html" role="menuitem">Company Registration</a>
+              <a href="gst-pan.html" role="menuitem">GST Registration</a>
+              <a href="services.html#international-business-registration" role="menuitem">International Business Registration</a>
+            </div>
+            <div>
+              <strong>Compliance</strong>
+              <a href="compliance.html" role="menuitem">ROC & Business Compliance</a>
+              <a href="services.html#mca-services" role="menuitem">MCA Services</a>
+              <a href="services.html#compliance" role="menuitem">Business Compliance</a>
+            </div>
+            <div>
+              <strong>Advisory</strong>
+              <a href="trademark-registration.html" role="menuitem">Trademark Registration</a>
+              <a href="services.html#intellectual-property-rights" role="menuitem">IPR</a>
+              <a href="services.html#taxation" role="menuitem">Taxation</a>
+              <a href="services.html#accounting" role="menuitem">Accounting</a>
+              <a href="services.html#consulting" role="menuitem">Consulting</a>
+            </div>
+            <a class="mega-all" href="services.html" role="menuitem">View all services</a>
+          </div>
+        </div>
+        <a href="index.html#why-us">Why Regitrust</a>
+        <a href="index.html#process">How it works</a>
+        <a href="services.html">All Services</a>
+        <a href="contact.html">Contact</a>
+        <a href="contact.html" class="nav-cta">Book Consultation</a>
+      </nav>
     </div>
+  </header>
+
+  <main>
+    <section class="section section-muted">
+      <div class="container not-found-wrap">
+        <span class="pill">Page not found</span>
+        <h1>Let us get you back to the right service.</h1>
+        <p>The page may have moved, but Regitrust can still help with company registration, GST, ROC filing, trademark, tax, and India market-entry support.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="services.html">Browse Services</a>
+          <a class="btn btn-secondary" href="contact.html">Request Guidance</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container path-grid">
+        <article class="path-card"><span>CO</span><h3>Start a business</h3><p>Company registration, LLP, OPC, GST planning, and first compliance steps.</p><a href="company-registration.html">Company registration</a></article>
+        <article class="path-card"><span>GST</span><h3>Tax and GST help</h3><p>GST registration, returns, notices, cancellation, revocation, and tax filings.</p><a href="gst-pan.html">GST support</a></article>
+        <article class="path-card"><span>IN</span><h3>South India or NRI setup</h3><p>Bengaluru, Chennai, Hyderabad, NRI, and India market-entry support.</p><a href="south-india-business-registration.html">South India support</a></article>
+      </div>
+    </section>
   </main>
+
+  <footer class="footer">
+    <div class="container footer-wrap">
+      <p>&copy; <span id="year"></span> Regitrust Services LLP. All rights reserved.</p>
+      <p>Business Registration &bull; GST &bull; Compliance &bull; Legal Services</p>
+      <p class="legal-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-and-conditions.html">Terms & Conditions</a>
+        <a href="refund-policy.html">Refund Policy</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

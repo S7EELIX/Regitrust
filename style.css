@@ -4089,3 +4089,36 @@ body:not(.home-clean) .legal-copy h3 {
     grid-template-columns: 1fr;
   }
 }
+
+/* Premium 404 recovery page */
+.not-found-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+  text-align: left;
+}
+
+.not-found-wrap h1 {
+  max-width: 760px;
+  margin-top: 0.9rem;
+  color: #08152d;
+  font-size: clamp(2.45rem, 5vw, 4.9rem);
+  line-height: 0.99;
+}
+
+.not-found-wrap p {
+  max-width: 680px;
+  margin-top: 1rem;
+  color: #65728a;
+  font-size: 1.08rem;
+}
+
+.not-found-page .path-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 760px) {
+  .not-found-page .path-grid {
+    grid-template-columns: 1fr;
+  }
+}
