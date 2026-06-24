@@ -285,6 +285,9 @@ function main() {
         throw new Error(`Expected lead context support to include ${snippet}`);
       }
     });
+    if (!leadCaptureGs.includes('"lead_context"')) {
+      throw new Error("Expected Apps Script lead sheet headers to include lead_context");
+    }
   });
 
   check("public text files are free of common mojibake", () => {

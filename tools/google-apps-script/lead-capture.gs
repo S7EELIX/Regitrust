@@ -19,6 +19,7 @@ const HEADERS = [
   "page_path",
   "page_title",
   "service_name",
+  "lead_context",
   "referrer_url",
   "first_landing_url",
   "first_referrer_url",
