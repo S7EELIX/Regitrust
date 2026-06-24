@@ -235,7 +235,7 @@ function setupLeadCaptureHelpers() {
     footerContact.className = "footer-contact";
     footerContact.innerHTML = `
       <a href="tel:${PRIMARY_PHONE}">${DISPLAY_PHONE}</a>
-      <span>Lucknow, Uttar Pradesh</span>
+      <span>Online support across India</span>
       <a href="mailto:contact@regitrust.in">contact@regitrust.in</a>
     `;
     footer.appendChild(footerContact);
@@ -251,6 +251,8 @@ function setupLeadCaptureHelpers() {
       <a href="fssai-registration.html">FSSAI</a>
       <a href="gst-notice-reply.html">GST Notice</a>
       <a href="income-tax-return-filing.html">ITR Filing</a>
+      <a href="annual-roc-filing.html">Annual ROC Filing</a>
+      <a href="south-india-business-registration.html">South India Business Setup</a>
       <a href="company-registration-lucknow.html">Company Registration Lucknow</a>
       <a href="gst-registration-lucknow.html">GST Registration Lucknow</a>
       <a href="nri-company-registration-india.html">NRI Company Registration</a>
