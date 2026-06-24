@@ -1,0 +1,24 @@
+# Regitrust Search Console URL Submission List
+# Use Google Search Console > URL Inspection > Request indexing.
+# Priority: submit the hub pages first, then city service pages.
+
+https://regitrust.in/
+https://regitrust.in/south-india-business-registration.html
+https://regitrust.in/nri-company-registration-india.html
+https://regitrust.in/india-market-entry-services.html
+
+https://regitrust.in/company-registration-bengaluru.html
+https://regitrust.in/company-registration-chennai.html
+https://regitrust.in/company-registration-hyderabad.html
+
+https://regitrust.in/gst-registration-bengaluru.html
+https://regitrust.in/gst-registration-chennai.html
+https://regitrust.in/gst-registration-hyderabad.html
+
+https://regitrust.in/trademark-registration-bengaluru.html
+https://regitrust.in/trademark-registration-chennai.html
+https://regitrust.in/trademark-registration-hyderabad.html
+
+https://regitrust.in/roc-filing-bengaluru.html
+https://regitrust.in/roc-filing-chennai.html
+https://regitrust.in/roc-filing-hyderabad.html
