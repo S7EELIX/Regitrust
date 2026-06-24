@@ -44,6 +44,9 @@ function main() {
     "trademark-registration-bengaluru.html",
     "trademark-registration-chennai.html",
     "trademark-registration-hyderabad.html",
+    "roc-filing-bengaluru.html",
+    "roc-filing-chennai.html",
+    "roc-filing-hyderabad.html",
     "nri-company-registration-india.html",
     "india-market-entry-services.html"
   ];
