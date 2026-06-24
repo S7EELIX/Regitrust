@@ -279,7 +279,8 @@ function main() {
       "setupLeadContextLinks",
       "lead_context",
       'setHiddenInput(form, "lead_context", leadContext)',
-      "url.searchParams.set(\"lead_context\", pageSlug)"
+      "url.searchParams.set(\"lead_context\", pageSlug)",
+      'thankYouUrl.searchParams.set("lead_context", serviceContext.lead_context)'
     ].forEach((snippet) => {
       if (!scriptJs.includes(snippet)) {
         throw new Error(`Expected lead context support to include ${snippet}`);
@@ -288,6 +289,19 @@ function main() {
     if (!leadCaptureGs.includes('"lead_context"')) {
       throw new Error("Expected Apps Script lead sheet headers to include lead_context");
     }
+  });
+
+  check("GA4 recommended lead conversion event is emitted", () => {
+    [
+      "setupAnalytics();",
+      'const GA4_MEASUREMENT_ID = "G-3TFYHJLKL3"',
+      'trackEvent("generate_lead"',
+      'method: emailSubmitted ? "formsubmit" : "lead_backup"'
+    ].forEach((snippet) => {
+      if (!scriptJs.includes(snippet)) {
+        throw new Error(`Expected GA4 lead conversion support to include ${snippet}`);
+      }
+    });
   });
 
   check("public text files are free of common mojibake", () => {
@@ -303,7 +317,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log(JSON.stringify({ checks: 23, failures: 0 }, null, 2));
+  console.log(JSON.stringify({ checks: 24, failures: 0 }, null, 2));
 }
 
 main();

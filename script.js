@@ -629,6 +629,11 @@ if (contactForm) {
       }
 
       contactForm.reset();
+      trackEvent("generate_lead", {
+        form_id: contactForm.id || "contact-form",
+        method: emailSubmitted ? "formsubmit" : "lead_backup",
+        ...serviceContext
+      });
       trackEvent("lead_form_submitted", {
         form_id: contactForm.id || "contact-form",
         ...serviceContext
@@ -640,6 +645,9 @@ if (contactForm) {
       const thankYouUrl = new URL("thank-you.html", window.location.href);
       if (submittedService) {
         thankYouUrl.searchParams.set("service", submittedService);
+      }
+      if (serviceContext.lead_context) {
+        thankYouUrl.searchParams.set("lead_context", serviceContext.lead_context);
       }
       window.location.href = thankYouUrl.toString();
     } catch (error) {
