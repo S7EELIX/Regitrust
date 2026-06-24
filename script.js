@@ -224,6 +224,10 @@ function setupLeadCaptureHelpers() {
     setHiddenInput(form, "source_path", window.location.pathname);
     setHiddenInput(form, "source_title", document.title);
     setHiddenInput(form, "lead_channel", "website");
+    const leadContext = new URLSearchParams(window.location.search).get("lead_context");
+    if (leadContext) {
+      setHiddenInput(form, "lead_context", leadContext);
+    }
     Object.entries(getAttributionContext()).forEach(([name, value]) => {
       setHiddenInput(form, name, value);
     });
