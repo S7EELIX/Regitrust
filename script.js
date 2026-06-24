@@ -47,7 +47,11 @@ function trackEvent(eventName, params = {}) {
 function getServiceContext(form) {
   const params = new URLSearchParams(window.location.search);
   const selectedService = form?.querySelector('[name="service"]')?.value || params.get("service") || "";
-  return selectedService ? { service_name: selectedService } : {};
+  const leadContext = params.get("lead_context") || "";
+  return {
+    ...(selectedService ? { service_name: selectedService } : {}),
+    ...(leadContext ? { lead_context: leadContext } : {})
+  };
 }
 
 function getSessionValue(key) {
