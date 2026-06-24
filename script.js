@@ -172,6 +172,7 @@ function getLeadEventName(element) {
 
 setupAnalytics();
 setupAttribution();
+setupPremiumPageEnhancements();
 
 function setupLeadCaptureHelpers() {
   const pageLabel = document.title.replace(/\s*\|\s*Regitrust Services LLP\s*$/i, "").trim() || "Regitrust website";
@@ -266,6 +267,55 @@ function setupLeadCaptureHelpers() {
   injectLeadSchema();
   injectPageFaqSchema();
   injectBreadcrumbSchema();
+}
+
+function setupPremiumPageEnhancements() {
+  document.querySelectorAll(".mega-menu").forEach((menu) => {
+    if (menu.querySelector(".mega-intro")) {
+      return;
+    }
+
+    const intro = document.createElement("div");
+    intro.className = "mega-intro";
+    intro.innerHTML = `
+      <span>Start here</span>
+      <strong>Find the right filing fast</strong>
+      <p>Pick a service family. We confirm scope, documents, and starts-from pricing before work begins.</p>
+      <a href="contact.html" role="menuitem">Ask for a recommendation</a>
+    `;
+    menu.prepend(intro);
+  });
+
+  if (document.body.classList.contains("home-clean")) {
+    return;
+  }
+
+  const firstSection = document.querySelector("main > .section:first-child");
+  const heroHead = firstSection?.querySelector(".section-head");
+  if (!firstSection || !heroHead || heroHead.querySelector(".service-assurance-strip")) {
+    return;
+  }
+
+  const heading = heroHead.querySelector("h1");
+  if (!heading) {
+    return;
+  }
+
+  firstSection.classList.add("premium-service-hero");
+  const assuranceStrip = document.createElement("div");
+  assuranceStrip.className = "service-assurance-strip";
+  assuranceStrip.innerHTML = `
+    <span><strong>Scope first</strong> We confirm the right route before quoting</span>
+    <span><strong>Document check</strong> Practical checklist and gap review</span>
+    <span><strong>After filing</strong> Next compliance step explained</span>
+  `;
+
+  const heroCta = heroHead.querySelector(".hero-cta");
+  if (heroCta) {
+    heroCta.insertAdjacentElement("afterend", assuranceStrip);
+  } else {
+    heroHead.appendChild(assuranceStrip);
+  }
 }
 
 function setupAttribution() {
