@@ -177,6 +177,7 @@ function getLeadEventName(element) {
 setupAnalytics();
 setupAttribution();
 setupPremiumPageEnhancements();
+setupLeadContextLinks();
 
 function setupLeadCaptureHelpers() {
   const pageLabel = document.title.replace(/\s*\|\s*Regitrust Services LLP\s*$/i, "").trim() || "Regitrust website";
@@ -321,6 +322,27 @@ function setupPremiumPageEnhancements() {
   } else {
     heroHead.appendChild(assuranceStrip);
   }
+}
+
+function setupLeadContextLinks() {
+  const pageSlug = window.location.pathname
+    .split("/")
+    .pop()
+    .replace(/\.html$/i, "") || "home";
+  const excludedPages = new Set(["home", "index", "contact", "thank-you", "404", "services", "service"]);
+
+  if (excludedPages.has(pageSlug)) {
+    return;
+  }
+
+  document.querySelectorAll('a[href^="contact.html?"]').forEach((link) => {
+    const url = new URL(link.getAttribute("href"), window.location.href);
+    if (!url.searchParams.get("service") || url.searchParams.get("lead_context")) {
+      return;
+    }
+    url.searchParams.set("lead_context", pageSlug);
+    link.href = `${url.pathname.split("/").pop()}?${url.searchParams.toString()}`;
+  });
 }
 
 function setupAttribution() {
