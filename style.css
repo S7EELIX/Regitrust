@@ -4308,12 +4308,14 @@ body:not(.home-clean):not(.services-page) .legal-copy .hero-cta {
   padding-top: 1.2rem;
 }
 
+.south-india-page .path-grid,
 .market-entry-page .path-grid,
 .nri-company-page .path-grid,
 .thank-you-page .path-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.south-india-page .path-card,
 .market-entry-page .path-card,
 .nri-company-page .path-card,
 .thank-you-page .path-card {
@@ -4321,6 +4323,7 @@ body:not(.home-clean):not(.services-page) .legal-copy .hero-cta {
 }
 
 @media (max-width: 1080px) {
+  .south-india-page .path-grid,
   .market-entry-page .path-grid,
   .nri-company-page .path-grid,
   .thank-you-page .path-grid {
@@ -4329,12 +4332,14 @@ body:not(.home-clean):not(.services-page) .legal-copy .hero-cta {
 }
 
 @media (max-width: 620px) {
+  .south-india-page .path-grid,
   .market-entry-page .path-grid,
   .nri-company-page .path-grid,
   .thank-you-page .path-grid {
     grid-template-columns: 1fr;
   }
 
+  .south-india-page .path-card,
   .market-entry-page .path-card,
   .nri-company-page .path-card,
   .thank-you-page .path-card {
