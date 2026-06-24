@@ -274,6 +274,19 @@ function main() {
     });
   });
 
+  check("page-specific lead context is captured in links and forms", () => {
+    [
+      "setupLeadContextLinks",
+      "lead_context",
+      'setHiddenInput(form, "lead_context", leadContext)',
+      "url.searchParams.set(\"lead_context\", pageSlug)"
+    ].forEach((snippet) => {
+      if (!scriptJs.includes(snippet)) {
+        throw new Error(`Expected lead context support to include ${snippet}`);
+      }
+    });
+  });
+
   check("public text files are free of common mojibake", () => {
     const mojibakePattern = /(?:\u00e2\u20ac|\u00e2\u20ac\u0153|\u00e2\u20ac\ufffd|\u00e2\u20ac\u2122|\u00c3\u00a9|\u00c3\u00a2|\ufffd)/;
     const affected = textFiles.filter((file) => mojibakePattern.test(read(file)));
@@ -287,7 +300,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log(JSON.stringify({ checks: 22, failures: 0 }, null, 2));
+  console.log(JSON.stringify({ checks: 23, failures: 0 }, null, 2));
 }
 
 main();
