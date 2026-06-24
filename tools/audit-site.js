@@ -156,6 +156,9 @@ serviceSlugs
 const sitemap = read("sitemap.xml");
 const robots = read("robots.txt");
 const manifest = JSON.parse(read("site.webmanifest"));
+const sitemapPaths = [...sitemap.matchAll(/<loc>https:\/\/regitrust\.in\/([^<]*)<\/loc>/g)]
+  .map((match) => match[1] || "index.html")
+  .map((pathname) => pathname === "" ? "index.html" : pathname);
 
 if (!robots.includes("Sitemap: https://regitrust.in/sitemap.xml")) {
   addProblem("robots.txt", "Missing sitemap directive");
@@ -176,11 +179,14 @@ if (!Array.isArray(manifest.icons) || !manifest.icons.length) {
   });
 }
 
-[...sitemap.matchAll(/<loc>https:\/\/regitrust\.in\/([^<]*)<\/loc>/g)]
-  .map((match) => match[1] || "index.html")
-  .map((pathname) => pathname === "" ? "index.html" : pathname)
+sitemapPaths
   .filter((pathname) => !pathname.includes("?") && !exists(pathname))
   .forEach((pathname) => addProblem("sitemap.xml", "Broken sitemap local target", pathname));
+
+htmlFiles
+  .filter((htmlFile) => /<meta name="robots" content="[^"]*noindex/i.test(read(htmlFile)))
+  .filter((htmlFile) => sitemapPaths.includes(htmlFile))
+  .forEach((htmlFile) => addProblem("sitemap.xml", "Noindex page should not be in sitemap", htmlFile));
 
 serviceSlugs
   .filter((slug) => {
