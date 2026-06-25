@@ -177,6 +177,7 @@ function getLeadEventName(element) {
 setupAnalytics();
 setupAttribution();
 setupPremiumPageEnhancements();
+setupMoneyPageEnhancements();
 setupLeadContextLinks();
 
 function setupLeadCaptureHelpers() {
@@ -326,6 +327,138 @@ function setupPremiumPageEnhancements() {
   } else {
     heroHead.appendChild(assuranceStrip);
   }
+}
+
+function setupMoneyPageEnhancements() {
+  const slug = window.location.pathname.split("/").pop() || "index.html";
+  const pages = {
+    "company-registration.html": {
+      className: "money-page money-company-page",
+      label: "Company setup desk",
+      title: "Launch with a clean compliance base",
+      summary: "Best for founders who need company setup, PAN/TAN, GST readiness, banking documents, and first-year compliance planning in one connected route.",
+      metrics: [
+        ["Scope", "Entity, directors, capital"],
+        ["Output", "Incorporation plus next steps"],
+        ["Quote", "Starts from after review"]
+      ],
+      outcomes: [
+        ["Structure clarity", "Private limited, LLP, OPC, or foreign-founder route explained before filing."],
+        ["Document control", "Director, office, DSC, PAN/TAN, and MCA filing dependencies checked early."],
+        ["Post-setup map", "GST, accounting, ROC, trademark, and tax priorities sequenced after incorporation."]
+      ],
+      cta: "Request Company Setup Review",
+      service: "private-limited-company-registration"
+    },
+    "gst-pan.html": {
+      className: "money-page money-gst-page",
+      label: "GST readiness desk",
+      title: "Get GST right before invoices begin",
+      summary: "Designed for traders, ecommerce sellers, consultants, agencies, SaaS, and service businesses that need GSTIN, return readiness, and query handling.",
+      metrics: [
+        ["Scope", "Registration, query, returns"],
+        ["Output", "GSTIN plus compliance basics"],
+        ["Quote", "Starts from after review"]
+      ],
+      outcomes: [
+        ["Eligibility check", "Confirm whether GST is mandatory based on turnover, state, ecommerce, and supply model."],
+        ["Portal-ready documents", "PAN, Aadhaar, office proof, bank details, authorization, and business activity reviewed."],
+        ["After-registration support", "Invoice basics, return filing, notices, and accounting needs mapped early."]
+      ],
+      cta: "Request GST Scope Review",
+      service: "gst-registration"
+    },
+    "trademark-registration.html": {
+      className: "money-page money-trademark-page",
+      label: "Brand protection desk",
+      title: "Protect the name customers remember",
+      summary: "For startups, agencies, restaurants, ecommerce brands, SaaS products, exporters, and creators who need class guidance and trademark filing support.",
+      metrics: [
+        ["Scope", "Name, logo, class"],
+        ["Output", "Filing plus status path"],
+        ["Quote", "Starts from after review"]
+      ],
+      outcomes: [
+        ["Class direction", "Choose a filing class based on actual goods, services, and expansion plans."],
+        ["Applicant review", "Individual, proprietor, MSME, company, or LLP filing details checked before submission."],
+        ["Objection readiness", "Next steps explained if the application receives examination or objection remarks."]
+      ],
+      cta: "Request Trademark Review",
+      service: "trademark-registration"
+    },
+    "nri-company-registration-india.html": {
+      className: "money-page money-nri-page",
+      label: "Global founder desk",
+      title: "Set up in India without losing control of the process",
+      summary: "Built for NRIs and global founders who need structure planning, resident director clarity, signing flow, banking readiness, and India compliance support.",
+      metrics: [
+        ["Scope", "NRI, resident director, FEMA"],
+        ["Output", "Remote setup roadmap"],
+        ["Quote", "Starts from after review"]
+      ],
+      outcomes: [
+        ["Remote coordination", "Plan signatures, DSC, documents, notarization, apostille, and Indian office requirements."],
+        ["Operating route", "Connect incorporation with GST, banking, IEC, trademark, contracts, and accounting."],
+        ["Compliance visibility", "Understand ROC, tax, foreign-investment, and first-year obligations before launch."]
+      ],
+      cta: "Request NRI Setup Review",
+      service: "private-limited-company-registration"
+    },
+    "south-india-business-registration.html": {
+      className: "money-page money-south-page",
+      label: "South India launch desk",
+      title: "One connected route for Bengaluru, Chennai, and Hyderabad",
+      summary: "For founders who want company registration, GST, trademark, ROC, and recurring compliance coordinated around their South India business base.",
+      metrics: [
+        ["Scope", "City, entity, tax, brand"],
+        ["Output", "Launch and compliance path"],
+        ["Quote", "Starts from after review"]
+      ],
+      outcomes: [
+        ["City-first planning", "Match registered office, customers, vendors, hiring, and filing needs to the right city route."],
+        ["Bundled clarity", "See which filings should happen now and which can wait until the business is active."],
+        ["Compliance calendar", "Plan GST, ROC, tax, accounting, renewals, and notices into a recurring schedule."]
+      ],
+      cta: "Request South India Setup Review",
+      service: "private-limited-company-registration"
+    }
+  };
+  const config = pages[slug];
+
+  if (!config || document.querySelector(".money-conversion-panel")) {
+    return;
+  }
+
+  document.body.className = `${document.body.className} ${config.className}`.trim();
+
+  const firstSection = document.querySelector("main > .section:first-child");
+  if (!firstSection) {
+    return;
+  }
+
+  const trustPanel = document.createElement("section");
+  trustPanel.className = "section money-trust-section";
+  trustPanel.innerHTML = `
+    <div class="container money-conversion-panel">
+      <div class="money-panel-copy">
+        <span>${config.label}</span>
+        <h2>${config.title}</h2>
+        <p>${config.summary}</p>
+      </div>
+      <div class="money-metrics" aria-label="Priority service review metrics">
+        ${config.metrics.map(([label, value]) => `<div><strong>${label}</strong><span>${value}</span></div>`).join("")}
+      </div>
+      <div class="money-outcomes">
+        ${config.outcomes.map(([title, text]) => `<article><strong>${title}</strong><p>${text}</p></article>`).join("")}
+      </div>
+      <div class="money-panel-actions">
+        <a class="btn btn-primary" href="contact.html?lead_context=${encodeURIComponent(slug.replace(".html", ""))}&service=${encodeURIComponent(config.service)}" data-track="money_page_scope_review_click">${config.cta}</a>
+        <a class="btn btn-secondary" href="${whatsappUrl(`Hello Regitrust, I am viewing ${config.label} and need a scope review.`)}" target="_blank" rel="noopener noreferrer" data-track="money_page_whatsapp_click">WhatsApp Scope</a>
+      </div>
+    </div>
+  `;
+
+  firstSection.insertAdjacentElement("afterend", trustPanel);
 }
 
 function setupLeadContextLinks() {

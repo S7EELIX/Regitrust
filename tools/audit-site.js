@@ -93,7 +93,7 @@ for (const htmlFile of htmlFiles) {
     addProblem(htmlFile, "Missing shared stylesheet link");
   }
 
-  if (htmlFile !== "404.html" && !html.includes('src="script.js"')) {
+  if (htmlFile !== "404.html" && !/src="script\.js(?:\?[^"]*)?"/.test(html)) {
     addProblem(htmlFile, "Missing shared script include");
   }
 
