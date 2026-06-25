@@ -5451,3 +5451,112 @@ body.home-clean .hero-proof span {
     min-height: 36px;
   }
 }
+
+/* Services command-center polish */
+.services-page .priority-services {
+  background: #ffffff;
+}
+
+.services-page .priority-services .section-head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(260px, 0.38fr);
+  align-items: end;
+  gap: 1.5rem;
+  max-width: none;
+}
+
+.services-page .priority-services .section-head::after {
+  content: "Scope first. Quote second. File clean.";
+  display: block;
+  border: 1px solid rgba(199, 211, 230, 0.95);
+  border-radius: 10px;
+  padding: 0.86rem 1rem;
+  color: #0b476f;
+  background:
+    linear-gradient(90deg, rgba(0, 166, 183, 0.08), rgba(20, 71, 166, 0.04));
+  font-size: 0.92rem;
+  font-weight: 820;
+}
+
+.services-page .priority-services .cards.cards-3 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.services-page .priority-services .card {
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  padding: 0.94rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 255, 0.98));
+}
+
+.services-page .priority-services .card h3 {
+  min-height: 2.55em;
+  color: #08111f;
+  font-size: 0.98rem;
+}
+
+.services-page .priority-services .card p {
+  margin-top: 0.55rem;
+  color: #5f7085;
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.services-page .priority-services .card p strong {
+  display: inline-flex;
+  border: 1px solid rgba(0, 166, 183, 0.2);
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+  padding: 0.18rem 0.48rem;
+  color: #075c68;
+  background: rgba(0, 166, 183, 0.08);
+  font-size: 0.78rem;
+}
+
+.services-page .priority-services .card .btn {
+  width: 100%;
+  min-height: 38px;
+  margin-top: auto;
+  padding: 0.56rem 0.64rem;
+  font-size: 0.84rem;
+}
+
+.services-page .service-search {
+  position: relative;
+  border: 1px solid rgba(199, 211, 230, 0.95);
+  background:
+    linear-gradient(90deg, rgba(0, 166, 183, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(0, 166, 183, 0.045) 1px, transparent 1px),
+    #ffffff;
+  background-size: 32px 32px;
+}
+
+.services-page .service-search label {
+  color: #08111f;
+  font-weight: 850;
+}
+
+.services-page .service-search input {
+  min-height: 48px;
+  font-size: 0.98rem;
+}
+
+@media (max-width: 1120px) {
+  .services-page .priority-services .cards.cards-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 780px) {
+  .services-page .priority-services .section-head,
+  .services-page .priority-services .cards.cards-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .services-page .priority-services .card {
+    min-height: auto;
+  }
+}
