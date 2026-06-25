@@ -5560,3 +5560,64 @@ body.home-clean .hero-proof span {
     min-height: auto;
   }
 }
+
+/* Contact intake polish */
+.contact-page .contact-grid {
+  align-items: start;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.contact-page .contact-grid > div:first-child {
+  border: 1px solid rgba(199, 211, 230, 0.95);
+  border-radius: 12px;
+  padding: clamp(1rem, 2.4vw, 1.45rem);
+  background:
+    linear-gradient(90deg, rgba(0, 166, 183, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(0, 166, 183, 0.045) 1px, transparent 1px),
+    #ffffff;
+  background-size: 32px 32px;
+  box-shadow: 0 18px 46px rgba(8, 17, 31, 0.08);
+}
+
+.contact-page .contact-form {
+  border-radius: 12px;
+  padding: clamp(1rem, 2.4vw, 1.45rem);
+  box-shadow: 0 24px 60px rgba(8, 17, 31, 0.12);
+}
+
+.contact-page .contact-form label {
+  margin-top: 0.74rem;
+  color: #142238;
+  font-size: 0.84rem;
+  font-weight: 820;
+}
+
+.contact-page .contact-form input,
+.contact-page .contact-form select,
+.contact-page .contact-form textarea {
+  min-height: 44px;
+  border-color: rgba(199, 211, 230, 0.95);
+  background: #fbfdff;
+}
+
+.contact-page .contact-form button[type="submit"] {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.contact-page .contact-trust {
+  border-radius: 10px;
+  background:
+    linear-gradient(135deg, rgba(0, 166, 183, 0.08), rgba(20, 71, 166, 0.035));
+  box-shadow: none;
+}
+
+.contact-page .contact-list li {
+  border-radius: 8px;
+  padding: 0.68rem 0;
+}
+
+.contact-page .contact-route-grid a {
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.92);
+}
