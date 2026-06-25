@@ -4864,3 +4864,118 @@ body:not(.home-clean):not(.services-page) main > .section:first-child + .section
     width: 100%;
   }
 }
+
+/* Homepage cool-tech refinement */
+.home-clean .hero {
+  padding: clamp(2.9rem, 6vw, 5.6rem) 0 clamp(2.6rem, 5vw, 4.2rem);
+  background:
+    linear-gradient(90deg, rgba(0, 166, 183, 0.17) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(0, 166, 183, 0.11) 1px, transparent 1px),
+    linear-gradient(115deg, rgba(199, 151, 53, 0.13) 0%, transparent 30%),
+    linear-gradient(135deg, #050b16 0%, #07152b 48%, #0b2554 100%);
+  background-size: 44px 44px, 44px 44px, auto, auto;
+}
+
+.home-clean .hero-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.74fr);
+  gap: clamp(2rem, 5vw, 5.6rem);
+}
+
+.home-clean .hero h1 {
+  max-width: 720px;
+  font-size: clamp(3rem, 6vw, 5.6rem);
+  text-wrap: balance;
+}
+
+.home-clean .hero p {
+  max-width: 650px;
+  color: #c8d7e8;
+}
+
+.home-clean .hero .pill {
+  color: #a8f6ff;
+  background: rgba(0, 166, 183, 0.13);
+}
+
+.home-clean .hero-cta .btn-primary {
+  background: linear-gradient(135deg, #00a6b7 0%, #1263d1 100%);
+}
+
+.home-clean .hero-cta .btn-secondary {
+  color: #eff7ff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.clean-hero-panel {
+  border: 1px solid rgba(151, 196, 255, 0.24);
+  background:
+    linear-gradient(180deg, rgba(9, 24, 49, 0.94), rgba(7, 17, 31, 0.94));
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.clean-hero-panel h2 {
+  color: #ffffff;
+}
+
+.clean-hero-panel .panel-kicker {
+  color: #f4d389;
+  background: rgba(199, 151, 53, 0.14);
+}
+
+.hero-service-list a {
+  border-color: rgba(151, 196, 255, 0.16);
+  color: #eef6ff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.hero-service-list a:hover {
+  border-color: rgba(0, 166, 183, 0.46);
+  background: rgba(0, 166, 183, 0.1);
+}
+
+.hero-service-list strong {
+  color: #ffffff;
+}
+
+.hero-service-list span {
+  color: #aebfd4;
+}
+
+.clean-hero-panel .btn-primary {
+  border-color: rgba(0, 166, 183, 0.4);
+  background: linear-gradient(135deg, #00a6b7, #145ad1);
+}
+
+.hero-proof span {
+  min-height: 64px;
+  border-color: rgba(151, 196, 255, 0.16);
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.site-contact-bar {
+  background: rgba(5, 11, 22, 0.96);
+}
+
+.site-contact-bar-wrap {
+  min-height: 32px;
+}
+
+.site-contact-bar a {
+  min-height: 24px;
+}
+
+@media (max-width: 980px) {
+  .home-clean .hero {
+    background:
+      linear-gradient(90deg, rgba(0, 166, 183, 0.15) 1px, transparent 1px),
+      linear-gradient(180deg, rgba(0, 166, 183, 0.1) 1px, transparent 1px),
+      linear-gradient(180deg, #050b16 0%, #0b2554 100%);
+    background-size: 44px 44px;
+  }
+
+  .home-clean .hero-grid {
+    grid-template-columns: 1fr;
+  }
+}
