@@ -7069,3 +7069,320 @@ body.home-clean .path-card a::after {
     min-height: auto;
   }
 }
+
+/* Regitrust brand theme consolidation */
+:root {
+  --rt-ink: #071a3d;
+  --rt-body: #34445d;
+  --rt-muted: #607088;
+  --rt-blue: #123f91;
+  --rt-blue-dark: #0a2b66;
+  --rt-cyan: #00a6b7;
+  --rt-cyan-dark: #075c68;
+  --rt-gold: #d0a53f;
+  --rt-soft: #f7fbff;
+  --rt-panel: #ffffff;
+  --rt-border: #d8e4f3;
+  --rt-shadow-sm: 0 14px 34px rgba(8, 17, 31, 0.065);
+  --rt-shadow-md: 0 24px 60px rgba(8, 17, 31, 0.11);
+  --rt-radius: 12px;
+  --rt-radius-sm: 9px;
+}
+
+body {
+  color: var(--rt-ink);
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f8fbff 48%, #ffffff 100%);
+}
+
+.site-header {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border-bottom: 1px solid var(--rt-border) !important;
+  box-shadow: 0 10px 30px rgba(8, 17, 31, 0.045);
+}
+
+.nav a,
+.dropdown-toggle {
+  color: var(--rt-ink) !important;
+}
+
+.nav a:hover,
+.dropdown-toggle:hover,
+.nav-dropdown.open .dropdown-toggle,
+.nav-dropdown:focus-within .dropdown-toggle {
+  color: var(--rt-blue) !important;
+}
+
+.nav .nav-cta,
+.btn-primary,
+.contact-form button[type="submit"] {
+  border: 1px solid var(--rt-blue) !important;
+  border-radius: var(--rt-radius-sm) !important;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--rt-blue-dark) 0%, var(--rt-blue) 64%, #1768cf 100%) !important;
+  box-shadow: 0 14px 30px rgba(18, 63, 145, 0.22) !important;
+}
+
+.nav .nav-cta:hover,
+.btn-primary:hover,
+.contact-form button[type="submit"]:hover {
+  box-shadow: 0 18px 38px rgba(18, 63, 145, 0.28) !important;
+}
+
+.btn-secondary,
+.hero .btn-secondary {
+  border: 1px solid rgba(18, 63, 145, 0.18) !important;
+  border-radius: var(--rt-radius-sm) !important;
+  color: var(--rt-ink) !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+  box-shadow: 0 10px 24px rgba(8, 17, 31, 0.065) !important;
+}
+
+.btn-secondary:hover {
+  border-color: rgba(0, 166, 183, 0.38) !important;
+  background: #ffffff !important;
+}
+
+.hero,
+body.home-clean .hero,
+main > .section:first-child:not(.hero),
+.service-hero,
+body:not(.home-clean) .premium-service-hero,
+.about-page .about-hero,
+.money-page main > .section:first-child,
+.city-page main > .section:first-child,
+.ad-landing-hero {
+  color: var(--rt-ink) !important;
+  background:
+    radial-gradient(circle at 12% 16%, rgba(0, 166, 183, 0.11), transparent 28%),
+    radial-gradient(circle at 88% 8%, rgba(208, 165, 63, 0.11), transparent 24%),
+    linear-gradient(90deg, rgba(18, 63, 145, 0.042) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(18, 63, 145, 0.035) 1px, transparent 1px),
+    linear-gradient(118deg, #ffffff 0%, #f8fbff 52%, #eef6ff 100%) !important;
+  background-size: auto, auto, 54px 54px, 54px 54px, auto !important;
+}
+
+.hero h1,
+body.home-clean .hero h1,
+main > .section:first-child:not(.hero) h1,
+.service-hero h1,
+.ad-hero-grid h1,
+.about-page .about-hero h1 {
+  color: var(--rt-ink) !important;
+  text-shadow: none !important;
+}
+
+.hero p,
+body.home-clean .hero p,
+main > .section:first-child:not(.hero) p,
+.service-hero p,
+.ad-hero-grid .section-head p,
+.about-page .about-hero p {
+  color: var(--rt-body) !important;
+}
+
+.pill,
+body.home-clean .hero .pill,
+main > .section:first-child:not(.hero) .pill,
+.service-hero .pill,
+.ad-intake-panel > span {
+  border: 1px solid rgba(0, 166, 183, 0.24) !important;
+  border-radius: 999px !important;
+  color: var(--rt-cyan-dark) !important;
+  background: rgba(255, 255, 255, 0.86) !important;
+  box-shadow: 0 10px 24px rgba(8, 17, 31, 0.045) !important;
+}
+
+.card,
+.value-card,
+.path-card,
+.hero-card,
+.clean-hero-panel,
+.hero-dashboard,
+.ad-intake-panel,
+.ad-proof-grid article,
+.service-note,
+.service-contact-card,
+.contact-form,
+.service-search,
+.service-category,
+.about-service-panel,
+.money-trust-console,
+.city-conversion-panel,
+.city-route-grid a,
+.seo-link-grid a,
+.service-assurance-strip {
+  border: 1px solid var(--rt-border) !important;
+  border-radius: var(--rt-radius) !important;
+  color: var(--rt-ink) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.99), rgba(248, 251, 255, 0.98)) !important;
+  box-shadow: var(--rt-shadow-sm) !important;
+}
+
+.card h3,
+.value-card h3,
+.path-card h3,
+.ad-intake-panel h2,
+.hero-dashboard strong,
+.clean-hero-panel h2,
+.service-note h2,
+.service-contact-card h3,
+.contact-form h2,
+.section-head h2 {
+  color: var(--rt-ink) !important;
+}
+
+.card p,
+.value-card p,
+.path-card p,
+.ad-proof-grid span,
+.ad-intake-panel li,
+.service-note p,
+.service-contact-card p,
+.contact-form p,
+.section-head p,
+.legal-copy p,
+.legal-copy li {
+  color: var(--rt-muted) !important;
+}
+
+.card::before,
+.value-card::before,
+.path-card::before {
+  background: linear-gradient(90deg, var(--rt-cyan) 0%, var(--rt-gold) 56%, transparent 100%) !important;
+}
+
+.path-card span,
+.services-page .priority-services .card p strong,
+.service-snapshot dt {
+  border-radius: 999px !important;
+  color: var(--rt-cyan-dark) !important;
+  background: rgba(0, 166, 183, 0.08) !important;
+}
+
+.path-card a,
+.card a,
+.text-link,
+.dashboard-link,
+.footer-service-links a,
+.legal-links a {
+  color: var(--rt-blue) !important;
+}
+
+.nav-dropdown-wide .mega-menu,
+.dropdown-menu {
+  border: 1px solid var(--rt-border) !important;
+  border-radius: 14px !important;
+  background:
+    linear-gradient(90deg, rgba(0, 166, 183, 0.04) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(0, 166, 183, 0.032) 1px, transparent 1px),
+    rgba(255, 255, 255, 0.98) !important;
+  background-size: 28px 28px !important;
+  box-shadow: var(--rt-shadow-md) !important;
+}
+
+.mega-menu > div:not(.mega-intro),
+.dropdown-menu a {
+  border-radius: var(--rt-radius-sm) !important;
+}
+
+.mega-menu strong {
+  color: var(--rt-blue-dark) !important;
+}
+
+.mega-menu a {
+  color: var(--rt-ink) !important;
+}
+
+.mega-menu a:hover,
+.mega-menu a:focus-visible,
+.dropdown-menu a:hover,
+.dropdown-menu a:focus-visible {
+  color: var(--rt-blue) !important;
+  background: #ffffff !important;
+  border-color: rgba(18, 63, 145, 0.18) !important;
+}
+
+.mega-intro {
+  color: #ffffff !important;
+  background:
+    radial-gradient(circle at 22% 16%, rgba(0, 166, 183, 0.28), transparent 34%),
+    linear-gradient(145deg, #071a3d 0%, #0a2b66 62%, #123f91 100%) !important;
+}
+
+.mega-intro strong,
+.mega-intro p,
+.mega-intro span {
+  color: #ffffff !important;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea,
+.service-search input {
+  border: 1px solid var(--rt-border) !important;
+  border-radius: var(--rt-radius-sm) !important;
+  color: var(--rt-ink) !important;
+  background: #ffffff !important;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus,
+.service-search input:focus {
+  border-color: rgba(0, 166, 183, 0.54) !important;
+  box-shadow: 0 0 0 4px rgba(0, 166, 183, 0.12) !important;
+}
+
+.section-muted,
+.conversion-paths,
+.ad-proof-section,
+.services-page .priority-services {
+  background: linear-gradient(180deg, #ffffff 0%, var(--rt-soft) 100%) !important;
+}
+
+.site-contact-bar,
+.lead-strip {
+  color: #ffffff !important;
+  background: linear-gradient(90deg, #071a3d 0%, #0a2b66 56%, #123f91 100%) !important;
+}
+
+.footer {
+  color: #dce8f7 !important;
+  background:
+    linear-gradient(90deg, rgba(0, 166, 183, 0.08) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(0, 166, 183, 0.06) 1px, transparent 1px),
+    #071a3d !important;
+  background-size: 34px 34px !important;
+}
+
+.footer p,
+.footer span {
+  color: #dce8f7 !important;
+}
+
+.footer a {
+  color: #ffffff !important;
+}
+
+.whatsapp-float,
+.mobile-cta a[href*="wa.me"],
+.site-contact-whatsapp {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #0b8f47, #13b96b) !important;
+}
+
+@media (max-width: 760px) {
+  .hero,
+  body.home-clean .hero,
+  main > .section:first-child:not(.hero),
+  .service-hero,
+  .ad-landing-hero {
+    background:
+      linear-gradient(90deg, rgba(18, 63, 145, 0.038) 1px, transparent 1px),
+      linear-gradient(180deg, rgba(18, 63, 145, 0.034) 1px, transparent 1px),
+      linear-gradient(180deg, #ffffff 0%, #eef6ff 100%) !important;
+    background-size: 42px 42px, 42px 42px, auto !important;
+  }
+}
