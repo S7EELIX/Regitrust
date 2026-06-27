@@ -178,6 +178,7 @@ setupAnalytics();
 setupAttribution();
 setupPremiumPageEnhancements();
 setupMoneyPageEnhancements();
+setupCityPageEnhancements();
 setupLeadContextLinks();
 
 function setupLeadCaptureHelpers() {
@@ -459,6 +460,103 @@ function setupMoneyPageEnhancements() {
   `;
 
   firstSection.insertAdjacentElement("afterend", trustPanel);
+}
+
+function setupCityPageEnhancements() {
+  const slug = window.location.pathname.split("/").pop() || "";
+  const match = slug.match(/^(company-registration|gst-registration|trademark-registration|roc-filing)-(bengaluru|chennai|hyderabad|lucknow)\.html$/);
+  if (!match || document.querySelector(".city-conversion-panel")) {
+    return;
+  }
+
+  const serviceType = match[1];
+  const cityKey = match[2];
+  const cityNames = {
+    bengaluru: "Bengaluru",
+    chennai: "Chennai",
+    hyderabad: "Hyderabad",
+    lucknow: "Lucknow"
+  };
+  const serviceLabels = {
+    "company-registration": {
+      label: "Company setup",
+      service: "private-limited-company-registration",
+      cta: "Request Company Setup Review",
+      title: "Local setup planning with national filing support",
+      summary: "Connect entity choice, documents, PAN/TAN, GST, trademark, bank readiness, and first compliance steps before work begins."
+    },
+    "gst-registration": {
+      label: "GST registration",
+      service: "gst-registration",
+      cta: "Request GST Review",
+      title: "GST readiness for local invoices and client onboarding",
+      summary: "Review eligibility, address proof, business activity, ARN tracking, query risk, and return filing needs before GSTIN use."
+    },
+    "trademark-registration": {
+      label: "Trademark filing",
+      service: "trademark-registration",
+      cta: "Request Trademark Review",
+      title: "Brand protection connected to company and GST setup",
+      summary: "Plan class selection, applicant ownership, logo or wordmark choice, filing support, and objection next steps."
+    },
+    "roc-filing": {
+      label: "ROC compliance",
+      service: "annual-roc-filing",
+      cta: "Request ROC Review",
+      title: "Annual compliance and company changes kept on calendar",
+      summary: "Map due dates, company records, director or office changes, statutory filings, and recurring compliance requirements."
+    }
+  };
+  const city = cityNames[cityKey];
+  const service = serviceLabels[serviceType];
+  const isSouth = ["bengaluru", "chennai", "hyderabad"].includes(cityKey);
+  const cityCluster = isSouth ? "South India desk" : "North India desk";
+  const cityLinks = isSouth
+    ? [
+        ["South India Hub", "south-india-business-registration.html"],
+        [`${city} Company`, `company-registration-${cityKey}.html`],
+        [`${city} GST`, `gst-registration-${cityKey}.html`],
+        [`${city} Trademark`, `trademark-registration-${cityKey}.html`]
+      ]
+    : [
+        ["Company Registration Lucknow", "company-registration-lucknow.html"],
+        ["GST Registration Lucknow", "gst-registration-lucknow.html"],
+        ["Trademark Registration Lucknow", "trademark-registration-lucknow.html"],
+        ["Company Registration India", "company-registration.html"]
+      ];
+
+  document.body.className = `${document.body.className} city-page city-${cityKey}-page city-${serviceType}-page`.trim();
+
+  const firstSection = document.querySelector("main > .section:first-child");
+  if (!firstSection) {
+    return;
+  }
+
+  const panel = document.createElement("section");
+  panel.className = "section city-trust-section";
+  panel.innerHTML = `
+    <div class="container city-conversion-panel">
+      <div class="city-panel-copy">
+        <span>${cityCluster}</span>
+        <h2>${service.label} support in ${city}</h2>
+        <p>${service.summary}</p>
+      </div>
+      <div class="city-metrics" aria-label="${city} service review details">
+        <div><strong>City</strong><span>${city}</span></div>
+        <div><strong>Service</strong><span>${service.label}</span></div>
+        <div><strong>Pricing</strong><span>Starts from after review</span></div>
+      </div>
+      <div class="city-route-grid">
+        ${cityLinks.map(([label, href]) => `<a href="${href}"><strong>${label}</strong><span>Review related local route</span></a>`).join("")}
+      </div>
+      <div class="city-panel-actions">
+        <a class="btn btn-primary" href="contact.html?lead_context=${encodeURIComponent(slug.replace(".html", ""))}&service=${encodeURIComponent(service.service)}" data-track="city_page_scope_review_click">${service.cta}</a>
+        <a class="btn btn-secondary" href="${whatsappUrl(`Hello Regitrust, I am viewing ${city} ${service.label} support and need a scope review.`)}" target="_blank" rel="noopener noreferrer" data-track="city_page_whatsapp_click">WhatsApp ${city}</a>
+      </div>
+    </div>
+  `;
+
+  firstSection.insertAdjacentElement("afterend", panel);
 }
 
 function setupLeadContextLinks() {
