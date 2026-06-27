@@ -560,7 +560,7 @@ function injectPageFaqSchema() {
   }
 
   const faqHeading = Array.from(document.querySelectorAll("h2")).find((heading) =>
-    /frequently asked questions|faqs/i.test(heading.textContent)
+    /frequently asked questions|common questions|faqs/i.test(heading.textContent)
   );
   if (!faqHeading) {
     return;
@@ -568,7 +568,9 @@ function injectPageFaqSchema() {
 
   const faqs = [];
   const headingWrapper = faqHeading.closest(".section-head");
-  let node = faqHeading.nextElementSibling || headingWrapper?.nextElementSibling;
+  let node = headingWrapper?.contains(faqHeading) && headingWrapper.nextElementSibling
+    ? headingWrapper.nextElementSibling
+    : faqHeading.nextElementSibling;
   while (node && node.tagName !== "H2") {
     const questionNodes = node.tagName === "H3"
       ? [node]
