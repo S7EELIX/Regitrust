@@ -6588,3 +6588,88 @@ body.home-clean .hero-proof span {
     grid-template-columns: 1fr;
   }
 }
+
+/* Emergency readability pass for ad traffic */
+body:not(.home-clean) main > .section:first-child,
+body:not(.home-clean) .premium-service-hero,
+.about-page .about-hero,
+.money-page main > .section:first-child,
+.city-page main > .section:first-child {
+  color: #071a3d;
+}
+
+body:not(.home-clean) main > .section:first-child h1,
+body:not(.home-clean) .premium-service-hero h1,
+.about-page .about-hero h1,
+.money-page main > .section:first-child h1,
+.city-page main > .section:first-child h1 {
+  color: #071a3d !important;
+  text-shadow: none !important;
+}
+
+body:not(.home-clean) main > .section:first-child p,
+body:not(.home-clean) .premium-service-hero p,
+.about-page .about-hero p,
+.money-page main > .section:first-child p,
+.city-page main > .section:first-child p {
+  color: #3f5068 !important;
+}
+
+body:not(.home-clean) main > .section:first-child .pill,
+body:not(.home-clean) .premium-service-hero .pill,
+.about-page .about-hero .pill,
+.money-page main > .section:first-child .pill,
+.city-page main > .section:first-child .pill,
+.services-page main > .section:first-child .pill {
+  border-color: rgba(0, 101, 116, 0.28) !important;
+  color: #075c68 !important;
+  background: rgba(255, 255, 255, 0.86) !important;
+}
+
+.breadcrumbs,
+.breadcrumbs a,
+.breadcrumbs span {
+  color: #44546b !important;
+}
+
+.service-assurance-strip {
+  border-color: rgba(199, 211, 230, 0.95) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+}
+
+.service-assurance-strip span {
+  border-color: rgba(199, 211, 230, 0.95) !important;
+  color: #53627a !important;
+  background: #ffffff !important;
+}
+
+.service-assurance-strip strong {
+  color: #071a3d !important;
+}
+
+.about-trust-console p,
+.money-outcomes p,
+.city-panel-copy p,
+.city-route-grid span,
+.seo-link-grid span {
+  color: #3f5068 !important;
+}
+
+.btn-primary,
+.nav .nav-cta,
+.contact-form button[type="submit"] {
+  color: #ffffff !important;
+  background: #123f91 !important;
+}
+
+.btn-secondary {
+  color: #071a3d !important;
+  background: #ffffff !important;
+}
+
+.whatsapp-float,
+.mobile-cta a[href*="wa.me"],
+.mobile-cta a[href^="tel:"] {
+  color: #ffffff !important;
+  background: #075f35 !important;
+}

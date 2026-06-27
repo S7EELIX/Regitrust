@@ -89,7 +89,7 @@ function collectAttributes(html, attr) {
 for (const htmlFile of htmlFiles) {
   const html = read(htmlFile);
 
-  if (!html.includes('rel="stylesheet" href="style.css"')) {
+  if (!/<link\s+rel="stylesheet"\s+href="style\.css(?:\?[^"]*)?"/.test(html)) {
     addProblem(htmlFile, "Missing shared stylesheet link");
   }
 
