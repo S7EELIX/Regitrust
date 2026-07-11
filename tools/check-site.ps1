@@ -8,9 +8,21 @@ $git = if (Test-Path $bundledGit) { $bundledGit } else { "git" }
 
 Push-Location $root
 try {
-  & $node tools\audit-site.js
-  & $node tools\verify-runtime.js
-  & $git diff --check
+  function Invoke-Checked {
+    param(
+      [string]$Command,
+      [string[]]$Arguments
+    )
+
+    & $Command @Arguments
+    if ($LASTEXITCODE -ne 0) {
+      throw "Command failed with exit code $LASTEXITCODE`: $Command $($Arguments -join ' ')"
+    }
+  }
+
+  Invoke-Checked $node @("tools\audit-site.js")
+  Invoke-Checked $node @("tools\verify-runtime.js")
+  Invoke-Checked $git @("diff", "--check")
 } finally {
   Pop-Location
 }

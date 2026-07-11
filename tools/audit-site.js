@@ -27,6 +27,7 @@ const serviceContentSlugs = Object.keys(serviceContent);
 const cleanServiceUrls = extractCleanServiceUrls(read("services.js"));
 const problems = [];
 const styleVersions = new Set();
+const pageTitles = new Map();
 const allowedPhoneHrefs = new Set(["tel:+918984297666", "tel:+916306898090"]);
 
 function extractCleanServiceUrls(source) {
@@ -105,6 +106,25 @@ for (const htmlFile of htmlFiles) {
   const html = read(htmlFile);
   const expectedPublicPath = htmlFile === "index.html" ? "" : htmlFile;
   const expectedPublicUrl = `https://regitrust.in/${expectedPublicPath}`;
+  const titleMatch = html.match(/<title>([^<]+)<\/title>/);
+
+  if (!titleMatch) {
+    addProblem(htmlFile, "Missing page title");
+  } else {
+    const title = titleMatch[1].trim();
+    if (title.length < 25 || title.length > 75) {
+      addProblem(htmlFile, "Page title should stay within a useful SEO length", title);
+    }
+    if (!/\|\s*Regitrust(?: Services LLP)?$/.test(title)) {
+      addProblem(htmlFile, "Page title should end with Regitrust brand", title);
+    }
+    pageTitles.set(htmlFile, title);
+  }
+
+  const h1Count = (html.match(/<h1\b/gi) || []).length;
+  if (htmlFile !== "service.html" && h1Count !== 1) {
+    addProblem(htmlFile, "Page should have exactly one H1", String(h1Count));
+  }
 
   const styleMatch = html.match(/<link\s+rel="stylesheet"\s+href="style\.css(\?v=([^"]+))?"/);
   if (!styleMatch) {
@@ -223,6 +243,11 @@ serviceContentSlugs
 serviceSlugs
   .filter((slug, index) => serviceSlugs.indexOf(slug) !== index)
   .forEach((slug) => addProblem("services-data.js", "Duplicate service slug", slug));
+
+const duplicateTitles = [...pageTitles.entries()].filter(([, title], index, entries) =>
+  entries.findIndex(([, candidate]) => candidate === title) !== index
+);
+duplicateTitles.forEach(([htmlFile, title]) => addProblem(htmlFile, "Duplicate page title", title));
 
 const sitemap = read("sitemap.xml");
 const robots = read("robots.txt");
