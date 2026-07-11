@@ -81,6 +81,13 @@ function requirePatterns(file, html, patterns, message) {
 for (const markupFile of markupFiles) {
   const html = read(markupFile);
 
+  requirePatterns(markupFile, html, [
+    ["doctype", /^<!DOCTYPE html>/],
+    ["html-lang", /<html lang="en">/],
+    ["charset", /<meta charset="UTF-8">/],
+    ["viewport", /<meta name="viewport" content="width=device-width, initial-scale=1\.0">/]
+  ], "Missing or invalid document shell tag");
+
   if (/\sstyle="/.test(html)) {
     addProblem(markupFile, "Inline style attribute should move to shared CSS");
   }
