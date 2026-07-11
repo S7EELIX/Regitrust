@@ -6970,7 +6970,7 @@ body.home-clean .path-card a::after {
   border-radius: 999px;
   margin-bottom: 0.9rem;
   padding: 0.24rem 0.6rem;
-  color: #075c68;
+  color: var(--rt-cyan-dark);
   background: rgba(0, 166, 183, 0.08);
   font-size: 0.76rem;
   font-weight: 850;
@@ -7006,7 +7006,7 @@ body.home-clean .path-card a::after {
   width: 7px;
   height: 7px;
   border-radius: 999px;
-  background: #00a6b7;
+  background: var(--rt-cyan);
   box-shadow: 0 0 0 4px rgba(0, 166, 183, 0.1);
 }
 
@@ -7017,7 +7017,7 @@ body.home-clean .path-card a::after {
 .ad-proof-section {
   padding-top: 1rem;
   padding-bottom: 1rem;
-  background: #ffffff;
+  background: var(--rt-panel);
 }
 
 .ad-proof-grid {
@@ -7029,9 +7029,9 @@ body.home-clean .path-card a::after {
 .ad-proof-grid article {
   min-height: 96px;
   border: 1px solid rgba(199, 211, 230, 0.95);
-  border-radius: 12px;
+  border-radius: var(--rt-radius);
   padding: 0.9rem;
-  background: #ffffff;
+  background: var(--rt-panel);
   box-shadow: 0 14px 34px rgba(8, 17, 31, 0.055);
 }
 
@@ -7041,7 +7041,7 @@ body.home-clean .path-card a::after {
 }
 
 .ad-proof-grid strong {
-  color: #071a3d;
+  color: var(--rt-ink);
   font-size: 0.98rem;
 }
 
