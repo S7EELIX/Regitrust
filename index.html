@@ -283,13 +283,15 @@
           <input id="email" name="email" type="email" required>
           <label for="phone">Phone Number</label>
           <input id="phone" name="phone" type="tel" required>
-          <label for="city">City / State</label>
-          <input id="city" name="city_state" type="text" autocomplete="address-level2" placeholder="Example: Bengaluru, Karnataka or Dubai, UAE">
+          <label for="city">City / Country</label>
+          <input id="city" name="city_state" type="text" autocomplete="address-level2" placeholder="Example: Bengaluru, India or Dubai, UAE">
           <label for="business-stage">Business Stage</label>
           <select id="business-stage" name="business_stage">
             <option value="">Select your stage</option>
             <option value="Planning to start">Planning to start</option>
             <option value="NRI or overseas founder">NRI or overseas founder</option>
+            <option value="Foreign company entering India">Foreign company entering India</option>
+            <option value="Importer or exporter">Importer or exporter</option>
             <option value="Already registered">Already registered</option>
             <option value="Need filing cleanup">Need filing cleanup</option>
             <option value="Received notice or objection">Received notice or objection</option>
@@ -314,6 +316,7 @@
           <label for="preferred-contact">Preferred Contact Method</label>
           <select id="preferred-contact" name="preferred_contact">
             <option value="WhatsApp">WhatsApp</option>
+            <option value="WhatsApp international">WhatsApp international</option>
             <option value="Phone Call">Phone Call</option>
             <option value="Email">Email</option>
           </select>
