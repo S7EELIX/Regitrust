@@ -160,6 +160,7 @@ serviceSlugs
 
 const sitemap = read("sitemap.xml");
 const robots = read("robots.txt");
+const cname = read("CNAME").trim();
 const manifest = JSON.parse(read("site.webmanifest"));
 const searchConsoleUrls = read("seo-search-console-urls.txt");
 const sitemapPaths = [...sitemap.matchAll(/<loc>https:\/\/regitrust\.in\/([^<]*)<\/loc>/g)]
@@ -190,6 +191,14 @@ if (!Array.isArray(manifest.icons) || !manifest.icons.length) {
       addProblem("site.webmanifest", "Broken manifest icon", icon.src || "");
     }
   });
+}
+
+if (cname !== "regitrust.in") {
+  addProblem("CNAME", "Unexpected production domain", cname);
+}
+
+if (manifest.start_url !== "/" || manifest.scope !== "/") {
+  addProblem("site.webmanifest", "Manifest should start at the production root");
 }
 
 sitemapPaths
