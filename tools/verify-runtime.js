@@ -117,6 +117,12 @@ function main() {
     return match ? match.index : -1;
   }
 
+  function scriptTagVersion(html, file) {
+    const escapedFile = file.replace(".", "\\.");
+    const match = html.match(new RegExp(`src="${escapedFile}\\?v=([^"]+)"`));
+    return match ? match[1] : "";
+  }
+
   function sharedScriptIndex(html) {
     return scriptTagIndex(html, "script.js");
   }
@@ -150,6 +156,21 @@ function main() {
       if (configIndex === -1 || scriptIndex === -1 || configIndex > scriptIndex) {
         throw new Error(`${file} must load lead-config.js before script.js`);
       }
+    });
+  });
+
+  check("shared service and lead scripts use cache versions", () => {
+    [
+      ["index.html", indexHtml, ["services-data.js", "lead-config.js"]],
+      ["contact.html", contactHtml, ["services-data.js", "lead-config.js"]],
+      ["services.html", read("services.html"), ["services-data.js", "services.js"]],
+      ["service.html", read("service.html"), ["services-data.js", "services-content.js", "services.js"]]
+    ].forEach(([file, html, scripts]) => {
+      scripts.forEach((script) => {
+        if (!scriptTagVersion(html, script)) {
+          throw new Error(`${file} must cache-version ${script}`);
+        }
+      });
     });
   });
 
