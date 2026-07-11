@@ -8812,3 +8812,405 @@ body.home-clean .hero-grid {
     display: none !important;
   }
 }
+
+/* Site-wide finish pass for service/detail and trust pages */
+.service-hero,
+body:not(.home-clean) .premium-service-hero,
+.about-page .about-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(2rem, 4vw, 3.2rem) 0 !important;
+  background:
+    linear-gradient(118deg, #ffffff 0%, #f8fbff 56%, #eef6ff 100%) !important;
+}
+
+.service-hero::before,
+body:not(.home-clean) .premium-service-hero::before,
+.about-page .about-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, transparent 0 64%, rgba(22, 75, 186, 0.055) 64% 64.42%, transparent 64.42%),
+    linear-gradient(90deg, rgba(13, 154, 168, 0.03) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(22, 75, 186, 0.026) 1px, transparent 1px);
+  background-size: auto, 46px 46px, 46px 46px;
+}
+
+.service-hero-grid,
+.about-hero-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.service-hero-grid {
+  grid-template-columns: minmax(0, 0.96fr) minmax(300px, 0.44fr) !important;
+  gap: clamp(1rem, 3vw, 2.2rem) !important;
+  align-items: start !important;
+}
+
+.service-hero h1 {
+  max-width: 760px !important;
+  color: var(--clean-ink) !important;
+  font-size: clamp(1.9rem, 3.35vw, 2.85rem) !important;
+  line-height: 1.08 !important;
+}
+
+.service-hero p {
+  max-width: 720px !important;
+  color: var(--clean-muted) !important;
+  font-size: 0.98rem !important;
+}
+
+.service-note,
+.related-services,
+.service-contact-card,
+.about-trust-console,
+.about-service-panel,
+.about-cta-band,
+.about-cred-grid article,
+.about-principles article,
+.about-faq-grid article {
+  border-radius: var(--clean-radius) !important;
+  border: 1px solid var(--clean-line) !important;
+  background:
+    linear-gradient(180deg, #ffffff 0%, #fbfdff 100%) !important;
+  box-shadow: 0 10px 26px rgba(12, 24, 43, 0.055) !important;
+}
+
+.service-note {
+  position: sticky;
+  top: 88px;
+  padding: 0.92rem !important;
+}
+
+.service-hero .service-note h2:nth-of-type(2),
+.service-hero .service-jump-links {
+  display: none !important;
+}
+
+.service-note h2,
+.related-services h2,
+.service-contact-card h2,
+.service-contact-card h3 {
+  color: var(--clean-ink) !important;
+  font-size: 0.98rem !important;
+}
+
+.service-snapshot {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0.65rem 0 0.9rem;
+}
+
+.service-snapshot div {
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  gap: 0.45rem;
+  border-bottom: 1px solid #edf1f6;
+  padding-bottom: 0.36rem;
+}
+
+.service-snapshot div:last-child {
+  border-bottom: 0;
+}
+
+.service-snapshot dt {
+  color: #607087;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.service-snapshot dd {
+  color: var(--clean-ink);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.service-hero .service-snapshot {
+  margin-bottom: 0;
+}
+
+.service-jump-links {
+  grid-template-columns: 1fr !important;
+  gap: 0.38rem !important;
+}
+
+.service-jump-links a,
+.related-services > a:not(.text-link) {
+  min-height: 34px;
+  border-radius: 6px !important;
+  border: 1px solid #dfe8f4 !important;
+  padding: 0.42rem 0.5rem !important;
+  color: #263c58 !important;
+  background: #ffffff !important;
+  font-size: 0.82rem !important;
+  line-height: 1.3 !important;
+}
+
+.service-jump-links a:hover,
+.related-services > a:not(.text-link):hover {
+  color: var(--clean-blue) !important;
+  border-color: rgba(22, 75, 186, 0.25) !important;
+  background: #f6f9ff !important;
+}
+
+.service-article {
+  grid-template-columns: minmax(0, 0.95fr) minmax(290px, 0.36fr) !important;
+  gap: clamp(1rem, 3vw, 2rem) !important;
+}
+
+.service-article > article,
+.legal-copy {
+  border: 1px solid var(--clean-line);
+  border-radius: var(--clean-radius);
+  padding: clamp(1rem, 2.2vw, 1.35rem);
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(12, 24, 43, 0.045);
+}
+
+.service-article article h2,
+.legal-copy h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.48rem;
+  margin-top: 1.3rem !important;
+  color: var(--clean-ink) !important;
+  font-size: 1.14rem !important;
+}
+
+.service-article article h2:first-child,
+.legal-copy h2:first-child {
+  margin-top: 0 !important;
+}
+
+.service-article article h2::before,
+.legal-copy h2::before {
+  content: "";
+  width: 7px;
+  height: 21px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--clean-teal), var(--clean-blue));
+}
+
+.service-article p,
+.service-article li,
+.legal-copy p,
+.legal-copy li {
+  color: var(--clean-muted) !important;
+  font-size: 0.94rem !important;
+  line-height: 1.62 !important;
+}
+
+.service-article .contact-list,
+.legal-copy .contact-list {
+  gap: 0.5rem !important;
+  margin-top: 0.65rem !important;
+}
+
+.service-article .contact-list li,
+.legal-copy .contact-list li {
+  position: relative;
+  border: 1px solid #e7eef7;
+  border-radius: 6px;
+  padding: 0.54rem 0.62rem 0.54rem 0.82rem;
+  background: #fbfdff;
+}
+
+.service-contact-card {
+  padding: 0.9rem !important;
+}
+
+.service-contact-card .btn {
+  width: 100%;
+  text-align: center;
+}
+
+.related-services {
+  position: sticky;
+  top: 88px;
+  align-self: start;
+}
+
+.service-faqs details {
+  border-radius: 6px !important;
+  box-shadow: none !important;
+}
+
+.service-faqs summary {
+  color: var(--clean-ink) !important;
+  font-weight: 800 !important;
+}
+
+.about-page .about-hero {
+  padding: clamp(2rem, 4vw, 3.25rem) 0 !important;
+}
+
+.about-hero-grid {
+  grid-template-columns: minmax(0, 0.98fr) minmax(300px, 0.42fr) !important;
+  gap: clamp(1rem, 3vw, 2.4rem) !important;
+}
+
+.about-hero-grid h1 {
+  max-width: 760px !important;
+  color: var(--clean-ink) !important;
+  font-size: clamp(2rem, 3.65vw, 3rem) !important;
+  line-height: 1.08 !important;
+}
+
+.about-hero-grid p {
+  max-width: 720px !important;
+  color: var(--clean-muted) !important;
+}
+
+.about-trust-console {
+  padding: 0.9rem !important;
+}
+
+.about-trust-console div {
+  padding: 0.72rem !important;
+}
+
+.about-trust-console p {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: 0.86rem !important;
+}
+
+.about-trust-console > span,
+.about-service-panel > span,
+.about-cta-band > div > span {
+  color: #087381 !important;
+  font-size: 0.68rem !important;
+}
+
+.about-trust-console div,
+.about-service-panel a:not(.btn) {
+  border-radius: 6px !important;
+  border-color: #e6edf7 !important;
+  background: #ffffff !important;
+}
+
+.about-cred-grid,
+.about-principles,
+.about-faq-grid {
+  gap: 0.75rem !important;
+}
+
+.about-cred-grid article,
+.about-principles article,
+.about-faq-grid article {
+  padding: 0.95rem !important;
+}
+
+.about-cred-grid article h3,
+.about-principles article h3,
+.about-faq-grid article h3 {
+  color: var(--clean-ink) !important;
+  font-size: 1rem !important;
+}
+
+.about-cred-grid article p,
+.about-principles article p,
+.about-faq-grid article p {
+  color: var(--clean-muted) !important;
+  font-size: 0.9rem !important;
+}
+
+.about-cta-band {
+  padding: clamp(1rem, 2.6vw, 1.5rem) !important;
+}
+
+.about-cta-band h2 {
+  font-size: clamp(1.45rem, 2.8vw, 2.2rem) !important;
+}
+
+body:not(.home-clean):not(.services-page):not(.contact-page):not(.about-page):not(.money-page):not(.nri-company-page):not(.market-entry-page):not(.south-india-page) main > .section:first-child h1 {
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem) !important;
+  line-height: 1.08 !important;
+}
+
+.footer {
+  padding: 1.6rem 0 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-wrap {
+  text-align: left !important;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: start;
+}
+
+.footer .legal-links,
+.footer-contact,
+.footer-service-links {
+  justify-content: flex-start !important;
+}
+
+@media (max-width: 980px) {
+  .service-hero-grid,
+  .service-article,
+  .about-hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .service-note,
+  .related-services,
+  .contact-page .contact-grid > div:first-child {
+    position: static !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .service-hero,
+  .about-page .about-hero {
+    padding: 1.65rem 0 1.9rem !important;
+  }
+
+  .service-hero h1,
+  .about-hero-grid h1 {
+    font-size: clamp(1.8rem, 8.8vw, 2.42rem) !important;
+  }
+
+  .service-note {
+    display: none;
+  }
+
+  .about-trust-console {
+    display: none !important;
+  }
+
+  .service-article > article,
+  .legal-copy,
+  .related-services {
+    padding: 0.9rem !important;
+  }
+
+  .service-snapshot div {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-wrap {
+    text-align: center !important;
+    justify-items: center;
+  }
+
+  .footer .legal-links,
+  .footer-contact,
+  .footer-service-links {
+    justify-content: center !important;
+  }
+
+  .footer-service-links {
+    display: none !important;
+  }
+
+  .footer {
+    padding-bottom: 4.7rem !important;
+  }
+}
