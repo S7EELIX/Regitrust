@@ -289,6 +289,16 @@ function main() {
     ], "NRI page qualification copy");
   });
 
+  check("market entry page protects the international lead funnel", () => {
+    const marketEntryHtml = read("india-market-entry-services.html");
+    requireSnippets(marketEntryHtml, [
+      "India entry for overseas businesses",
+      "Not the Right Fit",
+      "tiny one-time registrations",
+      "Request India Entry Review"
+    ], "market entry qualification copy");
+  });
+
   check("contact service select can represent every service plus placeholder", () => {
     const expectedOptions = services.length + 1;
     if (expectedOptions !== 70) {
