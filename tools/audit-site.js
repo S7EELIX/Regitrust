@@ -26,6 +26,7 @@ const serviceContentSlugs = Object.keys(serviceContent);
 const cleanServiceUrls = extractCleanServiceUrls(read("services.js"));
 const problems = [];
 const styleVersions = new Set();
+const allowedPhoneHrefs = new Set(["tel:+918984297666", "tel:+916306898090"]);
 
 function extractCleanServiceUrls(source) {
   const objectMatch = source.match(/const CLEAN_SERVICE_URLS = \{([\s\S]*?)\n\};/);
@@ -94,6 +95,14 @@ for (const htmlFile of htmlFiles) {
     .forEach((id) => addProblem(htmlFile, "Duplicate id attribute", id));
 
   collectAttributes(html, "href").forEach((href) => {
+    if (href.startsWith("tel:") && !allowedPhoneHrefs.has(href)) {
+      addProblem(htmlFile, "Unexpected phone CTA target", href);
+    }
+
+    if ((href.includes("wa.me/") || href.includes("api.whatsapp.com/")) && !href.includes("918984297666")) {
+      addProblem(htmlFile, "Unexpected WhatsApp CTA target", href);
+    }
+
     const target = localTarget(href);
     if (!target) {
       return;
