@@ -77,6 +77,10 @@ for (const htmlFile of htmlFiles) {
     addProblem(htmlFile, "Inline style attribute should move to shared CSS");
   }
 
+  if (/\son[a-z]+=["']/i.test(html)) {
+    addProblem(htmlFile, "Inline event handler should move to shared JS");
+  }
+
   if (htmlFile !== "404.html" && !/src="script\.js(?:\?[^"]*)?"/.test(html)) {
     addProblem(htmlFile, "Missing shared script include");
   }
@@ -95,6 +99,10 @@ for (const htmlFile of htmlFiles) {
     .forEach((id) => addProblem(htmlFile, "Duplicate id attribute", id));
 
   collectAttributes(html, "href").forEach((href) => {
+    if (/^javascript:/i.test(href)) {
+      addProblem(htmlFile, "JavaScript href should move to shared JS", href);
+    }
+
     if (href.startsWith("tel:") && !allowedPhoneHrefs.has(href)) {
       addProblem(htmlFile, "Unexpected phone CTA target", href);
     }
