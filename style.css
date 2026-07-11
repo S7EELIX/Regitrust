@@ -9675,3 +9675,119 @@ body:not(.home-clean):not(.services-page):not(.contact-page):not(.about-page):no
     display: none !important;
   }
 }
+
+/* Trust signal upgrade: business identity and submission confidence */
+.trust-identity-section {
+  padding-top: clamp(1.8rem, 3vw, 2.6rem) !important;
+  padding-bottom: clamp(1.8rem, 3vw, 2.6rem) !important;
+}
+
+.trust-identity-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.68fr) minmax(320px, 0.82fr);
+  gap: clamp(1rem, 3vw, 2rem);
+  align-items: stretch;
+}
+
+.trust-identity-grid article,
+.trust-identity-grid dl,
+.contact-identity-card {
+  border: 1px solid var(--clean-line);
+  border-radius: var(--clean-radius);
+  background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+  box-shadow: 0 10px 26px rgba(12, 24, 43, 0.055);
+}
+
+.trust-identity-grid article {
+  padding: clamp(1rem, 2vw, 1.3rem);
+}
+
+.trust-identity-grid article span,
+.contact-identity-card span {
+  display: inline-flex;
+  margin-bottom: 0.5rem;
+  color: #075c68;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.trust-identity-grid article h2 {
+  margin: 0;
+  color: var(--clean-ink);
+  font-size: clamp(1.45rem, 2.6vw, 2rem);
+  line-height: 1.08;
+}
+
+.trust-identity-grid article p,
+.contact-identity-card p {
+  margin: 0.6rem 0 0;
+  color: var(--clean-muted);
+  font-size: 0.92rem;
+  line-height: 1.58;
+}
+
+.trust-identity-grid dl {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.trust-identity-grid dl div {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 0.8rem;
+  padding: 0.82rem 1rem;
+  border-bottom: 1px solid #edf1f6;
+}
+
+.trust-identity-grid dl div:last-child {
+  border-bottom: 0;
+}
+
+.trust-identity-grid dt {
+  color: #607087;
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.trust-identity-grid dd {
+  margin: 0;
+  color: var(--clean-ink);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.trust-identity-grid a {
+  color: var(--clean-blue);
+  font-weight: 800;
+}
+
+.contact-identity-card {
+  margin-top: 0.8rem;
+  padding: 0.78rem;
+}
+
+.contact-identity-card strong {
+  display: block;
+  color: var(--clean-ink);
+  font-size: 1rem;
+}
+
+@media (max-width: 760px) {
+  .trust-identity-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trust-identity-grid dl div {
+    grid-template-columns: 1fr;
+    gap: 0.18rem;
+  }
+
+  .contact-identity-card {
+    display: none;
+  }
+}
