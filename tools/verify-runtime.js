@@ -16,6 +16,20 @@ function main() {
     }
   }
 
+  function requireSnippets(source, snippets, label) {
+    const missing = snippets.filter((snippet) => !source.includes(snippet));
+    if (missing.length) {
+      throw new Error(`Expected ${label} to include: ${missing.join(", ")}`);
+    }
+  }
+
+  function requireSnippetsInAny(sources, snippets, label) {
+    const missing = snippets.filter((snippet) => !sources.some((source) => source.includes(snippet)));
+    if (missing.length) {
+      throw new Error(`Expected ${label} to include: ${missing.join(", ")}`);
+    }
+  }
+
   const context = { window: {} };
   vm.createContext(context);
   vm.runInContext(read("services-data.js"), context);
@@ -223,31 +237,23 @@ function main() {
   });
 
   check("homepage stays focused on foreign founder and NRI lead quality", () => {
-    [
+    requireSnippets(indexHtml, [
       "foreign founders",
       "NRIs",
       "overseas companies",
       "India Market Entry",
       "NRI or overseas founder"
-    ].forEach((snippet) => {
-      if (!indexHtml.includes(snippet)) {
-        throw new Error(`Expected homepage lead-quality copy to include: ${snippet}`);
-      }
-    });
+    ], "homepage lead-quality copy");
   });
 
   check("NRI landing page filters out low-scope local shop leads", () => {
     const nriHtml = read("nri-company-registration-india.html");
-    [
+    requireSnippets(nriHtml, [
       "Built for cross-border India setup, not basic local shop filings.",
       "Not the Right Fit",
       "tiny grocery registrations",
       "Starts from pricing after scope check"
-    ].forEach((snippet) => {
-      if (!nriHtml.includes(snippet)) {
-        throw new Error(`Expected NRI page qualification copy to include: ${snippet}`);
-      }
-    });
+    ], "NRI page qualification copy");
   });
 
   check("contact service select can represent every service plus placeholder", () => {
@@ -276,11 +282,15 @@ function main() {
   });
 
   check("shared script tracks lead actions and form outcomes", () => {
-    ["phone_lead_click", "email_lead_click", "whatsapp_lead_click", "lead_form_submit_attempt", "lead_form_submitted", "lead_form_submit_failed", "lead_form_email_failed"].forEach((eventName) => {
-      if (!scriptJs.includes(eventName)) {
-        throw new Error(`Expected shared script to include ${eventName}`);
-      }
-    });
+    requireSnippets(scriptJs, [
+      "phone_lead_click",
+      "email_lead_click",
+      "whatsapp_lead_click",
+      "lead_form_submit_attempt",
+      "lead_form_submitted",
+      "lead_form_submit_failed",
+      "lead_form_email_failed"
+    ], "shared script");
   });
 
   check("lead backup endpoint is configurable without code changes", () => {
@@ -293,25 +303,21 @@ function main() {
   });
 
   check("successful form submissions are copied to optional lead storage", () => {
-    [
+    requireSnippets(scriptJs, [
       "submitLeadBackup(formData, contactForm, serviceContext)",
       "navigator.sendBeacon",
       'mode: "no-cors"',
       "lead_backup_request_sent",
       "lead_backup_request_failed"
-    ].forEach((snippet) => {
-      if (!scriptJs.includes(snippet)) {
-        throw new Error(`Expected shared script lead backup support to include ${snippet}`);
-      }
-    });
+    ], "shared script lead backup support");
   });
 
   check("Google Apps Script lead receiver stores the full lead field contract", () => {
-    ["function doPost(e)", "SpreadsheetApp.getActiveSpreadsheet", "sheet.appendRow(row)"].forEach((snippet) => {
-      if (!leadCaptureGs.includes(snippet)) {
-        throw new Error(`Expected lead capture Apps Script to include ${snippet}`);
-      }
-    });
+    requireSnippets(leadCaptureGs, [
+      "function doPost(e)",
+      "SpreadsheetApp.getActiveSpreadsheet",
+      "sheet.appendRow(row)"
+    ], "lead capture Apps Script");
 
     const missingHeaders = requiredLeadFields.filter((field) => !appsScriptHeaders.includes(field));
     if (missingHeaders.length) {
@@ -320,7 +326,7 @@ function main() {
   });
 
   check("shared script can populate every derived lead storage field", () => {
-    [
+    requireSnippets(scriptJs, [
       "form_id",
       "page_url",
       "page_path",
@@ -333,15 +339,11 @@ function main() {
       "submitted_at",
       "service_name",
       "lead_context"
-    ].forEach((field) => {
-      if (!scriptJs.includes(field)) {
-        throw new Error(`Expected shared script to populate ${field}`);
-      }
-    });
+    ], "shared script derived lead storage fields");
   });
 
   check("lead attribution fields are captured and stored", () => {
-    [
+    requireSnippetsInAny([scriptJs, leadCaptureGs], [
       "ATTRIBUTION_KEYS",
       "getAttributionContext",
       "first_landing_url",
@@ -350,41 +352,29 @@ function main() {
       "utm_medium",
       "utm_campaign",
       "gclid"
-    ].forEach((snippet) => {
-      if (!scriptJs.includes(snippet) && !leadCaptureGs.includes(snippet)) {
-        throw new Error(`Expected lead attribution support to include ${snippet}`);
-      }
-    });
+    ], "lead attribution support");
   });
 
   check("page-specific lead context is captured in links and forms", () => {
-    [
+    requireSnippets(scriptJs, [
       "setupLeadContextLinks",
       "lead_context",
       'setHiddenInput(form, "lead_context", leadContext)',
       "url.searchParams.set(\"lead_context\", pageSlug)",
       'thankYouUrl.searchParams.set("lead_context", serviceContext.lead_context)'
-    ].forEach((snippet) => {
-      if (!scriptJs.includes(snippet)) {
-        throw new Error(`Expected lead context support to include ${snippet}`);
-      }
-    });
+    ], "lead context support");
     if (!leadCaptureGs.includes('"lead_context"')) {
       throw new Error("Expected Apps Script lead sheet headers to include lead_context");
     }
   });
 
   check("GA4 recommended lead conversion event is emitted", () => {
-    [
+    requireSnippets(scriptJs, [
       "setupAnalytics();",
       'const GA4_MEASUREMENT_ID = "G-3TFYHJLKL3"',
       'trackEvent("generate_lead"',
       'method: emailSubmitted ? "formsubmit" : "lead_backup"'
-    ].forEach((snippet) => {
-      if (!scriptJs.includes(snippet)) {
-        throw new Error(`Expected GA4 lead conversion support to include ${snippet}`);
-      }
-    });
+    ], "GA4 lead conversion support");
   });
 
   check("public text files are free of common mojibake", () => {
