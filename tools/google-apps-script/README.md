@@ -12,7 +12,14 @@ Use this once from the Google account that should own the lead sheet.
 8. Authorize and copy the Web app URL.
 9. Paste that URL into `lead-config.js` as `window.REGITRUST_LEAD_WEBHOOK_URL`.
 
-After this, FormSubmit will still email leads, and the same successful leads will also be copied into the Google Sheet.
+After this, FormSubmit will still email leads, and the same successful leads will also be copied into a `Leads` tab in the Google Sheet.
+
+## Quick Verification
+
+1. Open the Web app URL in a browser. It should return a JSON message saying the lead capture is ready.
+2. Submit a small test lead from the website contact form.
+3. Confirm a new row appears in the `Leads` tab with contact details, page context, attribution fields, and form metadata.
+4. Delete the test row after confirming the flow.
 
 ## Updating an Existing Deployment
 
