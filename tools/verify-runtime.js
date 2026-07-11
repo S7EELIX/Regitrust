@@ -299,6 +299,16 @@ function main() {
     ], "market entry qualification copy");
   });
 
+  check("foreign company page protects cross-border setup intent", () => {
+    const foreignCompanyHtml = read("foreign-company-registration-india.html");
+    requireSnippets(foreignCompanyHtml, [
+      "Foreign company registration in India",
+      "Not the Right Fit",
+      "tiny one-time registrations",
+      "Starts from pricing after scope check"
+    ], "foreign company qualification copy");
+  });
+
   check("contact service select can represent every service plus placeholder", () => {
     const expectedOptions = services.length + 1;
     if (expectedOptions !== 70) {
