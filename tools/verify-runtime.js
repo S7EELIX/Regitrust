@@ -189,6 +189,18 @@ function main() {
     });
   });
 
+  check("services catalogue page can render dynamic service data", () => {
+    const servicesHtml = read("services.html");
+    const dataIndex = scriptTagIndex(servicesHtml, "services-data.js");
+    const rendererIndex = scriptTagIndex(servicesHtml, "services.js");
+    if (!servicesHtml.includes('id="service-catalogue"')) {
+      throw new Error("services.html must expose the service catalogue mount point");
+    }
+    if (dataIndex === -1 || rendererIndex === -1 || dataIndex > rendererIndex) {
+      throw new Error("services.html must load services-data.js before services.js");
+    }
+  });
+
   check("contact form supports no-JavaScript fallback", () => {
     requireFormSubmitFallback(contactHtml, "contact");
   });

@@ -31,7 +31,7 @@ Or run the same checks directly:
 
 Expected results:
 
-- `verify-runtime.js` reports `27` checks and `0` failures.
+- `verify-runtime.js` reports `28` checks and `0` failures.
 - `audit-site.js` reports `0` problems.
 - `git diff --check` exits cleanly.
 
