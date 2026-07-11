@@ -70,6 +70,14 @@ function pngSize(file) {
   return `${buffer.readUInt32BE(16)}x${buffer.readUInt32BE(20)}`;
 }
 
+function requirePatterns(file, html, patterns, message) {
+  patterns.forEach(([name, pattern]) => {
+    if (!pattern.test(html)) {
+      addProblem(file, message, name);
+    }
+  });
+}
+
 for (const markupFile of markupFiles) {
   const html = read(markupFile);
 
@@ -104,32 +112,24 @@ for (const htmlFile of htmlFiles) {
     addProblem(htmlFile, "Missing shared script include");
   }
 
-  [
+  requirePatterns(htmlFile, html, [
     ["favicon", /<link rel="icon" type="image\/png" href="\.\/assets\/favicon\.png">/],
     ["apple-touch-icon", /<link rel="apple-touch-icon" href="\.\/assets\/apple-touch-icon\.png">/],
     ["manifest", /<link rel="manifest" href="site\.webmanifest">/],
     ["theme-color", /<meta name="theme-color" content="#133f97">/]
-  ].forEach(([name, pattern]) => {
-    if (!pattern.test(html)) {
-      addProblem(htmlFile, "Missing or invalid head asset tag", name);
-    }
-  });
+  ], "Missing or invalid head asset tag");
 
   if (!/<meta name="description" content="[^"]{50,}"/.test(html)) {
     addProblem(htmlFile, "Missing or very short meta description");
   }
 
-  [
+  requirePatterns(htmlFile, html, [
     ["og:title", /<meta property="og:title" content="[^"]{10,}">/],
     ["og:description", /<meta property="og:description" content="[^"]{30,}">/],
     ["og:type", /<meta property="og:type" content="website">/],
     ["og:image", /<meta property="og:image" content="https:\/\/regitrust\.in\/assets\/logo\.png">/],
     ["twitter:card", /<meta name="twitter:card" content="summary_large_image">/]
-  ].forEach(([name, pattern]) => {
-    if (!pattern.test(html)) {
-      addProblem(htmlFile, `Missing or invalid social meta tag`, name);
-    }
-  });
+  ], "Missing or invalid social meta tag");
 
   const canonicalMatch = html.match(/<link rel="canonical" href="([^"]+)">/);
   if (!canonicalMatch) {
