@@ -60,6 +60,40 @@ function main() {
   const cleanServiceSlugs = new Set(
     Array.from(servicesJs.matchAll(/"([^"]+)":\s*"[^"]+\.html"/g)).map((match) => match[1])
   );
+  const appsScriptHeaders = Array.from(leadCaptureGs.matchAll(/^\s*"([^"]+)",?$/gm)).map((match) => match[1]);
+  const requiredLeadFields = [
+    "name",
+    "phone",
+    "email",
+    "city_state",
+    "service",
+    "business_stage",
+    "urgency",
+    "preferred_contact",
+    "message",
+    "source_page",
+    "source_url",
+    "source_path",
+    "source_title",
+    "page_url",
+    "page_path",
+    "page_title",
+    "service_name",
+    "lead_context",
+    "referrer_url",
+    "first_landing_url",
+    "first_referrer_url",
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_term",
+    "utm_content",
+    "gclid",
+    "submitted_at",
+    "lead_channel",
+    "form_id",
+    "user_agent"
+  ];
 
   function sharedScriptIndex(html) {
     const match = html.match(/src="script\.js(?:\?[^"]*)?"/);
@@ -223,22 +257,15 @@ function main() {
     }
   });
 
-  check("contact form captures location and preferred contact method", () => {
-    if (!contactHtml.includes('name="city_state"')) {
-      throw new Error("Expected contact form to capture city/state");
-    }
-    if (!contactHtml.includes('name="preferred_contact"')) {
-      throw new Error("Expected contact form to capture preferred contact method");
-    }
-  });
-
-  check("contact form captures lead stage and urgency", () => {
-    if (!contactHtml.includes('name="business_stage"')) {
-      throw new Error("Expected contact form to capture business stage");
-    }
-    if (!contactHtml.includes('name="urgency"')) {
-      throw new Error("Expected contact form to capture urgency");
-    }
+  check("public lead forms capture the core lead qualification fields", () => {
+    ["city_state", "service", "business_stage", "urgency", "preferred_contact", "message"].forEach((field) => {
+      [indexHtml, contactHtml].forEach((html, index) => {
+        const file = index === 0 ? "index.html" : "contact.html";
+        if (!html.includes(`name="${field}"`)) {
+          throw new Error(`${file} must capture ${field}`);
+        }
+      });
+    });
   });
 
   check("shared script supports wrapped FAQ sections", () => {
@@ -279,18 +306,36 @@ function main() {
     });
   });
 
-  check("Google Apps Script lead receiver stores key form fields", () => {
-    [
-      "function doPost(e)",
-      "SpreadsheetApp.getActiveSpreadsheet",
-      "sheet.appendRow(row)",
-      '"phone"',
-      '"service"',
-      '"urgency"',
-      '"preferred_contact"'
-    ].forEach((snippet) => {
+  check("Google Apps Script lead receiver stores the full lead field contract", () => {
+    ["function doPost(e)", "SpreadsheetApp.getActiveSpreadsheet", "sheet.appendRow(row)"].forEach((snippet) => {
       if (!leadCaptureGs.includes(snippet)) {
         throw new Error(`Expected lead capture Apps Script to include ${snippet}`);
+      }
+    });
+
+    const missingHeaders = requiredLeadFields.filter((field) => !appsScriptHeaders.includes(field));
+    if (missingHeaders.length) {
+      throw new Error(`Expected Apps Script lead sheet headers to include: ${missingHeaders.join(", ")}`);
+    }
+  });
+
+  check("shared script can populate every derived lead storage field", () => {
+    [
+      "form_id",
+      "page_url",
+      "page_path",
+      "page_title",
+      "user_agent",
+      "source_url",
+      "source_path",
+      "source_title",
+      "lead_channel",
+      "submitted_at",
+      "service_name",
+      "lead_context"
+    ].forEach((field) => {
+      if (!scriptJs.includes(field)) {
+        throw new Error(`Expected shared script to populate ${field}`);
       }
     });
   });
@@ -355,7 +400,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log(JSON.stringify({ checks: 26, failures: 0 }, null, 2));
+  console.log(JSON.stringify({ checks: 27, failures: 0 }, null, 2));
 }
 
 main();
