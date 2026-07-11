@@ -18,8 +18,14 @@ Static website for Regitrust Services LLP, focused on company registration, GST,
 Run these before pushing changes:
 
 ```powershell
-node tools\verify-runtime.js
-node tools\audit-site.js
+powershell -ExecutionPolicy Bypass -File .\tools\check-site.ps1
+```
+
+Or run the same checks directly:
+
+```powershell
+& "C:\Users\rajra\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe" tools\audit-site.js
+& "C:\Users\rajra\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe" tools\verify-runtime.js
 git diff --check
 ```
 
