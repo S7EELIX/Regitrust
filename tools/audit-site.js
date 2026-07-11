@@ -25,6 +25,7 @@ const serviceSlugs = services.map((service) => service.slug);
 const serviceContentSlugs = Object.keys(serviceContent);
 const cleanServiceUrls = extractCleanServiceUrls(read("services.js"));
 const problems = [];
+const styleVersions = new Set();
 
 function extractCleanServiceUrls(source) {
   const objectMatch = source.match(/const CLEAN_SERVICE_URLS = \{([\s\S]*?)\n\};/);
@@ -62,8 +63,13 @@ function collectAttributes(html, attr) {
 for (const htmlFile of htmlFiles) {
   const html = read(htmlFile);
 
-  if (!/<link\s+rel="stylesheet"\s+href="style\.css(?:\?[^"]*)?"/.test(html)) {
+  const styleMatch = html.match(/<link\s+rel="stylesheet"\s+href="style\.css(\?v=([^"]+))?"/);
+  if (!styleMatch) {
     addProblem(htmlFile, "Missing shared stylesheet link");
+  } else if (!styleMatch[2]) {
+    addProblem(htmlFile, "Shared stylesheet link should use cache version");
+  } else {
+    styleVersions.add(styleMatch[2]);
   }
 
   if (/\sstyle="/.test(html)) {
@@ -180,6 +186,10 @@ htmlFiles.forEach((htmlFile) => {
 
 if (scriptVersions.size > 1) {
   addProblem("script.js", "Shared script cache versions differ", [...scriptVersions].sort().join(", "));
+}
+
+if (styleVersions.size > 1) {
+  addProblem("style.css", "Shared stylesheet cache versions differ", [...styleVersions].sort().join(", "));
 }
 
 serviceSlugs
