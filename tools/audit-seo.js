@@ -56,6 +56,18 @@ const htmlFiles = fs.readdirSync(root)
 const services = loadServiceData();
 const serviceSlugs = services.map((service) => service.slug).sort();
 const cleanServiceUrls = extractCleanServiceUrls();
+const snippetTargets = {
+  "index.html": /(NRI|foreign|overseas|exporter)/i,
+  "nri-company-registration-india.html": /(NRI|foreign founder)/i,
+  "india-market-entry-services.html": /(market entry|overseas)/i,
+  "south-india-business-registration.html": /(Bengaluru|Chennai|Hyderabad)/i,
+  "company-registration-bengaluru.html": /Bengaluru/i,
+  "company-registration-chennai.html": /Chennai/i,
+  "company-registration-hyderabad.html": /Hyderabad/i,
+  "gst-registration-bengaluru.html": /Bengaluru/i,
+  "gst-registration-chennai.html": /Chennai/i,
+  "gst-registration-hyderabad.html": /Hyderabad/i
+};
 
 const indexableHtmlFiles = [];
 
@@ -85,6 +97,9 @@ for (const htmlFile of htmlFiles) {
   }
   if (!noindex && (description.length < 80 || description.length > 165)) {
     addProblem(htmlFile, "Meta description should be concise and useful", `${description.length} chars`);
+  }
+  if (!noindex && snippetTargets[htmlFile] && !snippetTargets[htmlFile].test(`${title} ${description}`)) {
+    addProblem(htmlFile, "High-intent page snippet is missing its target audience or location term");
   }
 
   extractJsonLdBlocks(html).forEach((block, index) => {
