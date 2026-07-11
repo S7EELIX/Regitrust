@@ -788,16 +788,22 @@ function setupServiceSelect() {
 
 setupServiceSelect();
 
+function syncMobileNavState() {
+  document.body.classList.toggle("nav-open", Boolean(nav?.classList.contains("open")));
+}
+
 if (menuBtn && nav) {
   menuBtn.addEventListener("click", () => {
     const isOpen = nav.classList.toggle("open");
     menuBtn.setAttribute("aria-expanded", String(isOpen));
+    syncMobileNavState();
   });
 
   nav.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
       nav.classList.remove("open");
       menuBtn.setAttribute("aria-expanded", "false");
+      syncMobileNavState();
     });
   });
 }
@@ -936,6 +942,7 @@ document.addEventListener("click", (event) => {
     dropdown.classList.remove("open");
     dropdown.querySelector(".dropdown-toggle")?.setAttribute("aria-expanded", "false");
   });
+  syncMobileNavState();
 });
 
 document.addEventListener("keydown", (event) => {
@@ -945,6 +952,7 @@ document.addEventListener("keydown", (event) => {
 
   nav?.classList.remove("open");
   menuBtn?.setAttribute("aria-expanded", "false");
+  syncMobileNavState();
   document.querySelectorAll(".nav-dropdown.open").forEach((dropdown) => {
     dropdown.classList.remove("open");
     dropdown.querySelector(".dropdown-toggle")?.setAttribute("aria-expanded", "false");
