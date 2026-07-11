@@ -104,6 +104,17 @@ for (const htmlFile of htmlFiles) {
     addProblem(htmlFile, "Missing shared script include");
   }
 
+  [
+    ["favicon", /<link rel="icon" type="image\/png" href="\.\/assets\/favicon\.png">/],
+    ["apple-touch-icon", /<link rel="apple-touch-icon" href="\.\/assets\/apple-touch-icon\.png">/],
+    ["manifest", /<link rel="manifest" href="site\.webmanifest">/],
+    ["theme-color", /<meta name="theme-color" content="#133f97">/]
+  ].forEach(([name, pattern]) => {
+    if (!pattern.test(html)) {
+      addProblem(htmlFile, "Missing or invalid head asset tag", name);
+    }
+  });
+
   if (!/<meta name="description" content="[^"]{50,}"/.test(html)) {
     addProblem(htmlFile, "Missing or very short meta description");
   }
