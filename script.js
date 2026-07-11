@@ -90,6 +90,36 @@ function getAttributionContext() {
   return attribution;
 }
 
+function getCampaignClassification(leadContext = "") {
+  const normalized = leadContext.toLowerCase();
+  if (/(nri|foreign|international|overseas|market-entry|india-entry)/.test(normalized)) {
+    return {
+      campaign_focus: "international_nri_market_entry",
+      audience_priority: "high",
+      lead_intent: "cross_border_india_setup"
+    };
+  }
+  if (/(south-india|bengaluru|chennai|hyderabad)/.test(normalized)) {
+    return {
+      campaign_focus: "south_india_business_setup",
+      audience_priority: "medium_high",
+      lead_intent: "regional_growth_setup"
+    };
+  }
+  if (/(company|scope-console|business-setup)/.test(normalized)) {
+    return {
+      campaign_focus: "company_registration",
+      audience_priority: "medium",
+      lead_intent: "business_setup"
+    };
+  }
+  return {
+    campaign_focus: "general_services",
+    audience_priority: "standard",
+    lead_intent: "general_enquiry"
+  };
+}
+
 function formDataToLeadPayload(formData, form, serviceContext = {}) {
   const payload = {};
   formData.forEach((value, key) => {
@@ -176,6 +206,7 @@ function getLeadEventName(element) {
 
 setupAnalytics();
 setupAttribution();
+trackThankYouConversion();
 setupPremiumPageEnhancements();
 setupMoneyPageEnhancements();
 setupCityPageEnhancements();
@@ -230,6 +261,9 @@ function setupLeadCaptureHelpers() {
     if (leadContext) {
       setHiddenInput(form, "lead_context", leadContext);
     }
+    Object.entries(getCampaignClassification(leadContext || "")).forEach(([name, value]) => {
+      setHiddenInput(form, name, value);
+    });
     Object.entries(getAttributionContext()).forEach(([name, value]) => {
       setHiddenInput(form, name, value);
     });
@@ -594,6 +628,30 @@ function setupAttribution() {
     if (value) {
       setSessionValue(`regitrust_${key}`, value);
     }
+  });
+}
+
+function trackThankYouConversion() {
+  if (!document.body.classList.contains("thank-you-page")) {
+    return;
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const serviceName = params.get("service") || "";
+  const leadContext = params.get("lead_context") || "";
+  const classification = getCampaignClassification(leadContext);
+  const conversionKey = `regitrust_confirmation_${serviceName}_${leadContext}_${getSessionValue("regitrust_gclid")}`;
+
+  if (getSessionValue(conversionKey)) {
+    return;
+  }
+  setSessionValue(conversionKey, new Date().toISOString());
+
+  trackEvent("lead_confirmation_view", {
+    service_name: serviceName,
+    lead_context: leadContext,
+    ...classification,
+    ...getAttributionContext()
   });
 }
 
