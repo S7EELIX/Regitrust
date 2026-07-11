@@ -1,6 +1,6 @@
 # Regitrust Website
 
-Static website for Regitrust Services LLP, focused on company registration, GST, compliance, trademark, NRI, South India, and India market-entry lead generation.
+Static website for Regitrust Services LLP, focused on company registration, GST, compliance, trademark, foreign company, NRI, South India, and India market-entry lead generation.
 
 ## Local Editing
 
