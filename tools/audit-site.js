@@ -115,6 +115,15 @@ for (const htmlFile of htmlFiles) {
     .filter((id, index) => ids.indexOf(id) !== index)
     .forEach((id) => addProblem(htmlFile, "Duplicate id attribute", id));
 
+  [...html.matchAll(/<a\b[^>]*target=["']_blank["'][^>]*>/gi)].forEach((match) => {
+    const tag = match[0];
+    const relMatch = tag.match(/\srel=["']([^"']+)["']/i);
+    const relTokens = relMatch ? relMatch[1].toLowerCase().split(/\s+/) : [];
+    if (!relTokens.includes("noopener") || !relTokens.includes("noreferrer")) {
+      addProblem(htmlFile, "New-tab links should use rel=\"noopener noreferrer\"", tag);
+    }
+  });
+
   collectAttributes(html, "href").forEach((href) => {
     if (href.startsWith("tel:") && !allowedPhoneHrefs.has(href)) {
       addProblem(htmlFile, "Unexpected phone CTA target", href);
