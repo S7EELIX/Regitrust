@@ -25,15 +25,27 @@ Or run the same checks directly:
 
 ```powershell
 & "C:\Users\rajra\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe" tools\audit-site.js
+& "C:\Users\rajra\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe" tools\audit-seo.js
 & "C:\Users\rajra\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe" tools\verify-runtime.js
 & "E:\CodexTools\PortableGit\bin\git.exe" diff --check
 ```
 
 Expected results:
 
-- `verify-runtime.js` reports `28` checks and `0` failures.
+- `verify-runtime.js` reports `30` checks and `0` failures.
 - `audit-site.js` reports `0` problems.
+- `audit-seo.js` reports `0` problems.
 - `git diff --check` exits cleanly.
+
+Optional visual QA after starting a local static server:
+
+```powershell
+$env:NODE_PATH = "E:\CodexTools\regitrust-visual\node_modules"
+$env:PLAYWRIGHT_BROWSERS_PATH = "E:\CodexTools\ms-playwright"
+& "E:\CodexTools\node\node.exe" tools\visual-check.js http://localhost:5500
+```
+
+Screenshots are written outside the repo to `E:\CodexTools\regitrust-visual\screenshots`.
 
 ## Lead Capture
 
