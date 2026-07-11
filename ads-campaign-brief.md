@@ -4,15 +4,18 @@
 
 Generate higher-fit enquiries from NRIs, foreign founders, overseas companies, export-led businesses, SaaS teams, and serious growth businesses that need India company setup, GST, IEC, trademark, contracts, tax, or compliance planning.
 
-## Primary Landing Page
+## Landing Page Routing
 
-Use this page first:
+Use one campaign, but split ad groups by intent:
 
-`https://regitrust.in/india-market-entry-services.html`
+- Foreign company / foreign founder intent:
+  `https://regitrust.in/foreign-company-registration-india.html`
 
-Backup page for NRI-specific ad groups:
+- NRI-specific intent:
+  `https://regitrust.in/nri-company-registration-india.html`
 
-`https://regitrust.in/nri-company-registration-india.html`
+- Broader India entry, IEC, GST, import-export, and operating setup:
+  `https://regitrust.in/india-market-entry-services.html`
 
 ## Best-Fit Audience
 
@@ -51,6 +54,8 @@ Start narrow before expanding:
 
 - NRI company registration in India
 - foreign company registration in India
+- foreign founder company registration India
+- register foreign owned company in India
 - India market entry services
 - register company in India from abroad
 - company registration for foreign founders India
