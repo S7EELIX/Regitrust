@@ -221,7 +221,7 @@ function setupLeadCaptureHelpers() {
     contactBar.className = "site-contact-bar";
     contactBar.innerHTML = `
       <div class="container site-contact-bar-wrap">
-        <span class="site-contact-message">Need registration, GST, ROC, tax, or trademark help?</span>
+        <span class="site-contact-message">NRI, foreign founder, GST, ROC, tax, or trademark help?</span>
         <a class="site-contact-call" href="tel:${PRIMARY_PHONE}" data-track="top_bar_call_click">Call ${DISPLAY_PHONE}</a>
         <a class="site-contact-whatsapp" href="${whatsappUrl(`Hello Regitrust, I am viewing ${pageLabel} and need help.`)}" target="_blank" rel="noopener noreferrer" data-track="top_bar_whatsapp_click">WhatsApp</a>
       </div>
@@ -291,20 +291,16 @@ function setupLeadCaptureHelpers() {
     const footerServiceLinks = document.createElement("p");
     footerServiceLinks.className = "legal-links footer-service-links";
     footerServiceLinks.innerHTML = `
-      <a href="company-registration.html">Company Registration</a>
-      <a href="gst-pan.html">GST Registration</a>
-      <a href="llp-registration.html">LLP Registration</a>
-      <a href="fssai-registration.html">FSSAI</a>
-      <a href="gst-notice-reply.html">GST Notice</a>
-      <a href="income-tax-return-filing.html">ITR Filing</a>
-      <a href="annual-roc-filing.html">Annual ROC Filing</a>
-      <a href="south-india-business-registration.html">South India Business Setup</a>
-      <a href="company-registration-lucknow.html">Company Registration Lucknow</a>
-      <a href="gst-registration-lucknow.html">GST Registration Lucknow</a>
       <a href="nri-company-registration-india.html">NRI Company Registration</a>
+      <a href="india-market-entry-services.html">India Market Entry</a>
+      <a href="south-india-business-registration.html">South India Business Setup</a>
       <a href="company-registration-bengaluru.html">Company Registration Bengaluru</a>
       <a href="company-registration-chennai.html">Company Registration Chennai</a>
       <a href="company-registration-hyderabad.html">Company Registration Hyderabad</a>
+      <a href="company-registration.html">Company Registration</a>
+      <a href="gst-pan.html">GST Registration</a>
+      <a href="trademark-registration.html">Trademark Registration</a>
+      <a href="annual-roc-filing.html">Annual ROC Filing</a>
     `;
     footer.appendChild(footerServiceLinks);
   }
@@ -324,9 +320,9 @@ function setupPremiumPageEnhancements() {
     intro.className = "mega-intro";
     intro.innerHTML = `
       <span>Start here</span>
-      <strong>Find the right filing fast</strong>
-      <p>Pick a service family. We confirm scope, documents, and starts-from pricing before work begins.</p>
-      <a href="contact.html" role="menuitem">Ask for a recommendation</a>
+      <strong>India setup review</strong>
+      <p>For NRIs, foreign founders, and growth businesses. We confirm scope, documents, and starts-from pricing before work begins.</p>
+      <a href="contact.html?lead_context=nav-generated-scope" role="menuitem">Ask for a recommendation</a>
     `;
     menu.prepend(intro);
   });
