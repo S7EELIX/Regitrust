@@ -312,6 +312,7 @@ function setupLeadCaptureHelpers() {
     footerServiceLinks.className = "legal-links footer-service-links";
     footerServiceLinks.innerHTML = `
       <a href="nri-company-registration-india.html">NRI Company Registration</a>
+      <a href="foreign-company-registration-india.html">Foreign Company Registration</a>
       <a href="india-market-entry-services.html">India Market Entry</a>
       <a href="south-india-business-registration.html">South India Business Setup</a>
       <a href="company-registration-bengaluru.html">Company Registration Bengaluru</a>
@@ -453,6 +454,24 @@ function setupMoneyPageEnhancements() {
         ["Compliance visibility", "Understand ROC, tax, foreign-investment, and first-year obligations before launch."]
       ],
       cta: "Request NRI Setup Review",
+      service: "private-limited-company-registration"
+    },
+    "foreign-company-registration-india.html": {
+      className: "money-page money-foreign-company-page",
+      label: "Foreign company setup desk",
+      title: "Plan the India entity before filings begin",
+      summary: "Built for overseas companies and foreign founders who need entity choice, resident director planning, documents, GST, IEC, banking readiness, and ongoing compliance visibility.",
+      metrics: [
+        ["Scope", "Foreign founder, entity, GST"],
+        ["Output", "India setup roadmap"],
+        ["Quote", "Starts from after review"]
+      ],
+      outcomes: [
+        ["Structure clarity", "Compare India company, LLP, subsidiary-style setup, ownership, and resident director dependencies."],
+        ["Document control", "Plan passport, address proof, DSC, notarization, apostille, and office proof requirements early."],
+        ["Operating readiness", "Connect incorporation with GST, IEC, banking, contracts, trademark, accounting, and ROC compliance."]
+      ],
+      cta: "Request Foreign Company Review",
       service: "private-limited-company-registration"
     },
     "south-india-business-registration.html": {
