@@ -182,6 +182,10 @@ sitemapPaths
   .filter((pathname, index) => sitemapPaths.indexOf(pathname) !== index)
   .forEach((pathname) => addProblem("sitemap.xml", "Duplicate sitemap URL", pathname));
 
+if (sitemapPaths.includes("service.html")) {
+  addProblem("sitemap.xml", "Dynamic service template should not be submitted directly", "service.html");
+}
+
 if (!robots.includes("Sitemap: https://regitrust.in/sitemap.xml")) {
   addProblem("robots.txt", "Missing sitemap directive");
 }
