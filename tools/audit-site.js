@@ -88,6 +88,8 @@ for (const markupFile of markupFiles) {
 
 for (const htmlFile of htmlFiles) {
   const html = read(htmlFile);
+  const expectedPublicPath = htmlFile === "index.html" ? "" : htmlFile;
+  const expectedPublicUrl = `https://regitrust.in/${expectedPublicPath}`;
 
   const styleMatch = html.match(/<link\s+rel="stylesheet"\s+href="style\.css(\?v=([^"]+))?"/);
   if (!styleMatch) {
@@ -106,8 +108,18 @@ for (const htmlFile of htmlFiles) {
     addProblem(htmlFile, "Missing or very short meta description");
   }
 
-  if (!/<link rel="canonical" href="https:\/\/regitrust\.in\/[^"]*">/.test(html)) {
+  const canonicalMatch = html.match(/<link rel="canonical" href="([^"]+)">/);
+  if (!canonicalMatch) {
     addProblem(htmlFile, "Missing canonical URL");
+  } else if (canonicalMatch[1] !== expectedPublicUrl) {
+    addProblem(htmlFile, "Canonical URL should match page path", canonicalMatch[1]);
+  }
+
+  const ogUrlMatch = html.match(/<meta property="og:url" content="([^"]+)">/);
+  if (!ogUrlMatch) {
+    addProblem(htmlFile, "Missing Open Graph URL");
+  } else if (ogUrlMatch[1] !== expectedPublicUrl) {
+    addProblem(htmlFile, "Open Graph URL should match page path", ogUrlMatch[1]);
   }
 
   const ids = collectAttributes(html, "id");
