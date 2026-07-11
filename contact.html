@@ -14,7 +14,7 @@
   <meta name="twitter:title" content="Contact for Company Registration | Regitrust">
   <meta name="twitter:description" content="Contact Regitrust Services LLP for company registration, GST, compliance, tax, trademark, FSSAI, notice replies, and legal support across India.">
   <link rel="canonical" href="https://regitrust.in/contact.html">
-  <link rel="stylesheet" href="style.css?v=20260711-conversion-polish">
+  <link rel="stylesheet" href="style.css?v=20260711-contact-polish">
   <link rel="icon" type="image/png" href="./assets/favicon.png">
   <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
@@ -88,6 +88,12 @@
             <span>Fill the form below</span>
           </a>
         </div>
+        <div class="contact-proof-grid" aria-label="Regitrust callback process">
+          <span><strong>1</strong>Scope review</span>
+          <span><strong>2</strong>Document checklist</span>
+          <span><strong>3</strong>Starts-from quote</span>
+          <span><strong>4</strong>Filing roadmap</span>
+        </div>
       </div>
     </section>
 
@@ -126,53 +132,83 @@
           <input type="hidden" name="_next" value="https://regitrust.in/thank-you.html">
           <input type="hidden" name="source_page" value="contact.html">
 
-          <label for="name">Full Name</label>
-          <input id="name" name="name" type="text" required>
+          <div class="form-intro">
+            <span class="pill">Secure lead intake</span>
+            <h2>Request a callback</h2>
+            <p>Share the basic context. We review the service scope before quoting, so you do not start with the wrong filing.</p>
+          </div>
 
-          <label for="phone">Phone Number</label>
-          <input id="phone" name="phone" type="tel" required>
+          <div class="form-fields">
+            <div class="form-field">
+              <label for="name">Full Name</label>
+              <input id="name" name="name" type="text" required>
+            </div>
 
-          <label for="email">Email Address</label>
-          <input id="email" name="email" type="email" autocomplete="email" required>
+            <div class="form-field">
+              <label for="phone">Phone Number</label>
+              <input id="phone" name="phone" type="tel" required>
+            </div>
 
-          <label for="city">City / State</label>
-          <input id="city" name="city_state" type="text" autocomplete="address-level2" placeholder="Example: Chennai, Tamil Nadu or Singapore">
+            <div class="form-field">
+              <label for="email">Email Address</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
 
-          <label for="business-stage">Business Stage</label>
-          <select id="business-stage" name="business_stage">
-            <option value="">Select your stage</option>
-            <option value="Planning to start">Planning to start</option>
-            <option value="NRI or overseas founder">NRI or overseas founder</option>
-            <option value="Already registered">Already registered</option>
-            <option value="Need filing cleanup">Need filing cleanup</option>
-            <option value="Received notice or objection">Received notice or objection</option>
-          </select>
+            <div class="form-field">
+              <label for="city">City / State</label>
+              <input id="city" name="city_state" type="text" autocomplete="address-level2" placeholder="Example: Chennai, Tamil Nadu or Singapore">
+            </div>
 
-          <label for="service">Service Needed</label>
-          <select id="service" name="service">
-            <option value="">Select a service</option>
-          </select>
+            <div class="form-field">
+              <label for="business-stage">Business Stage</label>
+              <select id="business-stage" name="business_stage">
+                <option value="">Select your stage</option>
+                <option value="Planning to start">Planning to start</option>
+                <option value="NRI or overseas founder">NRI or overseas founder</option>
+                <option value="Already registered">Already registered</option>
+                <option value="Need filing cleanup">Need filing cleanup</option>
+                <option value="Received notice or objection">Received notice or objection</option>
+              </select>
+            </div>
 
-          <label for="urgency">Timeline / Urgency</label>
-          <select id="urgency" name="urgency">
-            <option value="">Select timeline</option>
-            <option value="Urgent - today or tomorrow">Urgent - today or tomorrow</option>
-            <option value="This week">This week</option>
-            <option value="This month">This month</option>
-            <option value="Planning ahead">Planning ahead</option>
-          </select>
+            <div class="form-field">
+              <label for="service">Service Needed</label>
+              <select id="service" name="service">
+                <option value="">Select a service</option>
+              </select>
+            </div>
 
-          <label for="preferred-contact">Preferred Contact Method</label>
-          <select id="preferred-contact" name="preferred_contact">
-            <option value="WhatsApp">WhatsApp</option>
-            <option value="Phone Call">Phone Call</option>
-            <option value="Email">Email</option>
-          </select>
+            <div class="form-field">
+              <label for="urgency">Timeline / Urgency</label>
+              <select id="urgency" name="urgency">
+                <option value="">Select timeline</option>
+                <option value="Urgent - today or tomorrow">Urgent - today or tomorrow</option>
+                <option value="This week">This week</option>
+                <option value="This month">This month</option>
+                <option value="Planning ahead">Planning ahead</option>
+              </select>
+            </div>
 
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="4" placeholder="Tell us your requirement, timeline, document status, and any notice/order deadline"></textarea>
+            <div class="form-field">
+              <label for="preferred-contact">Preferred Contact Method</label>
+              <select id="preferred-contact" name="preferred_contact">
+                <option value="WhatsApp">WhatsApp</option>
+                <option value="Phone Call">Phone Call</option>
+                <option value="Email">Email</option>
+              </select>
+            </div>
+
+            <div class="form-field form-field-full">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="4" placeholder="Tell us your requirement, timeline, document status, and any notice/order deadline"></textarea>
+            </div>
+          </div>
 
           <button type="submit" class="btn btn-primary" data-track="contact_page_form_submit_click">Request Callback</button>
+          <div class="form-aftercare" aria-label="What happens after submission">
+            <strong>After you submit</strong>
+            <span>We check the service fit, document position, and timeline before sharing starts-from pricing.</span>
+          </div>
           <p class="form-note">No fixed pricing is shown here because final fees depend on scope, documents, urgency, and authority queries.</p>
           <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
         </form>
