@@ -430,7 +430,7 @@ function setupMoneyPageEnhancements() {
     return;
   }
 
-  document.body.className = `${document.body.className} ${config.className}`.trim();
+  document.body.classList.add(...config.className.split(" "));
 
   const firstSection = document.querySelector("main > .section:first-child");
   if (!firstSection) {
@@ -525,7 +525,7 @@ function setupCityPageEnhancements() {
         ["Company Registration India", "company-registration.html"]
       ];
 
-  document.body.className = `${document.body.className} city-page city-${cityKey}-page city-${serviceType}-page`.trim();
+  document.body.classList.add("city-page", `city-${cityKey}-page`, `city-${serviceType}-page`);
 
   const firstSection = document.querySelector("main > .section:first-child");
   if (!firstSection) {
