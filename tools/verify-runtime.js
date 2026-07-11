@@ -127,6 +127,21 @@ function main() {
     return scriptTagIndex(html, "script.js");
   }
 
+  function requireFormSubmitFallback(html, label) {
+    if (!html.includes('action="https://formsubmit.co/contact@regitrust.in"')) {
+      throw new Error(`Expected ${label} form to use regular FormSubmit action for no-JavaScript fallback`);
+    }
+    if (!html.includes('data-ajax-action="https://formsubmit.co/ajax/contact@regitrust.in"')) {
+      throw new Error(`Expected ${label} form to keep AJAX FormSubmit endpoint for enhanced submission`);
+    }
+    if (!html.includes('name="_honey"')) {
+      throw new Error(`Expected FormSubmit honeypot field on ${label} form`);
+    }
+    if (!html.includes('name="_next" value="https://regitrust.in/thank-you.html"')) {
+      throw new Error(`Expected ${label} form _next redirect for no-JavaScript fallback`);
+    }
+  }
+
   check("service database exposes 69 services", () => {
     if (services.length !== 69) {
       throw new Error(`Expected 69 services, found ${services.length}`);
@@ -175,33 +190,11 @@ function main() {
   });
 
   check("contact form supports no-JavaScript fallback", () => {
-    if (!contactHtml.includes('action="https://formsubmit.co/contact@regitrust.in"')) {
-      throw new Error("Expected regular FormSubmit action for no-JavaScript fallback");
-    }
-    if (!contactHtml.includes('data-ajax-action="https://formsubmit.co/ajax/contact@regitrust.in"')) {
-      throw new Error("Expected AJAX FormSubmit endpoint for enhanced submission");
-    }
-    if (!contactHtml.includes('name="_honey"')) {
-      throw new Error("Expected FormSubmit honeypot field on contact form");
-    }
-    if (!contactHtml.includes('name="_next" value="https://regitrust.in/thank-you.html"')) {
-      throw new Error("Expected _next redirect for no-JavaScript fallback");
-    }
+    requireFormSubmitFallback(contactHtml, "contact");
   });
 
   check("homepage form supports no-JavaScript fallback", () => {
-    if (!indexHtml.includes('action="https://formsubmit.co/contact@regitrust.in"')) {
-      throw new Error("Expected homepage form to use regular FormSubmit action for no-JavaScript fallback");
-    }
-    if (!indexHtml.includes('data-ajax-action="https://formsubmit.co/ajax/contact@regitrust.in"')) {
-      throw new Error("Expected homepage form to keep AJAX FormSubmit endpoint for enhanced submission");
-    }
-    if (!indexHtml.includes('name="_honey"')) {
-      throw new Error("Expected FormSubmit honeypot field on homepage form");
-    }
-    if (!indexHtml.includes('name="_next" value="https://regitrust.in/thank-you.html"')) {
-      throw new Error("Expected homepage form _next redirect for no-JavaScript fallback");
-    }
+    requireFormSubmitFallback(indexHtml, "homepage");
   });
 
   check("legacy company-registration htm path redirects to canonical page", () => {
