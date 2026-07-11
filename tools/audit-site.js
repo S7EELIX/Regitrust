@@ -224,36 +224,35 @@ htmlFiles
   .filter((htmlFile) => sitemapPaths.includes(htmlFile))
   .forEach((htmlFile) => addProblem("sitemap.xml", "Noindex page should not be in sitemap", htmlFile));
 
-const scriptVersions = new Set();
-const servicesScriptVersions = new Set();
+const cacheVersionedScripts = [
+  ["script.js", "Shared script"],
+  ["services.js", "Services script"],
+  ["services-data.js", "Services data script"],
+  ["services-content.js", "Services content script"],
+  ["lead-config.js", "Lead config script"]
+];
+const scriptVersionSets = Object.fromEntries(cacheVersionedScripts.map(([file]) => [file, new Set()]));
 htmlFiles.forEach((htmlFile) => {
   const html = read(htmlFile);
-  const match = html.match(/src="script\.js(\?v=([^"]+))?"/);
-  if (match) {
-    if (!match[2]) {
-      addProblem(htmlFile, "Shared script include should use cache version");
-      return;
+  cacheVersionedScripts.forEach(([file, label]) => {
+    const escapedFile = file.replace(".", "\\.");
+    const match = html.match(new RegExp(`src="${escapedFile}(\\?v=([^"]+))?"`));
+    if (match) {
+      if (!match[2]) {
+        addProblem(htmlFile, `${label} include should use cache version`);
+        return;
+      }
+      scriptVersionSets[file].add(match[2]);
     }
-    scriptVersions.add(match[2]);
-  }
-
-  const servicesMatch = html.match(/src="services\.js(\?v=([^"]+))?"/);
-  if (servicesMatch) {
-    if (!servicesMatch[2]) {
-      addProblem(htmlFile, "Services script include should use cache version");
-      return;
-    }
-    servicesScriptVersions.add(servicesMatch[2]);
-  }
+  });
 });
 
-if (scriptVersions.size > 1) {
-  addProblem("script.js", "Shared script cache versions differ", [...scriptVersions].sort().join(", "));
-}
-
-if (servicesScriptVersions.size > 1) {
-  addProblem("services.js", "Services script cache versions differ", [...servicesScriptVersions].sort().join(", "));
-}
+cacheVersionedScripts.forEach(([file, label]) => {
+  const versions = scriptVersionSets[file];
+  if (versions.size > 1) {
+    addProblem(file, `${label} cache versions differ`, [...versions].sort().join(", "));
+  }
+});
 
 if (styleVersions.size > 1) {
   addProblem("style.css", "Shared stylesheet cache versions differ", [...styleVersions].sort().join(", "));
