@@ -9214,3 +9214,252 @@ body:not(.home-clean):not(.services-page):not(.contact-page):not(.about-page):no
     padding-bottom: 4.7rem !important;
   }
 }
+
+/* Services page visual reset: compact finder, even priority grid, cleaner mobile */
+.services-page main > .section:first-child {
+  padding: clamp(2.2rem, 4vw, 3.1rem) 0 clamp(2rem, 3.5vw, 2.8rem) !important;
+}
+
+.services-page main > .section:first-child .container.section-head {
+  max-width: min(1120px, calc(100% - 2rem)) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 0.84fr) minmax(320px, 0.56fr);
+  gap: clamp(1rem, 3vw, 2rem);
+  align-items: end;
+  text-align: left !important;
+}
+
+.services-page main > .section:first-child .pill,
+.services-page main > .section:first-child h1,
+.services-page main > .section:first-child p {
+  grid-column: 1;
+}
+
+.services-page main > .section:first-child h1 {
+  margin-bottom: 0 !important;
+}
+
+.services-page main > .section:first-child p {
+  margin-top: 0.8rem !important;
+}
+
+.services-page .service-decision-strip {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  align-self: center;
+  margin-top: 0 !important;
+  grid-template-columns: 1fr !important;
+}
+
+.services-page .service-decision-strip a {
+  min-height: 68px !important;
+  padding: 0.72rem 0.82rem !important;
+}
+
+.services-page .priority-services {
+  padding-top: clamp(2rem, 3.5vw, 2.8rem) !important;
+}
+
+.services-page .priority-services .section-head {
+  max-width: 760px !important;
+  margin: 0 auto 1.1rem !important;
+  display: block !important;
+  text-align: center !important;
+}
+
+.services-page .priority-services .section-head h2 {
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: clamp(1.65rem, 2.6vw, 2.35rem) !important;
+  line-height: 1.1 !important;
+}
+
+.services-page .priority-services .section-head p {
+  max-width: 680px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.services-page .priority-services .section-head::after {
+  max-width: 520px;
+  margin: 0.9rem auto 0;
+  text-align: center;
+}
+
+.services-page .priority-services .cards.cards-3 {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 0.78rem !important;
+  align-items: stretch;
+}
+
+.services-page .priority-services .card {
+  min-height: 198px !important;
+  display: flex;
+  flex-direction: column;
+  padding: 0.86rem !important;
+}
+
+.services-page .priority-services .card p {
+  flex: 1;
+  margin-bottom: 0.7rem !important;
+}
+
+.services-page .priority-services .card .btn {
+  min-height: 38px !important;
+  padding: 0.5rem 0.62rem !important;
+  font-size: 0.82rem !important;
+}
+
+.services-page main > .section:nth-child(3) {
+  padding-top: 2rem !important;
+}
+
+@media (max-width: 1120px) {
+  .services-page main > .section:first-child .container.section-head {
+    grid-template-columns: 1fr !important;
+  }
+
+  .services-page .service-decision-strip {
+    grid-column: 1;
+    grid-row: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .services-page .priority-services .cards.cards-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .services-page main > .section:first-child {
+    padding: 1.45rem 0 1.55rem !important;
+  }
+
+  .services-page main > .section:first-child .container.section-head {
+    max-width: min(100% - 1.4rem, 1120px) !important;
+    gap: 0.75rem;
+  }
+
+  .services-page main > .section:first-child h1 {
+    font-size: clamp(1.72rem, 8.2vw, 2.1rem) !important;
+  }
+
+  .services-page main > .section:first-child p {
+    font-size: 0.94rem !important;
+    line-height: 1.54 !important;
+  }
+
+  .services-page .service-decision-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.5rem !important;
+  }
+
+  .services-page .service-decision-strip a {
+    min-height: 54px !important;
+    padding: 0.58rem 0.62rem !important;
+  }
+
+  .services-page .priority-services {
+    padding-top: 1.85rem !important;
+  }
+
+  .services-page .priority-services .section-head {
+    margin-bottom: 0.8rem !important;
+    text-align: left !important;
+  }
+
+  .services-page .priority-services .section-head h2,
+  .services-page .priority-services .section-head p {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .services-page .priority-services .section-head::after {
+    display: none !important;
+  }
+
+  .services-page .priority-services .cards.cards-3 {
+    grid-template-columns: 1fr !important;
+    gap: 0.55rem !important;
+  }
+
+  .services-page .priority-services .card {
+    min-height: 0 !important;
+    padding: 0.72rem !important;
+  }
+
+  .services-page .priority-services .card h3 {
+    font-size: 0.96rem !important;
+  }
+
+  .services-page .priority-services .card p {
+    display: none !important;
+  }
+
+  .services-page .priority-services .card .btn {
+    width: 100%;
+    margin-top: 0.5rem !important;
+  }
+}
+
+/* Keep services focused: priority teasers first, full catalogue below */
+.services-page .priority-services .card:nth-of-type(n+13) {
+  display: none !important;
+}
+
+.services-page .priority-services .cards.cards-3 {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+
+.services-page .priority-services .card {
+  min-height: 174px !important;
+}
+
+.services-page .priority-services .card h3 {
+  font-size: 0.88rem !important;
+}
+
+.services-page .priority-services .card p {
+  font-size: 0.78rem !important;
+  line-height: 1.42 !important;
+}
+
+.services-page .priority-services .card .btn {
+  min-height: 34px !important;
+  font-size: 0.76rem !important;
+}
+
+@media (max-width: 1120px) {
+  .services-page .priority-services .cards.cards-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .services-page .priority-services .card:nth-of-type(n+9) {
+    display: none !important;
+  }
+
+  .services-page .priority-services .cards.cards-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .services-page .priority-services .card {
+    min-height: 92px !important;
+  }
+
+  .services-page .priority-services .card h3 {
+    font-size: 0.84rem !important;
+    line-height: 1.22 !important;
+  }
+
+  .services-page .priority-services .card .btn {
+    min-height: 32px !important;
+    padding: 0.42rem 0.45rem !important;
+    font-size: 0.7rem !important;
+    line-height: 1.15 !important;
+  }
+}
