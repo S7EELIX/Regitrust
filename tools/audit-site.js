@@ -225,6 +225,7 @@ htmlFiles
   .forEach((htmlFile) => addProblem("sitemap.xml", "Noindex page should not be in sitemap", htmlFile));
 
 const scriptVersions = new Set();
+const servicesScriptVersions = new Set();
 htmlFiles.forEach((htmlFile) => {
   const html = read(htmlFile);
   const match = html.match(/src="script\.js(\?v=([^"]+))?"/);
@@ -235,10 +236,23 @@ htmlFiles.forEach((htmlFile) => {
     }
     scriptVersions.add(match[2]);
   }
+
+  const servicesMatch = html.match(/src="services\.js(\?v=([^"]+))?"/);
+  if (servicesMatch) {
+    if (!servicesMatch[2]) {
+      addProblem(htmlFile, "Services script include should use cache version");
+      return;
+    }
+    servicesScriptVersions.add(servicesMatch[2]);
+  }
 });
 
 if (scriptVersions.size > 1) {
   addProblem("script.js", "Shared script cache versions differ", [...scriptVersions].sort().join(", "));
+}
+
+if (servicesScriptVersions.size > 1) {
+  addProblem("services.js", "Services script cache versions differ", [...servicesScriptVersions].sort().join(", "));
 }
 
 if (styleVersions.size > 1) {
