@@ -235,6 +235,9 @@ const sitemapPaths = [...sitemap.matchAll(/<loc>https:\/\/regitrust\.in\/([^<]*)
 const searchConsolePaths = [...searchConsoleUrls.matchAll(/^https:\/\/regitrust\.in\/([^\s]*)$/gm)]
   .map((match) => match[1] || "index.html")
   .map((pathname) => pathname === "" ? "index.html" : pathname);
+const noindexMarkupFiles = markupFiles.filter((markupFile) =>
+  /<meta name="robots" content="[^"]*noindex/i.test(read(markupFile))
+);
 
 sitemapPaths
   .filter((pathname, index) => sitemapPaths.indexOf(pathname) !== index)
@@ -295,10 +298,13 @@ sitemapPaths
   .filter((slug) => !serviceSlugs.includes(slug))
   .forEach((slug) => addProblem("sitemap.xml", "Broken sitemap service slug", slug));
 
-htmlFiles
-  .filter((htmlFile) => /<meta name="robots" content="[^"]*noindex/i.test(read(htmlFile)))
-  .filter((htmlFile) => sitemapPaths.includes(htmlFile))
-  .forEach((htmlFile) => addProblem("sitemap.xml", "Noindex page should not be in sitemap", htmlFile));
+noindexMarkupFiles
+  .filter((markupFile) => sitemapPaths.includes(markupFile))
+  .forEach((markupFile) => addProblem("sitemap.xml", "Noindex page should not be in sitemap", markupFile));
+
+noindexMarkupFiles
+  .filter((markupFile) => searchConsolePaths.includes(markupFile))
+  .forEach((markupFile) => addProblem("seo-search-console-urls.txt", "Noindex page should not be manually submitted", markupFile));
 
 const cacheVersionedScripts = [
   ["script.js", "Shared script"],
