@@ -161,7 +161,11 @@ serviceSlugs
 const sitemap = read("sitemap.xml");
 const robots = read("robots.txt");
 const manifest = JSON.parse(read("site.webmanifest"));
+const searchConsoleUrls = read("seo-search-console-urls.txt");
 const sitemapPaths = [...sitemap.matchAll(/<loc>https:\/\/regitrust\.in\/([^<]*)<\/loc>/g)]
+  .map((match) => match[1] || "index.html")
+  .map((pathname) => pathname === "" ? "index.html" : pathname);
+const searchConsolePaths = [...searchConsoleUrls.matchAll(/^https:\/\/regitrust\.in\/([^\s]*)$/gm)]
   .map((match) => match[1] || "index.html")
   .map((pathname) => pathname === "" ? "index.html" : pathname);
 
@@ -191,6 +195,14 @@ if (!Array.isArray(manifest.icons) || !manifest.icons.length) {
 sitemapPaths
   .filter((pathname) => !pathname.includes("?") && !exists(pathname))
   .forEach((pathname) => addProblem("sitemap.xml", "Broken sitemap local target", pathname));
+
+searchConsolePaths
+  .filter((pathname) => !exists(pathname))
+  .forEach((pathname) => addProblem("seo-search-console-urls.txt", "Broken Search Console URL target", pathname));
+
+searchConsolePaths
+  .filter((pathname) => !sitemapPaths.includes(pathname))
+  .forEach((pathname) => addProblem("seo-search-console-urls.txt", "Search Console URL missing from sitemap", pathname));
 
 sitemapPaths
   .filter((pathname) => pathname.startsWith("service.html?service="))
