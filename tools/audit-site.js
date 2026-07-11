@@ -143,6 +143,10 @@ const sitemapPaths = [...sitemap.matchAll(/<loc>https:\/\/regitrust\.in\/([^<]*)
   .map((match) => match[1] || "index.html")
   .map((pathname) => pathname === "" ? "index.html" : pathname);
 
+sitemapPaths
+  .filter((pathname, index) => sitemapPaths.indexOf(pathname) !== index)
+  .forEach((pathname) => addProblem("sitemap.xml", "Duplicate sitemap URL", pathname));
+
 if (!robots.includes("Sitemap: https://regitrust.in/sitemap.xml")) {
   addProblem("robots.txt", "Missing sitemap directive");
 }
@@ -165,6 +169,12 @@ if (!Array.isArray(manifest.icons) || !manifest.icons.length) {
 sitemapPaths
   .filter((pathname) => !pathname.includes("?") && !exists(pathname))
   .forEach((pathname) => addProblem("sitemap.xml", "Broken sitemap local target", pathname));
+
+sitemapPaths
+  .filter((pathname) => pathname.startsWith("service.html?service="))
+  .map((pathname) => decodeURIComponent(pathname.slice("service.html?service=".length)))
+  .filter((slug) => !serviceSlugs.includes(slug))
+  .forEach((slug) => addProblem("sitemap.xml", "Broken sitemap service slug", slug));
 
 htmlFiles
   .filter((htmlFile) => /<meta name="robots" content="[^"]*noindex/i.test(read(htmlFile)))
