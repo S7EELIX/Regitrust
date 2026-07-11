@@ -23,46 +23,19 @@ const serviceContent = context.window.REGITRUST_SERVICE_CONTENT || {};
 const categoryIds = categories.map((category) => slugFor(category.title));
 const serviceSlugs = services.map((service) => service.slug);
 const serviceContentSlugs = Object.keys(serviceContent);
-const cleanServiceUrls = {
-  "private-limited-company-registration": "company-registration.html",
-  "gst-registration": "gst-pan.html",
-  "trademark-registration": "trademark-registration.html",
-  "one-person-company-opc-registration": "opc-registration.html",
-  "annual-roc-filing": "annual-roc-filing.html",
-  "llp-registration": "llp-registration.html",
-  "fssai-registration": "fssai-registration.html",
-  "msme-udyam-registration": "msme-udyam-registration.html",
-  "import-export-code-iec-registration": "iec-registration.html",
-  "startup-india-registration": "startup-india-registration.html",
-  "gst-return-filing": "gst-return-filing.html",
-  "trademark-objection-reply": "trademark-objection-reply.html",
-  "trademark-renewal": "trademark-renewal.html",
-  "income-tax-return-filing": "income-tax-return-filing.html",
-  "gst-notice-reply": "gst-notice-reply.html",
-  "income-tax-notice-reply": "income-tax-notice-reply.html",
-  "llp-annual-filing": "llp-annual-filing.html",
-  "tds-return-filing": "tds-return-filing.html",
-  "dsc-registration": "dsc-registration.html",
-  "din-registration": "din-registration.html",
-  "company-name-change": "company-name-change.html",
-  "registered-office-change": "registered-office-change.html",
-  "director-addition": "director-addition.html",
-  "director-resignation": "director-resignation.html",
-  "copyright-registration": "copyright-registration.html",
-  "shop-and-establishment-registration": "shop-establishment-registration.html",
-  "trade-license-registration": "trade-license-registration.html",
-  "professional-tax-registration": "professional-tax-registration.html",
-  "gst-cancellation": "gst-cancellation.html",
-  "gst-revocation": "gst-revocation.html",
-  "gst-lut-filing": "gst-lut-filing.html",
-  "gst-annual-return-filing": "gst-annual-return-filing.html",
-  "fssai-license-renewal": "fssai-license-renewal.html",
-  "fssai-state-license": "fssai-state-license.html",
-  "fssai-central-license": "fssai-central-license.html",
-  "pan-application": "pan-tan-application.html",
-  "tan-application": "pan-tan-application.html"
-};
+const cleanServiceUrls = extractCleanServiceUrls(read("services.js"));
 const problems = [];
+
+function extractCleanServiceUrls(source) {
+  const objectMatch = source.match(/const CLEAN_SERVICE_URLS = \{([\s\S]*?)\n\};/);
+  if (!objectMatch) {
+    return {};
+  }
+
+  return Object.fromEntries(
+    [...objectMatch[1].matchAll(/"([^"]+)":\s*"([^"]+\.html)"/g)].map((match) => [match[1], match[2]])
+  );
+}
 
 function addProblem(file, message, detail = "") {
   problems.push({ file, message, detail });

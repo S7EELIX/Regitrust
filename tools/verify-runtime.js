@@ -142,6 +142,11 @@ function main() {
     if (!servicesJs.includes("window.location.replace(cleanUrl)")) {
       throw new Error("Expected service.html clean URL requests to redirect to dedicated landing pages");
     }
+    ["private-limited-company-registration", "gst-registration"].forEach((slug) => {
+      if (!cleanServiceSlugs.has(slug)) {
+        throw new Error(`Expected ${slug} to redirect to its clean landing page`);
+      }
+    });
   });
 
   check("public pages link to clean landing pages when available", () => {

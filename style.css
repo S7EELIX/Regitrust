@@ -252,6 +252,15 @@ h1 {
   gap: 0.8rem;
 }
 
+.section-head .hero-cta,
+.legal-copy .hero-cta {
+  margin-top: 1.2rem;
+}
+
+.priority-services .cards + .cards {
+  margin-top: 1.2rem;
+}
+
 .btn {
   border: 0;
   border-radius: 12px;

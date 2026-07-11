@@ -1,4 +1,6 @@
 const CLEAN_SERVICE_URLS = {
+  "private-limited-company-registration": "company-registration.html",
+  "gst-registration": "gst-pan.html",
   "trademark-registration": "trademark-registration.html",
   "one-person-company-opc-registration": "opc-registration.html",
   "annual-roc-filing": "annual-roc-filing.html",
