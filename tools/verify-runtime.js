@@ -111,9 +111,14 @@ function main() {
     "user_agent"
   ];
 
-  function sharedScriptIndex(html) {
-    const match = html.match(/src="script\.js(?:\?[^"]*)?"/);
+  function scriptTagIndex(html, file) {
+    const escapedFile = file.replace(".", "\\.");
+    const match = html.match(new RegExp(`src="${escapedFile}(?:\\?[^"]*)?"`));
     return match ? match.index : -1;
+  }
+
+  function sharedScriptIndex(html) {
+    return scriptTagIndex(html, "script.js");
   }
 
   check("service database exposes 69 services", () => {
@@ -130,7 +135,7 @@ function main() {
   });
 
   check("contact form loads service data before shared script", () => {
-    const dataIndex = contactHtml.indexOf('src="services-data.js"');
+    const dataIndex = scriptTagIndex(contactHtml, "services-data.js");
     const scriptIndex = sharedScriptIndex(contactHtml);
     if (dataIndex === -1 || scriptIndex === -1 || dataIndex > scriptIndex) {
       throw new Error("contact.html must load services-data.js before script.js");
@@ -140,7 +145,7 @@ function main() {
   check("lead storage config loads before shared script", () => {
     [indexHtml, contactHtml].forEach((html, index) => {
       const file = index === 0 ? "index.html" : "contact.html";
-      const configIndex = html.indexOf('src="lead-config.js"');
+      const configIndex = scriptTagIndex(html, "lead-config.js");
       const scriptIndex = sharedScriptIndex(html);
       if (configIndex === -1 || scriptIndex === -1 || configIndex > scriptIndex) {
         throw new Error(`${file} must load lead-config.js before script.js`);
