@@ -62,6 +62,14 @@ function collectAttributes(html, attr) {
   return [...html.matchAll(pattern)].map((match) => match[1]);
 }
 
+function pngSize(file) {
+  const buffer = fs.readFileSync(path.join(root, file));
+  if (buffer.toString("ascii", 1, 4) !== "PNG") {
+    return "";
+  }
+  return `${buffer.readUInt32BE(16)}x${buffer.readUInt32BE(20)}`;
+}
+
 for (const markupFile of markupFiles) {
   const html = read(markupFile);
 
@@ -189,6 +197,12 @@ if (!Array.isArray(manifest.icons) || !manifest.icons.length) {
     const iconPath = String(icon.src || "").replace(/^\//, "");
     if (!iconPath || !exists(iconPath)) {
       addProblem("site.webmanifest", "Broken manifest icon", icon.src || "");
+      return;
+    }
+
+    const declaredSizes = String(icon.sizes || "").split(/\s+/).filter(Boolean);
+    if (!declaredSizes.includes(pngSize(iconPath))) {
+      addProblem("site.webmanifest", "Manifest icon size does not match PNG dimensions", icon.src || "");
     }
   });
 }
