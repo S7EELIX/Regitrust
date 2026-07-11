@@ -7,8 +7,10 @@ const read = (file) => fs.readFileSync(path.join(root, file), "utf8");
 
 function main() {
   const failures = [];
+  let checks = 0;
 
   function check(name, action) {
+    checks += 1;
     try {
       action();
     } catch (error) {
@@ -390,7 +392,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log(JSON.stringify({ checks: 27, failures: 0 }, null, 2));
+  console.log(JSON.stringify({ checks, failures: 0 }, null, 2));
 }
 
 main();
