@@ -26,7 +26,7 @@ Or run the same checks directly:
 ```powershell
 & "C:\Users\rajra\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe" tools\audit-site.js
 & "C:\Users\rajra\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe" tools\verify-runtime.js
-git diff --check
+& "E:\CodexTools\PortableGit\bin\git.exe" diff --check
 ```
 
 Expected results:
