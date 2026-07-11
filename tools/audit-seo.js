@@ -59,6 +59,7 @@ const cleanServiceUrls = extractCleanServiceUrls();
 const snippetTargets = {
   "index.html": /(NRI|foreign|overseas|exporter)/i,
   "nri-company-registration-india.html": /(NRI|foreign founder)/i,
+  "foreign-company-registration-india.html": /(foreign company|foreign founder|overseas)/i,
   "india-market-entry-services.html": /(market entry|overseas)/i,
   "south-india-business-registration.html": /(Bengaluru|Chennai|Hyderabad)/i,
   "company-registration-bengaluru.html": /Bengaluru/i,
