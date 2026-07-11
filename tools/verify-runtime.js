@@ -188,6 +188,34 @@ function main() {
     }
   });
 
+  check("homepage stays focused on foreign founder and NRI lead quality", () => {
+    [
+      "foreign founders",
+      "NRIs",
+      "overseas companies",
+      "India Market Entry",
+      "NRI or overseas founder"
+    ].forEach((snippet) => {
+      if (!indexHtml.includes(snippet)) {
+        throw new Error(`Expected homepage lead-quality copy to include: ${snippet}`);
+      }
+    });
+  });
+
+  check("NRI landing page filters out low-scope local shop leads", () => {
+    const nriHtml = read("nri-company-registration-india.html");
+    [
+      "Built for cross-border India setup, not basic local shop filings.",
+      "Not the Right Fit",
+      "tiny grocery registrations",
+      "Starts from pricing after scope check"
+    ].forEach((snippet) => {
+      if (!nriHtml.includes(snippet)) {
+        throw new Error(`Expected NRI page qualification copy to include: ${snippet}`);
+      }
+    });
+  });
+
   check("contact service select can represent every service plus placeholder", () => {
     const expectedOptions = services.length + 1;
     if (expectedOptions !== 70) {
@@ -327,7 +355,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log(JSON.stringify({ checks: 24, failures: 0 }, null, 2));
+  console.log(JSON.stringify({ checks: 26, failures: 0 }, null, 2));
 }
 
 main();
