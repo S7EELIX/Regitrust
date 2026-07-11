@@ -6,6 +6,7 @@ const root = path.resolve(__dirname, "..");
 const read = (file) => fs.readFileSync(path.join(root, file), "utf8");
 const exists = (file) => fs.existsSync(path.join(root, file));
 const files = fs.readdirSync(root);
+const markupFiles = files.filter((file) => /\.html?$/i.test(file)).sort();
 const htmlFiles = files.filter((file) => file.endsWith(".html")).sort();
 const assetFiles = files
   .concat(fs.readdirSync(path.join(root, "assets")).map((file) => `assets/${file}`))
@@ -61,6 +62,22 @@ function collectAttributes(html, attr) {
   return [...html.matchAll(pattern)].map((match) => match[1]);
 }
 
+for (const markupFile of markupFiles) {
+  const html = read(markupFile);
+
+  if (/\sstyle="/.test(html)) {
+    addProblem(markupFile, "Inline style attribute should move to shared CSS");
+  }
+
+  if (/\son[a-z]+=["']/i.test(html)) {
+    addProblem(markupFile, "Inline event handler should move to shared JS");
+  }
+
+  collectAttributes(html, "href")
+    .filter((href) => /^javascript:/i.test(href))
+    .forEach((href) => addProblem(markupFile, "JavaScript href should move to shared JS", href));
+}
+
 for (const htmlFile of htmlFiles) {
   const html = read(htmlFile);
 
@@ -71,14 +88,6 @@ for (const htmlFile of htmlFiles) {
     addProblem(htmlFile, "Shared stylesheet link should use cache version");
   } else {
     styleVersions.add(styleMatch[2]);
-  }
-
-  if (/\sstyle="/.test(html)) {
-    addProblem(htmlFile, "Inline style attribute should move to shared CSS");
-  }
-
-  if (/\son[a-z]+=["']/i.test(html)) {
-    addProblem(htmlFile, "Inline event handler should move to shared JS");
   }
 
   if (htmlFile !== "404.html" && !/src="script\.js(?:\?[^"]*)?"/.test(html)) {
@@ -99,10 +108,6 @@ for (const htmlFile of htmlFiles) {
     .forEach((id) => addProblem(htmlFile, "Duplicate id attribute", id));
 
   collectAttributes(html, "href").forEach((href) => {
-    if (/^javascript:/i.test(href)) {
-      addProblem(htmlFile, "JavaScript href should move to shared JS", href);
-    }
-
     if (href.startsWith("tel:") && !allowedPhoneHrefs.has(href)) {
       addProblem(htmlFile, "Unexpected phone CTA target", href);
     }
