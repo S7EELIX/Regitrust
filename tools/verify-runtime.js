@@ -61,6 +61,11 @@ function main() {
     Array.from(servicesJs.matchAll(/"([^"]+)":\s*"[^"]+\.html"/g)).map((match) => match[1])
   );
 
+  function sharedScriptIndex(html) {
+    const match = html.match(/src="script\.js(?:\?[^"]*)?"/);
+    return match ? match.index : -1;
+  }
+
   check("service database exposes 69 services", () => {
     if (services.length !== 69) {
       throw new Error(`Expected 69 services, found ${services.length}`);
@@ -76,7 +81,7 @@ function main() {
 
   check("contact form loads service data before shared script", () => {
     const dataIndex = contactHtml.indexOf('src="services-data.js"');
-    const scriptIndex = contactHtml.indexOf('src="script.js"');
+    const scriptIndex = sharedScriptIndex(contactHtml);
     if (dataIndex === -1 || scriptIndex === -1 || dataIndex > scriptIndex) {
       throw new Error("contact.html must load services-data.js before script.js");
     }
@@ -86,7 +91,7 @@ function main() {
     [indexHtml, contactHtml].forEach((html, index) => {
       const file = index === 0 ? "index.html" : "contact.html";
       const configIndex = html.indexOf('src="lead-config.js"');
-      const scriptIndex = html.indexOf('src="script.js"');
+      const scriptIndex = sharedScriptIndex(html);
       if (configIndex === -1 || scriptIndex === -1 || configIndex > scriptIndex) {
         throw new Error(`${file} must load lead-config.js before script.js`);
       }
