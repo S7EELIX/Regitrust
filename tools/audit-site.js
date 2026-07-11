@@ -66,6 +66,10 @@ for (const htmlFile of htmlFiles) {
     addProblem(htmlFile, "Missing shared stylesheet link");
   }
 
+  if (/\sstyle="/.test(html)) {
+    addProblem(htmlFile, "Inline style attribute should move to shared CSS");
+  }
+
   if (htmlFile !== "404.html" && !/src="script\.js(?:\?[^"]*)?"/.test(html)) {
     addProblem(htmlFile, "Missing shared script include");
   }
@@ -160,6 +164,23 @@ htmlFiles
   .filter((htmlFile) => /<meta name="robots" content="[^"]*noindex/i.test(read(htmlFile)))
   .filter((htmlFile) => sitemapPaths.includes(htmlFile))
   .forEach((htmlFile) => addProblem("sitemap.xml", "Noindex page should not be in sitemap", htmlFile));
+
+const scriptVersions = new Set();
+htmlFiles.forEach((htmlFile) => {
+  const html = read(htmlFile);
+  const match = html.match(/src="script\.js(\?v=([^"]+))?"/);
+  if (match) {
+    if (!match[2]) {
+      addProblem(htmlFile, "Shared script include should use cache version");
+      return;
+    }
+    scriptVersions.add(match[2]);
+  }
+});
+
+if (scriptVersions.size > 1) {
+  addProblem("script.js", "Shared script cache versions differ", [...scriptVersions].sort().join(", "));
+}
 
 serviceSlugs
   .filter((slug) => {
