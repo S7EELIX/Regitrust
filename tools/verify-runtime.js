@@ -337,7 +337,8 @@ function main() {
 
   check("successful form submissions are copied to optional lead storage", () => {
     requireSnippets(scriptJs, [
-      "submitLeadBackup(formData, contactForm, serviceContext)",
+      "syncCampaignClassification(contactForm, serviceContext)",
+      "submitLeadBackup(formData, contactForm, leadEventContext)",
       "navigator.sendBeacon",
       'mode: "no-cors"',
       "lead_backup_request_sent",

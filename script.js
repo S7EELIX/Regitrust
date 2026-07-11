@@ -120,6 +120,28 @@ function getCampaignClassification(leadContext = "") {
   };
 }
 
+function getFormCampaignSignal(form, serviceContext = {}) {
+  const signalParts = [
+    serviceContext.lead_context,
+    serviceContext.service_name
+  ];
+  ["business_stage", "city_state", "preferred_contact", "message"].forEach((name) => {
+    const value = form?.querySelector(`[name="${name}"]`)?.value;
+    if (value) {
+      signalParts.push(value);
+    }
+  });
+  return signalParts.filter(Boolean).join(" ");
+}
+
+function syncCampaignClassification(form, serviceContext = {}) {
+  const classification = getCampaignClassification(getFormCampaignSignal(form, serviceContext));
+  Object.entries(classification).forEach(([name, value]) => {
+    setHiddenInput(form, name, value);
+  });
+  return classification;
+}
+
 function formDataToLeadPayload(formData, form, serviceContext = {}) {
   const payload = {};
   formData.forEach((value, key) => {
@@ -261,9 +283,7 @@ function setupLeadCaptureHelpers() {
     if (leadContext) {
       setHiddenInput(form, "lead_context", leadContext);
     }
-    Object.entries(getCampaignClassification(leadContext || "")).forEach(([name, value]) => {
-      setHiddenInput(form, name, value);
-    });
+    syncCampaignClassification(form, { lead_context: leadContext || "" });
     Object.entries(getAttributionContext()).forEach(([name, value]) => {
       setHiddenInput(form, name, value);
     });
@@ -873,11 +893,16 @@ if (contactForm) {
     const submitButton = contactForm.querySelector('button[type="submit"]');
     const originalButtonText = submitButton ? submitButton.textContent : "";
     setHiddenInput(contactForm, "submitted_at", new Date().toISOString());
-    const formData = new FormData(contactForm);
     const serviceContext = getServiceContext(contactForm);
+    const campaignClassification = syncCampaignClassification(contactForm, serviceContext);
+    const leadEventContext = {
+      ...serviceContext,
+      ...campaignClassification
+    };
+    const formData = new FormData(contactForm);
     trackEvent("lead_form_submit_attempt", {
       form_id: contactForm.id || "contact-form",
-      ...serviceContext
+      ...leadEventContext
     });
 
     if (submitButton) {
@@ -891,7 +916,7 @@ if (contactForm) {
     }
 
     try {
-      const leadBackupSaved = await submitLeadBackup(formData, contactForm, serviceContext);
+      const leadBackupSaved = await submitLeadBackup(formData, contactForm, leadEventContext);
       const endpoint = contactForm.dataset.ajaxAction || contactForm.action;
       let emailSubmitted = false;
 
@@ -917,7 +942,7 @@ if (contactForm) {
       if (!emailSubmitted) {
         trackEvent("lead_form_email_failed", {
           form_id: contactForm.id || "contact-form",
-          ...serviceContext
+          ...leadEventContext
         });
       }
 
@@ -925,11 +950,11 @@ if (contactForm) {
       trackEvent("generate_lead", {
         form_id: contactForm.id || "contact-form",
         method: emailSubmitted ? "formsubmit" : "lead_backup",
-        ...serviceContext
+        ...leadEventContext
       });
       trackEvent("lead_form_submitted", {
         form_id: contactForm.id || "contact-form",
-        ...serviceContext
+        ...leadEventContext
       });
       if (formStatus) {
         formStatus.textContent = "Thanks! Redirecting you to confirmation...";
@@ -950,7 +975,7 @@ if (contactForm) {
       }
       trackEvent("lead_form_submit_failed", {
         form_id: contactForm.id || "contact-form",
-        ...serviceContext
+        ...leadEventContext
       });
     } finally {
       if (submitButton) {
