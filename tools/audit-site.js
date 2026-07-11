@@ -124,6 +124,13 @@ for (const htmlFile of htmlFiles) {
     }
   });
 
+  [...html.matchAll(/<img\b[^>]*>/gi)].forEach((match) => {
+    const tag = match[0];
+    if (!/\salt=["'][^"']*["']/i.test(tag)) {
+      addProblem(htmlFile, "Image is missing alt text", tag);
+    }
+  });
+
   collectAttributes(html, "href").forEach((href) => {
     if (href.startsWith("tel:") && !allowedPhoneHrefs.has(href)) {
       addProblem(htmlFile, "Unexpected phone CTA target", href);
