@@ -9463,3 +9463,160 @@ body:not(.home-clean):not(.services-page):not(.contact-page):not(.about-page):no
     line-height: 1.15 !important;
   }
 }
+
+/* Contact page speed pass: keep trust, reduce form fatigue */
+.contact-page .contact-grid {
+  align-items: start !important;
+  gap: clamp(1rem, 2.8vw, 1.65rem) !important;
+}
+
+.contact-page .contact-grid > div:first-child {
+  top: 84px !important;
+}
+
+.contact-page .contact-grid h2 {
+  font-size: 1.45rem !important;
+}
+
+.contact-page .contact-grid > div:first-child > p {
+  font-size: 0.92rem !important;
+  line-height: 1.55 !important;
+}
+
+.contact-page .contact-trust {
+  padding: 0.78rem !important;
+}
+
+.contact-page .contact-trust h3 {
+  font-size: 0.92rem !important;
+}
+
+.contact-page .contact-trust ul {
+  margin-top: 0.42rem !important;
+}
+
+.contact-page .contact-trust li {
+  font-size: 0.84rem !important;
+  line-height: 1.42 !important;
+}
+
+.contact-page .contact-list {
+  gap: 0.38rem !important;
+}
+
+.contact-page .contact-list li {
+  padding: 0.48rem 0 !important;
+  font-size: 0.86rem !important;
+}
+
+.contact-page .contact-form {
+  padding: clamp(0.9rem, 2vw, 1.2rem) !important;
+}
+
+.contact-page .form-intro {
+  margin-bottom: 0.72rem !important;
+}
+
+.contact-page .form-intro h2 {
+  font-size: 1.35rem !important;
+}
+
+.contact-page .form-intro p {
+  font-size: 0.88rem !important;
+  line-height: 1.45 !important;
+}
+
+.contact-page .form-fields {
+  gap: 0.62rem !important;
+}
+
+.contact-page .contact-form label {
+  margin-bottom: 0.26rem !important;
+  font-size: 0.72rem !important;
+}
+
+.contact-page .contact-form input,
+.contact-page .contact-form select {
+  min-height: 40px !important;
+  padding: 0.52rem 0.62rem !important;
+  font-size: 0.88rem !important;
+}
+
+.contact-page .contact-form textarea {
+  min-height: 74px !important;
+  padding: 0.58rem 0.62rem !important;
+  font-size: 0.88rem !important;
+}
+
+.contact-page .contact-form button[type="submit"] {
+  min-height: 42px !important;
+}
+
+.contact-page .form-aftercare {
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.56rem 0.65rem !important;
+}
+
+.contact-page .form-aftercare strong,
+.contact-page .form-aftercare span {
+  font-size: 0.8rem !important;
+}
+
+@media (max-width: 760px) {
+  .contact-page .contact-hero {
+    padding-bottom: 1.35rem !important;
+  }
+
+  .contact-page .contact-grid {
+    gap: 0.95rem !important;
+  }
+
+  .contact-page .contact-grid > div:first-child > p,
+  .contact-page .contact-trust {
+    display: none !important;
+  }
+
+  .contact-page .contact-grid h2 {
+    font-size: 1.25rem !important;
+  }
+
+  .contact-page .contact-list li:nth-child(1),
+  .contact-page .contact-list li:nth-child(2),
+  .contact-page .contact-list li:nth-child(6) {
+    display: none !important;
+  }
+
+  .contact-page .contact-list {
+    margin-top: 0.5rem !important;
+  }
+
+  .contact-page .contact-actions,
+  .contact-page .hero-cta {
+    gap: 0.5rem !important;
+  }
+
+  .contact-page .contact-form {
+    padding: 0.82rem !important;
+  }
+
+  .contact-page .form-intro p,
+  .contact-page .form-aftercare,
+  .contact-page .form-note {
+    display: none !important;
+  }
+
+  .contact-page .form-fields {
+    gap: 0.52rem !important;
+  }
+
+  .contact-page .contact-form input,
+  .contact-page .contact-form select {
+    min-height: 38px !important;
+  }
+
+  .contact-page .contact-form textarea {
+    min-height: 68px !important;
+  }
+}
