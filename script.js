@@ -125,7 +125,7 @@ function getFormCampaignSignal(form, serviceContext = {}) {
     serviceContext.lead_context,
     serviceContext.service_name
   ];
-  ["business_stage", "city_state", "preferred_contact", "message"].forEach((name) => {
+  ["business_stage", "city_state", "preferred_contact", "preferred_time", "message"].forEach((name) => {
     const value = form?.querySelector(`[name="${name}"]`)?.value;
     if (value) {
       signalParts.push(value);

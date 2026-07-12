@@ -86,6 +86,7 @@ function main() {
     "business_stage",
     "urgency",
     "preferred_contact",
+    "preferred_time",
     "message",
     "source_page",
     "source_url",
@@ -317,7 +318,7 @@ function main() {
   });
 
   check("public lead forms capture the core lead qualification fields", () => {
-    ["city_state", "service", "business_stage", "urgency", "preferred_contact", "message"].forEach((field) => {
+    ["city_state", "service", "business_stage", "urgency", "preferred_contact", "preferred_time", "message"].forEach((field) => {
       [indexHtml, contactHtml].forEach((html, index) => {
         const file = index === 0 ? "index.html" : "contact.html";
         if (!html.includes(`name="${field}"`)) {

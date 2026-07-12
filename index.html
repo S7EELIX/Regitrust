@@ -322,6 +322,15 @@
             <option value="Phone Call">Phone Call</option>
             <option value="Email">Email</option>
           </select>
+          <label for="preferred-time">Best Callback Window</label>
+          <select id="preferred-time" name="preferred_time">
+            <option value="">Select a convenient time</option>
+            <option value="India business hours">India business hours</option>
+            <option value="Gulf / UAE evening">Gulf / UAE evening</option>
+            <option value="Europe morning">Europe morning</option>
+            <option value="US morning">US morning</option>
+            <option value="Message first on WhatsApp">Message first on WhatsApp</option>
+          </select>
           <label for="message">Message</label>
           <textarea id="message" name="message" rows="4" placeholder="Tell us about your requirement"></textarea>
           <button class="btn btn-primary" type="submit" data-track="homepage_form_submit_click">Get My Callback</button>
@@ -376,6 +385,6 @@
 
   <script src="services-data.js?v=20260711-cleanup"></script>
   <script src="lead-config.js?v=20260711-leads"></script>
-  <script src="script.js?v=20260711-foreign-company-page"></script>
+  <script src="script.js?v=20260712-callback-window"></script>
 </body>
 </html>
