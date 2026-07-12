@@ -22,6 +22,7 @@ try {
 
   Invoke-Checked $node @("tools\audit-site.js")
   Invoke-Checked $node @("tools\audit-seo.js")
+  Invoke-Checked $node @("tools\audit-campaign-files.js")
   Invoke-Checked $node @("tools\verify-runtime.js")
   Invoke-Checked $git @("diff", "--check")
 } finally {
