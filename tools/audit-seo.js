@@ -69,6 +69,11 @@ const snippetTargets = {
   "gst-registration-chennai.html": /Chennai/i,
   "gst-registration-hyderabad.html": /Hyderabad/i
 };
+const requiredJsonLdTypes = {
+  "foreign-company-registration-india.html": "Service",
+  "nri-company-registration-india.html": "Service",
+  "india-market-entry-services.html": "Service"
+};
 
 const indexableHtmlFiles = [];
 
@@ -103,12 +108,16 @@ for (const htmlFile of htmlFiles) {
     addProblem(htmlFile, "High-intent page snippet is missing its target audience or location term");
   }
 
+  const jsonLdTypes = [];
   extractJsonLdBlocks(html).forEach((block, index) => {
     try {
       const parsed = JSON.parse(block);
       const graph = Array.isArray(parsed["@graph"]) ? parsed["@graph"] : [parsed];
       graph.forEach((node) => {
         const type = Array.isArray(node["@type"]) ? node["@type"].join(",") : node["@type"];
+        if (type) {
+          jsonLdTypes.push(type);
+        }
         if (!type) {
           addProblem(htmlFile, "JSON-LD node is missing @type", `block ${index + 1}`);
         }
@@ -120,6 +129,9 @@ for (const htmlFile of htmlFiles) {
       addProblem(htmlFile, "Invalid JSON-LD block", `block ${index + 1}: ${error.message}`);
     }
   });
+  if (requiredJsonLdTypes[htmlFile] && !jsonLdTypes.some((type) => type.split(",").includes(requiredJsonLdTypes[htmlFile]))) {
+    addProblem(htmlFile, "Priority landing page is missing required JSON-LD type", requiredJsonLdTypes[htmlFile]);
+  }
 }
 
 const sitemap = read("sitemap.xml");
