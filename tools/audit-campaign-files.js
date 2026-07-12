@@ -100,6 +100,12 @@ copyCsv.rows.forEach((row) => {
   if (!["Headline", "Description"].includes(row.values[1])) {
     addProblem("ads-copy.csv", "Ad copy type should be Headline or Description", `line ${row.line}: ${row.values[1]}`);
   }
+  if (row.values[1] === "Headline" && String(row.values[2] || "").length > 30) {
+    addProblem("ads-copy.csv", "Headline should be 30 characters or fewer", `line ${row.line}: ${row.values[2]}`);
+  }
+  if (row.values[1] === "Description" && String(row.values[2] || "").length > 90) {
+    addProblem("ads-copy.csv", "Description should be 90 characters or fewer", `line ${row.line}: ${row.values[2]}`);
+  }
   checkLandingUrl("ads-copy.csv", row, row.values[3] || "");
 });
 
