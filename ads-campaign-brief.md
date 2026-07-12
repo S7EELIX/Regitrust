@@ -76,6 +76,8 @@ Add these as phrase/exact negatives first if low-fit local enquiries continue:
 - "restaurant license"
 - "medical store license"
 
+Use `ads-negative-keywords.csv` as the working upload/copy sheet for these exclusions.
+
 ## Search Keyword Themes
 
 Start narrow before expanding:

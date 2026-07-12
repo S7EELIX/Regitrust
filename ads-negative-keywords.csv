@@ -1,0 +1,33 @@
+Keyword,Match type,Reason
+grocery,Broad,Low-fit local shop enquiry
+kirana,Broad,Low-fit local shop enquiry
+small shop,Phrase,Low-fit local shop enquiry
+free,Broad,Low commercial intent
+job,Broad,Employment traffic
+salary,Broad,Employment traffic
+loan,Broad,Finance traffic
+ration,Broad,Government ration traffic
+local shop license,Phrase,Low-fit local shop enquiry
+labour job,Phrase,Employment traffic
+franchise,Broad,Franchise traffic
+cheapest,Broad,Price-only traffic
+near me only,Phrase,Local-only low-fit traffic
+renewal only,Phrase,Low-scope renewal traffic
+food stall,Phrase,Low-fit food stall enquiry
+street vendor,Phrase,Low-fit street vendor enquiry
+shop act,Phrase,Local shop licence traffic
+gumasta,Broad,Local shop licence traffic
+trade licence for shop,Phrase,Local shop licence traffic
+trade license,Phrase,Local shop licence traffic
+food license,Phrase,Food licence traffic
+fssai license,Phrase,Food licence traffic
+fssai for grocery,Phrase,Food/grocery licence traffic
+supermarket license,Phrase,Low-fit retail enquiry
+retail shop,Phrase,Low-fit local shop enquiry
+general store,Phrase,Low-fit local shop enquiry
+dairy shop,Phrase,Low-fit local shop enquiry
+medical store,Phrase,Low-fit retail licence enquiry
+restaurant license,Phrase,Food licence traffic
+cafe license,Phrase,Food licence traffic
+labour licence,Phrase,Local labour licence traffic
+local business license,Phrase,Local licence traffic
