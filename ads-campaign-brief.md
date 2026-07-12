@@ -95,6 +95,8 @@ Start narrow before expanding:
 - India business setup consultant
 - private limited company registration for NRI
 
+Use `ads-keywords.csv` as the working keyword and landing-page routing sheet.
+
 ## Ad Message Direction
 
 Use scope-first language:
