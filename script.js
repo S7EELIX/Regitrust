@@ -154,6 +154,21 @@ function syncCampaignClassification(form, serviceContext = {}) {
   return classification;
 }
 
+function getPageLeadEventContext(extraSignal = "") {
+  const serviceContext = getServiceContext();
+  const signal = [
+    window.location.pathname,
+    document.title,
+    serviceContext.lead_context,
+    serviceContext.service_name,
+    extraSignal
+  ].filter(Boolean).join(" ");
+  return {
+    ...serviceContext,
+    ...getCampaignClassification(signal)
+  };
+}
+
 function formDataToLeadPayload(formData, form, serviceContext = {}) {
   const payload = {};
   formData.forEach((value, key) => {
@@ -1073,10 +1088,11 @@ document.querySelectorAll("[data-track], a[href^='tel:'], a[href^='mailto:'], a[
   element.addEventListener("click", () => {
     const name = getLeadEventName(element);
     if (name) {
+      const linkText = element.textContent.trim().slice(0, 80);
       trackEvent(name, {
         link_url: element.href || "",
-        link_text: element.textContent.trim().slice(0, 80),
-        ...getServiceContext()
+        link_text: linkText,
+        ...getPageLeadEventContext(`${element.href || ""} ${linkText}`)
       });
     }
   });

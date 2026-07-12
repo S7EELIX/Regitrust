@@ -440,6 +440,15 @@ function main() {
     ], "GA4 lead conversion support");
   });
 
+  check("lead click analytics include campaign fit context", () => {
+    requireSnippets(scriptJs, [
+      "function getPageLeadEventContext",
+      "...getCampaignClassification(signal)",
+      "...getPageLeadEventContext",
+      "lead_fit"
+    ], "lead click campaign context");
+  });
+
   check("public text files are free of common mojibake", () => {
     const mojibakePattern = /(?:\u00e2\u20ac|\u00e2\u20ac\u0153|\u00e2\u20ac\ufffd|\u00e2\u20ac\u2122|\u00c3\u00a9|\u00c3\u00a2|\ufffd)/;
     const affected = textFiles.filter((file) => mojibakePattern.test(read(file)));
