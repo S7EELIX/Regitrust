@@ -7,6 +7,7 @@ const baseUrl = process.argv[2] || "http://localhost:5520";
 const screenshotDir = process.env.REGITRUST_VISUAL_DIR || "E:\\CodexTools\\regitrust-visual\\screenshots";
 const pages = [
   ["home", "/"],
+  ["not-found", "/404.html"],
   ["foreign", "/foreign-company-registration-india.html"],
   ["nri", "/nri-company-registration-india.html"],
   ["market-entry", "/india-market-entry-services.html"]
