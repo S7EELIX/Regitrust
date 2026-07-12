@@ -136,6 +136,7 @@ for (const htmlFile of htmlFiles) {
 
 const sitemap = read("sitemap.xml");
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+const sitemapLastmods = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((match) => match[1]);
 const sitemapSet = new Set(sitemapUrls);
 const expectedSitemapUrls = [
   `${siteOrigin}/`,
@@ -161,6 +162,14 @@ sitemapUrls.forEach((url) => {
 if (sitemapUrls.length !== sitemapSet.size) {
   addProblem("sitemap.xml", "Duplicate URLs found in sitemap");
 }
+if (sitemapLastmods.length !== sitemapUrls.length) {
+  addProblem("sitemap.xml", "Every sitemap URL should include a lastmod date");
+}
+sitemapLastmods.forEach((lastmod) => {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(lastmod)) {
+    addProblem("sitemap.xml", "Sitemap lastmod should use YYYY-MM-DD", lastmod);
+  }
+});
 
 const robots = read("robots.txt");
 if (!/Sitemap:\s*https:\/\/regitrust\.in\/sitemap\.xml/i.test(robots)) {
