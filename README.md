@@ -52,3 +52,11 @@ Screenshots are written outside the repo to `E:\CodexTools\regitrust-visual\scre
 Primary lead delivery goes through FormSubmit email. Successful form submissions are also copied to Google Sheets through the Apps Script URL in `lead-config.js`.
 
 Apps Script setup and verification steps live in `tools/google-apps-script/README.md`.
+
+## Campaign Operations
+
+- `ads-campaign-brief.md` summarizes one-campaign routing, message direction, and exclusions.
+- `ads-keywords.csv` lists starter keyword/ad-group/landing-page routing.
+- `ads-negative-keywords.csv` lists low-fit exclusions for shop, grocery, job, loan, and local licence traffic.
+- `today-action-checklist.md` gives the current ads, Search Console, Apps Script, and lead-review steps.
+- `lead-review-template.csv` is a quick manual sheet for tagging lead quality and ad/search term notes.
