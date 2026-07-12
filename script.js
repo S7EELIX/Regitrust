@@ -92,31 +92,43 @@ function getAttributionContext() {
 
 function getCampaignClassification(leadContext = "") {
   const normalized = leadContext.toLowerCase();
+  if (/(basic local registration only|lowest-cost|lowest cost|small shop|grocery)/.test(normalized)) {
+    return {
+      campaign_focus: "low_scope_local_filing",
+      audience_priority: "low",
+      lead_intent: "basic_local_price_shopping",
+      lead_fit: "low_fit"
+    };
+  }
   if (/(nri|foreign|international|overseas|market-entry|india-entry)/.test(normalized)) {
     return {
       campaign_focus: "international_nri_market_entry",
       audience_priority: "high",
-      lead_intent: "cross_border_india_setup"
+      lead_intent: "cross_border_india_setup",
+      lead_fit: "priority_cross_border"
     };
   }
   if (/(south-india|bengaluru|chennai|hyderabad)/.test(normalized)) {
     return {
       campaign_focus: "south_india_business_setup",
       audience_priority: "medium_high",
-      lead_intent: "regional_growth_setup"
+      lead_intent: "regional_growth_setup",
+      lead_fit: "priority_regional_growth"
     };
   }
   if (/(company|scope-console|business-setup)/.test(normalized)) {
     return {
       campaign_focus: "company_registration",
       audience_priority: "medium",
-      lead_intent: "business_setup"
+      lead_intent: "business_setup",
+      lead_fit: "standard_business_setup"
     };
   }
   return {
     campaign_focus: "general_services",
     audience_priority: "standard",
-    lead_intent: "general_enquiry"
+    lead_intent: "general_enquiry",
+    lead_fit: "standard_review"
   };
 }
 

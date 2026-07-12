@@ -26,6 +26,7 @@ const HEADERS = [
   "campaign_focus",
   "audience_priority",
   "lead_intent",
+  "lead_fit",
   "referrer_url",
   "first_landing_url",
   "first_referrer_url",
