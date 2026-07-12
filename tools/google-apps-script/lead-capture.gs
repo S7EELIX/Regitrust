@@ -8,6 +8,8 @@ const HEADERS = [
   "city_state",
   "service",
   "business_stage",
+  "setup_scope",
+  "budget_readiness",
   "urgency",
   "preferred_contact",
   "preferred_time",
