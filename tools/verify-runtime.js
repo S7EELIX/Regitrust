@@ -68,6 +68,7 @@ function main() {
   ];
   const homepageLeadPages = [
     "south-india-business-registration.html",
+    "foreign-company-registration-india.html",
     "nri-company-registration-india.html",
     "india-market-entry-services.html"
   ];
