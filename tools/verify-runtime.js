@@ -44,6 +44,7 @@ function main() {
   const companyRegistrationHtm = read("company-registration.htm");
   const leadConfigJs = read("lead-config.js");
   const leadCaptureGs = read("tools/google-apps-script/lead-capture.gs");
+  const leadReviewTemplateCsv = read("lead-review-template.csv");
   const servicesJs = read("services.js");
   const scriptJs = read("script.js");
   const localLeadPages = [
@@ -447,6 +448,17 @@ function main() {
       "...getPageLeadEventContext",
       "lead_fit"
     ], "lead click campaign context");
+  });
+
+  check("lead review template mirrors qualification fields", () => {
+    requireSnippets(leadReviewTemplateCsv, [
+      "Setup scope",
+      "Budget readiness",
+      "Campaign focus",
+      "Audience priority",
+      "Lead intent",
+      "Lead fit"
+    ], "lead review template fields");
   });
 
   check("public text files are free of common mojibake", () => {
