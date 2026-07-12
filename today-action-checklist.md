@@ -21,7 +21,7 @@
 1. Update the deployed Apps Script with `tools/google-apps-script/lead-capture.gs`.
 2. Deploy a new web app version.
 3. Submit one test lead.
-4. Confirm the sheet includes the new `preferred_time` column.
+4. Confirm the sheet includes `campaign_focus`, `audience_priority`, `lead_intent`, and `preferred_time`.
 5. Delete the test lead row after confirming.
 
 ## Lead Review
