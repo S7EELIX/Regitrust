@@ -57,6 +57,7 @@ Apps Script setup and verification steps live in `tools/google-apps-script/READM
 
 - `ads-campaign-brief.md` summarizes one-campaign routing, message direction, and exclusions.
 - `ads-keywords.csv` lists starter keyword/ad-group/landing-page routing.
+- `ads-copy.csv` lists starter headlines and descriptions by ad group.
 - `ads-negative-keywords.csv` lists low-fit exclusions for shop, grocery, job, loan, and local licence traffic.
 - `today-action-checklist.md` gives the current ads, Search Console, Apps Script, and lead-review steps.
 - `lead-review-template.csv` is a quick manual sheet for tagging lead quality and ad/search term notes.

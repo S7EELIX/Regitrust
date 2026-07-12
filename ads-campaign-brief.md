@@ -116,6 +116,8 @@ Use scope-first language:
 
 ## Example Headlines
 
+Use `ads-copy.csv` as the working ad-copy sheet. Starter headline ideas:
+
 - India Company Setup for NRIs
 - Foreign Founder India Setup
 - India Market Entry Support
