@@ -63,6 +63,7 @@ function main() {
     "roc-filing-bengaluru.html",
     "roc-filing-chennai.html",
     "roc-filing-hyderabad.html",
+    "foreign-company-registration-india.html",
     "nri-company-registration-india.html",
     "india-market-entry-services.html"
   ];
