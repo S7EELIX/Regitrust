@@ -25,6 +25,13 @@ Use one campaign, but split ad groups by intent:
 - SaaS, consulting, ecommerce, import-export, and export-led businesses
 - Founders who need structure review before filing
 
+## Location And Search Term Discipline
+
+- Keep location targeting narrow enough to match the buyer you want.
+- Review the Google Ads search terms report regularly and add irrelevant searches as negatives.
+- If local shop leads continue, tighten location settings and query exclusions before increasing budget.
+- Start with phrase-match keywords in `ads-keywords.csv`; expand only after the search terms report shows relevant intent.
+
 ## Avoid / Exclude
 
 Avoid broad ads that attract low-fit local shop enquiries.
