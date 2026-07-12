@@ -47,6 +47,34 @@ Negative keyword ideas:
 - renewal only
 - food stall
 - street vendor
+- shop act
+- gumasta
+- trade licence for shop
+- food license
+- fssai for grocery
+- supermarket license
+- retail shop
+- general store
+- dairy shop
+- medical store
+- restaurant license
+- cafe license
+- labour licence
+- local business license
+
+Add these as phrase/exact negatives first if low-fit local enquiries continue:
+
+- "grocery shop"
+- "kirana shop"
+- "small shop"
+- "shop act"
+- "gumasta license"
+- "trade license"
+- "fssai license"
+- "food license"
+- "street vendor"
+- "restaurant license"
+- "medical store license"
 
 ## Search Keyword Themes
 
