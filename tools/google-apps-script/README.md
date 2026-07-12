@@ -23,4 +23,4 @@ After this, FormSubmit will still email leads, and the same successful leads wil
 
 ## Updating an Existing Deployment
 
-When `lead-capture.gs` changes, open the existing Apps Script project, replace the code, and deploy a new web app version. The sheet will add any new missing columns, such as `lead_context`, the next time a lead is received.
+When `lead-capture.gs` changes, open the existing Apps Script project, replace the code, and deploy a new web app version. The sheet will add any new missing columns, such as `lead_context` or `preferred_time`, the next time a lead is received.
