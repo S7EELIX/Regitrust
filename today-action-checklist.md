@@ -13,7 +13,7 @@
 
 ## Search Console
 
-Use `search-console-urls.txt` for the priority inspection URLs.
+Use `seo-search-console-urls.txt` for the priority inspection URLs.
 
 1. Inspect `https://regitrust.in/foreign-company-registration-india.html`.
 2. Request indexing if Google has not crawled it.
