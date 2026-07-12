@@ -27,6 +27,8 @@
 
 ## Lead Review
 
+Use `lead-review-template.csv` if you want a quick manual review sheet.
+
 For every lead today, tag it manually as:
 
 - High fit: foreign founder, NRI, overseas company, SaaS, exporter, India entry.
