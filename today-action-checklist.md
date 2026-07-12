@@ -4,12 +4,13 @@
 
 1. Add negative keywords from `ads-negative-keywords.csv`.
 2. Use `ads-keywords.csv` for keyword/ad-group routing.
-3. Keep one campaign, but split ad groups by intent:
+3. Use `ads-copy.csv` for starter headlines and descriptions.
+4. Keep one campaign, but split ad groups by intent:
    - Foreign company / foreign founder -> `https://regitrust.in/foreign-company-registration-india.html`
    - NRI setup -> `https://regitrust.in/nri-company-registration-india.html`
    - India market entry / IEC / GST / import-export -> `https://regitrust.in/india-market-entry-services.html`
-4. Pause or reduce any ad group that brings grocery, kirana, shop act, trade license, food license, restaurant, or street-vendor enquiries.
-5. Use scope-first ad copy. Do not promise fixed pricing.
+5. Pause or reduce any ad group that brings grocery, kirana, shop act, trade license, food license, restaurant, or street-vendor enquiries.
+6. Use scope-first ad copy. Do not promise fixed pricing.
 
 ## Search Console
 
