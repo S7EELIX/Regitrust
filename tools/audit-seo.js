@@ -169,6 +169,9 @@ if (!/Sitemap:\s*https:\/\/regitrust\.in\/sitemap\.xml/i.test(robots)) {
 if (!/User-agent:\s*\*/i.test(robots)) {
   addProblem("robots.txt", "robots.txt should declare a default user-agent");
 }
+if (sitemapUrls.some((url) => url.includes("/service.html?service=")) && isNoindex(read("service.html"))) {
+  addProblem("service.html", "Dynamic service shell must stay indexable while query service URLs are in the sitemap");
+}
 
 console.log(JSON.stringify({
   summary: {
