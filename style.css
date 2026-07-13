@@ -10602,3 +10602,280 @@ body.home-clean .asia-trust-section {
     display: none !important;
   }
 }
+
+/* Homepage rebuild: premium India entry studio */
+body.home-clean .home-studio-hero {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+  padding: clamp(3.4rem, 6.4vw, 5.25rem) 0 clamp(2.6rem, 5vw, 4rem) !important;
+  background:
+    linear-gradient(180deg, rgba(11, 23, 48, 0.88), rgba(11, 23, 48, 0.96)),
+    radial-gradient(circle at 50% -10%, rgba(45, 212, 191, 0.28), transparent 34%),
+    linear-gradient(135deg, #061324 0%, #0b1730 46%, #101b3c 100%) !important;
+  color: #ffffff !important;
+  border-bottom: 0 !important;
+}
+
+body.home-clean .home-studio-hero::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  width: auto !important;
+  background:
+    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px) !important;
+  background-size: 58px 58px !important;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.92), transparent 92%) !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+  z-index: -2 !important;
+}
+
+body.home-clean .home-studio-hero::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: auto -12% -34% -12% !important;
+  height: 48% !important;
+  background: linear-gradient(90deg, rgba(14, 165, 233, 0.22), rgba(22, 163, 74, 0.12), rgba(212, 175, 55, 0.18)) !important;
+  filter: blur(60px) !important;
+  opacity: 0.85 !important;
+  z-index: -1 !important;
+}
+
+body.home-clean .home-studio-wrap {
+  display: grid !important;
+  gap: clamp(0.95rem, 2.2vw, 1.55rem) !important;
+  justify-items: center !important;
+  text-align: center !important;
+}
+
+body.home-clean .home-studio-kicker {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 0.65rem !important;
+  color: #cbd5e1 !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+body.home-clean .home-studio-kicker span {
+  display: inline-flex !important;
+  align-items: center !important;
+  min-height: 34px !important;
+  padding: 0.45rem 0.8rem !important;
+  border: 1px solid rgba(226, 232, 240, 0.18) !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+body.home-clean .home-studio-head {
+  max-width: 1020px !important;
+  margin-inline: auto !important;
+}
+
+body.home-clean .home-studio-head .pill {
+  margin-bottom: 0.95rem !important;
+  border-color: rgba(45, 212, 191, 0.36) !important;
+  background: rgba(20, 184, 166, 0.12) !important;
+  color: #a7f3d0 !important;
+}
+
+body.home-clean .home-studio-head h1 {
+  max-width: 900px !important;
+  margin: 0 auto !important;
+  color: #ffffff !important;
+  font-size: clamp(2.55rem, 5vw, 4.55rem) !important;
+  line-height: 1.02 !important;
+  letter-spacing: 0 !important;
+}
+
+body.home-clean .home-studio-head p {
+  max-width: 850px !important;
+  margin: 1.05rem auto 0 !important;
+  color: #dbeafe !important;
+  font-size: clamp(1.04rem, 1.5vw, 1.25rem) !important;
+  line-height: 1.75 !important;
+}
+
+body.home-clean .home-studio-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 0.85rem !important;
+}
+
+body.home-clean .home-studio-actions .btn {
+  min-height: 52px !important;
+  border-radius: 10px !important;
+}
+
+body.home-clean .home-studio-actions .btn-primary {
+  background: linear-gradient(135deg, #16a34a, #0ea5e9) !important;
+  box-shadow: 0 18px 42px rgba(14, 165, 233, 0.24) !important;
+}
+
+body.home-clean .home-studio-actions .btn-secondary {
+  border-color: rgba(226, 232, 240, 0.28) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+}
+
+body.home-clean .home-market-strip {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 0.55rem !important;
+  max-width: 940px !important;
+}
+
+body.home-clean .home-market-strip span {
+  display: inline-flex !important;
+  align-items: center !important;
+  min-height: 36px !important;
+  padding: 0.48rem 0.76rem !important;
+  border: 1px solid rgba(226, 232, 240, 0.18) !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  color: #e2e8f0 !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  box-shadow: none !important;
+}
+
+body.home-clean .home-entry-board {
+  width: 100% !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  margin-top: clamp(0.9rem, 2vw, 1.4rem) !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(226, 232, 240, 0.18) !important;
+  border-radius: 18px !important;
+  background: rgba(255, 255, 255, 0.09) !important;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.28) !important;
+  backdrop-filter: blur(18px) !important;
+}
+
+body.home-clean .home-entry-board a {
+  display: grid !important;
+  align-content: start !important;
+  gap: 0.62rem !important;
+  min-height: 190px !important;
+  padding: clamp(1.05rem, 2vw, 1.55rem) !important;
+  color: #ffffff !important;
+  text-align: left !important;
+  text-decoration: none !important;
+  border-right: 1px solid rgba(226, 232, 240, 0.16) !important;
+  transition: background 0.18s ease, transform 0.18s ease !important;
+}
+
+body.home-clean .home-entry-board a:last-child {
+  border-right: 0 !important;
+}
+
+body.home-clean .home-entry-board a:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  transform: translateY(-2px) !important;
+}
+
+body.home-clean .home-entry-board span {
+  width: 44px !important;
+  height: 32px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid rgba(45, 212, 191, 0.32) !important;
+  border-radius: 999px !important;
+  background: rgba(20, 184, 166, 0.12) !important;
+  color: #99f6e4 !important;
+  font-size: 0.78rem !important;
+  font-weight: 800 !important;
+}
+
+body.home-clean .home-entry-board strong {
+  color: #ffffff !important;
+  font-size: 1.06rem !important;
+  line-height: 1.25 !important;
+}
+
+body.home-clean .home-entry-board small {
+  color: #cbd5e1 !important;
+  font-size: 0.92rem !important;
+  line-height: 1.58 !important;
+}
+
+body.home-clean .asia-trust-section {
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%) !important;
+}
+
+@media (max-width: 980px) {
+  body.home-clean .home-entry-board {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  body.home-clean .home-entry-board a:nth-child(2) {
+    border-right: 0 !important;
+  }
+
+  body.home-clean .home-entry-board a:nth-child(-n + 2) {
+    border-bottom: 1px solid rgba(226, 232, 240, 0.16) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body.home-clean .home-studio-hero {
+    padding: 3rem 0 2.6rem !important;
+  }
+
+  body.home-clean .home-studio-kicker {
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+
+  body.home-clean .home-studio-wrap,
+  body.home-clean .home-studio-head {
+    justify-items: stretch !important;
+    text-align: left !important;
+  }
+
+  body.home-clean .home-studio-head h1 {
+    font-size: clamp(2.15rem, 10vw, 3.05rem) !important;
+  }
+
+  body.home-clean .home-studio-head p {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  body.home-clean .home-studio-actions {
+    justify-content: stretch !important;
+  }
+
+  body.home-clean .home-studio-actions .btn {
+    width: 100% !important;
+  }
+
+  body.home-clean .home-market-strip {
+    justify-content: flex-start !important;
+  }
+
+  body.home-clean .home-entry-board {
+    grid-template-columns: 1fr !important;
+    border-radius: 14px !important;
+  }
+
+  body.home-clean .home-entry-board a,
+  body.home-clean .home-entry-board a:nth-child(2) {
+    min-height: auto !important;
+    border-right: 0 !important;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.16) !important;
+  }
+
+  body.home-clean .home-entry-board a:last-child {
+    border-bottom: 0 !important;
+  }
+}
