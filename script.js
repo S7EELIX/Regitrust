@@ -92,7 +92,7 @@ function getAttributionContext() {
 
 function getCampaignClassification(leadContext = "") {
   const normalized = leadContext.toLowerCase();
-  if (/(basic local registration only|lowest-cost|lowest cost|small shop|grocery)/.test(normalized)) {
+  if (/(basic local registration only|lowest-cost|lowest cost|small shop|small trader|local shop|grocery|cheap filing only)/.test(normalized)) {
     return {
       campaign_focus: "low_scope_local_filing",
       audience_priority: "low",

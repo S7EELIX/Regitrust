@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260713-home-rebuild">
+  <link rel="stylesheet" href="style.css?v=20260713-lead-quality">
   <link rel="icon" type="image/png" href="./assets/favicon.png">
   <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
@@ -188,6 +188,32 @@
       </div>
     </section>
 
+    <section class="section priority-intake-section" aria-labelledby="priority-intake-title">
+      <div class="container priority-intake-grid">
+        <div class="priority-intake-copy">
+          <span class="pill">Priority intake</span>
+          <h2 id="priority-intake-title">Built for serious cross-border India setup, not cheap one-time filings.</h2>
+          <p>Regitrust is a better fit when the client needs structure, document review, tax readiness, and ongoing compliance clarity. This helps us focus attention on founders and companies where good advice matters.</p>
+        </div>
+        <div class="fit-panel fit-panel-priority">
+          <h3>Best-fit clients</h3>
+          <ul>
+            <li>Hong Kong, Singapore, Malaysia, Thailand, Indonesia, China, Laos, Cambodia, Vietnam, and South Korea founders entering India</li>
+            <li>Foreign company, NRI, importer-exporter, SaaS, consulting, trading, or professional service businesses</li>
+            <li>Clients who want a document path, starts-from scope quote, and compliance calendar before filing</li>
+          </ul>
+        </div>
+        <div class="fit-panel fit-panel-low">
+          <h3>Lower priority enquiries</h3>
+          <ul>
+            <li>Basic local shop registrations where only the lowest fee matters</li>
+            <li>One-time filings with no document review, GST, ROC, tax, or after-setup plan</li>
+            <li>Urgent requests without identity, ownership, or business model clarity</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="why-us">
       <div class="container">
         <div class="section-head">
@@ -328,7 +354,7 @@
             <option value="Hong Kong Singapore ASEAN China Korea India setup">Hong Kong / Singapore / ASEAN / China / Korea India setup</option>
             <option value="Importer exporter or SaaS business">Importer exporter or SaaS business</option>
             <option value="South India growth business">South India growth business</option>
-            <option value="Basic local registration only">Basic local registration only</option>
+            <option value="Basic local registration only">Basic local registration only - lower priority</option>
           </select>
           <label for="budget-readiness">Budget Readiness</label>
           <select id="budget-readiness" name="budget_readiness">
@@ -372,9 +398,9 @@
             <option value="Message first on WhatsApp">Message first on WhatsApp</option>
           </select>
           <label for="message">Message</label>
-          <textarea id="message" name="message" rows="4" placeholder="Tell us about your requirement"></textarea>
+          <textarea id="message" name="message" rows="4" placeholder="Tell us your country, entity plan, expected India activity, and timeline"></textarea>
           <button class="btn btn-primary" type="submit" data-track="homepage_form_submit_click">Get My Callback</button>
-          <p class="form-note">Your request is saved to the lead sheet and routed for callback review.</p>
+          <p class="form-note">Priority is given to cross-border India setup, foreign founder, NRI, importer-exporter, and ongoing compliance enquiries.</p>
           <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -409,7 +435,19 @@
       "url": "https://regitrust.in/",
       "telephone": "+91-8984297666, +91-6306898090",
       "email": "contact@regitrust.in",
-      "areaServed": "India",
+      "areaServed": [
+        "India",
+        "Hong Kong",
+        "Singapore",
+        "Malaysia",
+        "Thailand",
+        "Indonesia",
+        "China",
+        "Laos",
+        "Cambodia",
+        "Vietnam",
+        "South Korea"
+      ],
       "serviceType": [
         "Company Registration in India",
         "Private Limited Company Registration",
@@ -425,6 +463,6 @@
 
   <script src="services-data.js?v=20260711-cleanup"></script>
   <script src="lead-config.js?v=20260711-leads"></script>
-  <script src="script.js?v=20260713-asia-targeting"></script>
+  <script src="script.js?v=20260713-lead-quality"></script>
 </body>
 </html>
