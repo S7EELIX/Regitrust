@@ -10,6 +10,7 @@ const pages = [
   ["not-found", "/404.html"],
   ["foreign", "/foreign-company-registration-india.html"],
   ["nri", "/nri-company-registration-india.html"],
+  ["asia-entry", "/asia-india-market-entry.html"],
   ["market-entry", "/india-market-entry-services.html"]
 ];
 const viewports = [
