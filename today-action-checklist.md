@@ -1,24 +1,21 @@
-# Regitrust Action Checklist - 2026-07-12
+# Regitrust Action Checklist - 2026-07-13
 
-## Google Ads
+## Priority Today
 
-1. Add negative keywords from `ads-negative-keywords.csv`.
-2. Use `ads-keywords.csv` for keyword/ad-group routing.
-3. Use `ads-copy.csv` for starter headlines and descriptions.
-4. Keep one campaign, but split ad groups by intent:
-   - Foreign company / foreign founder -> `https://regitrust.in/foreign-company-registration-india.html`
-   - NRI setup -> `https://regitrust.in/nri-company-registration-india.html`
-   - India market entry / IEC / GST / import-export -> `https://regitrust.in/india-market-entry-services.html`
-5. Pause or reduce any ad group that brings grocery, kirana, shop act, trade license, food license, restaurant, or street-vendor enquiries.
-6. Use scope-first ad copy. Do not promise fixed pricing.
+1. Keep Google Ads paused for now.
+2. Finish lead capture verification.
+3. Submit priority URLs in Search Console.
+4. Continue organic SEO and trust-building page polish.
 
 ## Search Console
 
 Use `seo-search-console-urls.txt` for the priority inspection URLs.
 
 1. Inspect `https://regitrust.in/foreign-company-registration-india.html`.
-2. Request indexing if Google has not crawled it.
-3. Confirm sitemap is submitted: `https://regitrust.in/sitemap.xml`.
+2. Inspect `https://regitrust.in/nri-company-registration-india.html`.
+3. Inspect `https://regitrust.in/india-market-entry-services.html`.
+4. Request indexing if Google has not crawled them.
+5. Confirm sitemap is submitted: `https://regitrust.in/sitemap.xml`.
 
 ## Lead Sheet / Apps Script
 

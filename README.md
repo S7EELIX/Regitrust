@@ -33,7 +33,7 @@ Or run the same checks directly:
 
 Expected results:
 
-- `verify-runtime.js` reports `30` checks and `0` failures.
+- `verify-runtime.js` reports `32` checks and `0` failures.
 - `audit-site.js` reports `0` problems.
 - `audit-seo.js` reports `0` problems.
 - `audit-campaign-files.js` reports `0` problems.
