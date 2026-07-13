@@ -281,11 +281,20 @@ function main() {
 
   check("homepage stays focused on Asia-to-India lead quality", () => {
     requireSnippets(indexHtml, [
+      "Asia-to-India setup desk",
       "Hong Kong",
       "Singapore",
+      "Malaysia",
+      "Thailand",
+      "Indonesia",
       "ASEAN",
       "China",
+      "Laos",
+      "Cambodia",
+      "Vietnam",
       "South Korea",
+      "Document path",
+      "Operating readiness",
       "India Market Entry",
       "East or Southeast Asia founder"
     ], "homepage lead-quality copy");
