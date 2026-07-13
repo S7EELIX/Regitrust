@@ -100,6 +100,14 @@ function getCampaignClassification(leadContext = "") {
       lead_fit: "low_fit"
     };
   }
+  if (/(hong kong|singapore|malaysia|thailand|indonesia|china|laos|cambodia|vietnam|south korea|korea|east asia|southeast asia|asean)/.test(normalized)) {
+    return {
+      campaign_focus: "east_southeast_asia_india_entry",
+      audience_priority: "highest",
+      lead_intent: "asia_to_india_market_entry",
+      lead_fit: "priority_asia_cross_border"
+    };
+  }
   if (/(nri|foreign|international|overseas|market-entry|india-entry)/.test(normalized)) {
     return {
       campaign_focus: "international_nri_market_entry",
@@ -270,7 +278,7 @@ function setupLeadCaptureHelpers() {
     contactBar.className = "site-contact-bar";
     contactBar.innerHTML = `
       <div class="container site-contact-bar-wrap">
-        <span class="site-contact-message">NRI, foreign founder, GST, ROC, tax, or trademark help?</span>
+        <span class="site-contact-message">Hong Kong, Singapore, ASEAN, foreign founder, GST, ROC, tax, or trademark help?</span>
         <a class="site-contact-call" href="tel:${PRIMARY_PHONE}" data-track="top_bar_call_click">Call ${DISPLAY_PHONE}</a>
         <a class="site-contact-whatsapp" href="${whatsappUrl(`Hello Regitrust, I am viewing ${pageLabel} and need help.`)}" target="_blank" rel="noopener noreferrer" data-track="top_bar_whatsapp_click">WhatsApp</a>
       </div>
@@ -369,7 +377,7 @@ function setupPremiumPageEnhancements() {
     intro.innerHTML = `
       <span>Start here</span>
       <strong>India setup review</strong>
-      <p>For NRIs, foreign founders, and growth businesses. We confirm scope, documents, and starts-from pricing before work begins.</p>
+      <p>For Hong Kong, Singapore, Southeast Asia, China, South Korea, and foreign founders entering India. We confirm scope, documents, and starts-from pricing before work begins.</p>
       <a href="contact.html?lead_context=nav-generated-scope" role="menuitem">Ask for a recommendation</a>
     `;
     menu.prepend(intro);
@@ -469,7 +477,7 @@ function setupMoneyPageEnhancements() {
       className: "money-page money-nri-page",
       label: "Global founder desk",
       title: "Set up in India without losing control of the process",
-      summary: "Built for NRIs and global founders who need structure planning, resident director clarity, signing flow, banking readiness, and India compliance support.",
+      summary: "Built for overseas founders from Hong Kong, Singapore, Malaysia, Thailand, Indonesia, China, Laos, Cambodia, Vietnam, South Korea, and NRI markets who need India structure planning, resident director clarity, signing flow, banking readiness, and compliance support.",
       metrics: [
         ["Scope", "NRI, resident director, FEMA"],
         ["Output", "Remote setup roadmap"],
@@ -487,7 +495,7 @@ function setupMoneyPageEnhancements() {
       className: "money-page money-foreign-company-page",
       label: "Foreign company setup desk",
       title: "Plan the India entity before filings begin",
-      summary: "Built for overseas companies and foreign founders who need entity choice, resident director planning, documents, GST, IEC, banking readiness, and ongoing compliance visibility.",
+      summary: "Built for overseas companies and foreign founders from Hong Kong, Singapore, Southeast Asia, China, and South Korea who need entity choice, resident director planning, documents, GST, IEC, banking readiness, and ongoing compliance visibility.",
       metrics: [
         ["Scope", "Foreign founder, entity, GST"],
         ["Output", "India setup roadmap"],

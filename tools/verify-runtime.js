@@ -279,13 +279,15 @@ function main() {
     }
   });
 
-  check("homepage stays focused on foreign founder and NRI lead quality", () => {
+  check("homepage stays focused on Asia-to-India lead quality", () => {
     requireSnippets(indexHtml, [
-      "foreign founders",
-      "NRIs",
-      "overseas companies",
+      "Hong Kong",
+      "Singapore",
+      "ASEAN",
+      "China",
+      "South Korea",
       "India Market Entry",
-      "NRI or overseas founder"
+      "East or Southeast Asia founder"
     ], "homepage lead-quality copy");
   });
 
@@ -302,7 +304,10 @@ function main() {
   check("market entry page protects the international lead funnel", () => {
     const marketEntryHtml = read("india-market-entry-services.html");
     requireSnippets(marketEntryHtml, [
-      "India entry for overseas businesses",
+      "India entry for East and Southeast Asia businesses",
+      "Hong Kong",
+      "Singapore",
+      "South Korea",
       "Not the Right Fit",
       "tiny one-time registrations",
       "Request India Entry Review"
@@ -313,6 +318,9 @@ function main() {
     const foreignCompanyHtml = read("foreign-company-registration-india.html");
     requireSnippets(foreignCompanyHtml, [
       "Foreign company registration in India",
+      "Hong Kong",
+      "Singapore",
+      "South Korea",
       "Not the Right Fit",
       "tiny one-time registrations",
       "Starts from pricing after scope check"
